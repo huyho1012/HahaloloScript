@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="All Test Suite" paralle  ="false">
+    <listeners>
+        <listener class-name="common.LogAndReport.MethodListener"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="common.LogAndReport.ExtentReportListener"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+<!--    <test name="Test with firefox">-->
+<!--        <parameter name="browser" value="firefox"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="hahalolo.newsfeed.StartIngApp.LoginTestCase.ITTestcase"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="Test with firefox">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+<!--            <class name="hahalolo.newsfeed.StartIngApp.LoginTestCase.ITTestcase"></class>-->
+            <class name="hahalolo.newsfeed.StartIngApp.SignUpTestCase.SignUpITTestcase"></class>
+        </classes>
+    </test>
+
+</suite>
