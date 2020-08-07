@@ -5,7 +5,7 @@ import actions.PageObject.Censor.CensorLogin;
 import actions.PageObject.newsfeed.Common.HeaderMenu;
 import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
 import actions.common.Function.PageGenerator;
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import interfaces.Newsfeed.StartWeb.LoginPageUI;
 import org.openqa.selenium.WebDriver;
 
@@ -114,13 +114,13 @@ public class NewsFeedLogin extends HeaderMenu {
 
     public BackendLoginPageObject goToBackendLoginPage() {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        openNewWindow(driver, Global_Constant.URL_BACKEND_LOGIN);
+        openNewWindow(driver, GlobalVariables.URL_BACKEND_LOGIN);
         return PageGenerator.getLoginBackendPage(driver);
     }
 
     public CensorLogin gotoCensorLoginPage(){
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        openNewWindow(driver,Global_Constant.URL_CENSOR_LINK);
+        openNewWindow(driver, GlobalVariables.URL_CENSOR_LINK);
         return  PageGenerator.getCensorLoginPage(driver);
     }
 }

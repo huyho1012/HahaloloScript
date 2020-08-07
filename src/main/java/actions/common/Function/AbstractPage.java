@@ -1,6 +1,6 @@
 package actions.common.Function;
 
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import interfaces.Newsfeed.Common.HeaderPageUI;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -32,11 +32,11 @@ public abstract class AbstractPage {
 
     // Timeout
     public void waitForPageLoading(WebDriver driver){
-        driver.manage().timeouts().pageLoadTimeout(Global_Constant.LONG_TIME_OUT,TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(GlobalVariables.LONG_TIME_OUT,TimeUnit.SECONDS);
     }
 
     public void setImplicitWait(WebDriver driver){
-        driver.manage().timeouts().implicitlyWait(Global_Constant.LONG_TIME_OUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(GlobalVariables.LONG_TIME_OUT, TimeUnit.SECONDS);
     }
 
     public void setTimeDelay(long time){
@@ -77,7 +77,7 @@ public abstract class AbstractPage {
     }
     // Alert
     public void waitPresenceAlert(WebDriver driver){
-        explicitWait = new WebDriverWait(driver,Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.alertIsPresent());
     }
 
@@ -195,7 +195,7 @@ public abstract class AbstractPage {
         waitElementToClickAble(driver,dropdownMenu);
         clickToElement(driver,dropdownMenu);
         setTimeDelay(1);
-        explicitWait = new WebDriverWait(driver,Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byXpath(dropdownItem)));
         elements = findElements(driver,dropdownItem);
         for(WebElement item: elements){
@@ -272,7 +272,7 @@ public abstract class AbstractPage {
     public void uploadMultipleFileBySendKey(WebDriver driver,String locator, String... fileNames){
         String fullFileName = "";
         for(String file : fileNames){
-            fullFileName = fullFileName + Global_Constant.UPLOAD_FOLDER+ file+ "\n";
+            fullFileName = fullFileName + GlobalVariables.UPLOAD_FOLDER+ file+ "\n";
         }
         fullFileName = fullFileName.trim();
         waitElementToVisible(driver,locator);
@@ -282,7 +282,7 @@ public abstract class AbstractPage {
     public void uploadFileByRobot(WebDriver driver, String... fileNames){
         String fullFileName = "";
         for(String file : fileNames){
-            fullFileName = fullFileName + Global_Constant.UPLOAD_FOLDER+ file+ "\n";
+            fullFileName = fullFileName + GlobalVariables.UPLOAD_FOLDER+ file+ "\n";
         }
         fullFileName = fullFileName.trim();
         StringSelection select = new StringSelection(fullFileName);
@@ -308,18 +308,18 @@ public abstract class AbstractPage {
     public void uploadMultipleFileByAutoIT(WebDriver driver, String... fileNames){
         String fullFileName = "";
         for(String file : fileNames){
-            fullFileName = fullFileName + "\"" +Global_Constant.UPLOAD_FOLDER + file + "\"" +" ";
+            fullFileName = fullFileName + "\"" + GlobalVariables.UPLOAD_FOLDER + file + "\"" +" ";
         }
         fullFileName = fullFileName.trim();
         if (driver.toString().contains("firefox")){
             try {
-                Runtime.getRuntime().exec(new String[] {Global_Constant.uploadMultipleByFirefoxAuto, fullFileName});
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_FILE_CHROME_PATH, fullFileName});
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (driver.toString().contains("chrome")){
             try {
-                Runtime.getRuntime().exec(new String[] {Global_Constant.uploadMultipleByChromeAuto, fullFileName});
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_FILE_FIREFOX_PATH, fullFileName});
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -373,24 +373,24 @@ public abstract class AbstractPage {
     }
     // Driver wait
     public void waitElementToClickAble(WebDriver driver, String locator){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(locator)));
     }
     public void waitElementToVisible(WebDriver driver, String locator){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.visibilityOfElementLocated(byXpath(locator)));
     }
     public void waitElementToPresence(WebDriver driver, String locator){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(byXpath(locator)));
     }
     public void waitElementToInvisible(WebDriver driver, String locator){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(byXpath(locator)));
     }
     public void waitElementsToInvisible(WebDriver driver, String locator){
         elements = findElements(driver,locator);
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.invisibilityOfAllElements(elements));
     }
     public void removeTextOnElement(WebDriver driver, String locator){
@@ -426,24 +426,24 @@ public abstract class AbstractPage {
     }
 
     public void waitElementToVisible(WebDriver driver, String locator, String...values){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.visibilityOfElementLocated(byXpath(castToObject(locator, values))));
     }
     public void waitElementToClickAble(WebDriver driver, String locator, String... values){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(castToObject(locator,values))));
     }
     public void waitElementToPresence(WebDriver driver, String locator, String...values){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(byXpath(castToObject(locator, values))));
     }
     public void waitElementToInvisible(WebDriver driver, String locator,String...values){
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(byXpath(castToObject(locator, values))));
     }
     public void waitElementsToInvisible(WebDriver driver, String locator,String...values){
         elements = findElements(driver,castToObject(locator, values));
-        explicitWait = new WebDriverWait(driver, Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.invisibilityOfAllElements(elements));
     }
     public boolean checkAreElementsIsDisplay(WebDriver driver, String locator,String...values){
@@ -472,7 +472,7 @@ public abstract class AbstractPage {
     public void selectItemInCustomDropdown(WebDriver driver , String dropdownMenu, String dropdownItem, String expectedItem, String...values){
         clickToElement(driver,castToObject(dropdownMenu,values));
         setTimeDelay(1);
-        explicitWait = new WebDriverWait(driver,Global_Constant.LONG_TIME_OUT);
+        explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byXpath(dropdownItem)));
         elements = findElements(driver,castToObject(dropdownItem,values));
         for(WebElement item: elements){

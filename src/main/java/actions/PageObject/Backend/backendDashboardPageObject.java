@@ -1,9 +1,9 @@
 package actions.PageObject.Backend;
 
-import common.Function.AbstractPage;
+
+import actions.common.Function.AbstractPage;
+import interfaces.Backend.backendDashboardPageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.Backend.LoginPageUI;
-import pageUI.Backend.backendDashboardPageUI;
 
 public class backendDashboardPageObject extends AbstractPage {
     WebDriver driver;

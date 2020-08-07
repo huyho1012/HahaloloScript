@@ -2,7 +2,7 @@ package actions.PageObject.business.Business;
 
 import actions.PageObject.newsfeed.Common.HeaderMenu;
 import actions.common.Function.PageGenerator;
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
 
 public class BusinessDashboard extends HeaderMenu {
@@ -12,7 +12,7 @@ public class BusinessDashboard extends HeaderMenu {
     }
 
     public BusinessDashboard getBusinessPage(WebDriver driver){
-        openURL(driver, Global_Constant.URL_BUSINESS_PAGE);
+        openURL(driver, GlobalVariables.URL_BUSINESS_PAGE);
         return PageGenerator.getBusinessDashboardPage(driver);
     }
 }

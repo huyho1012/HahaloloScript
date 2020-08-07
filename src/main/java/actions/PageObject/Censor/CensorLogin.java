@@ -2,7 +2,7 @@ package actions.PageObject.Censor;
 
 import actions.common.Function.AbstractPage;
 import actions.common.Function.PageGenerator;
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import interfaces.Censor.CensorLoginUI;
 import org.openqa.selenium.WebDriver;
 
@@ -14,11 +14,11 @@ public class CensorLogin extends AbstractPage {
 
     public void enterUsername(String userName) {
         waitElementToVisible(driver, CensorLoginUI.USER_NAME);
-        sendKeyToElement(driver,CensorLoginUI.USER_NAME, Global_Constant.BACKEND_USER_NAME);
+        sendKeyToElement(driver,CensorLoginUI.USER_NAME, GlobalVariables.BACKEND_USER_NAME);
     }
     public void enterPassword(String passWord) {
         waitElementToVisible(driver, CensorLoginUI.PASSWORD);
-        sendKeyToElement(driver,CensorLoginUI.PASSWORD, Global_Constant.BACKEND_PASSWORD);
+        sendKeyToElement(driver,CensorLoginUI.PASSWORD, GlobalVariables.BACKEND_PASSWORD);
     }
 
     public CensorHomePage clickLoginButton() {

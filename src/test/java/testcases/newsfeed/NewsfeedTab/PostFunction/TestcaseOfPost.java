@@ -1,14 +1,14 @@
 package testcases.newsfeed.NewsfeedTab.PostFunction;
 
-import PageObject.newsfeed.PageFeed.NewsfeedTabPageObject;
-import PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
-import PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
-import PageObject.newsfeed.Starting.NewsFeed_Login;
-import common.DriverBrowser.BrowserDriver;
-import common.DriverBrowser.DriverManager;
-import common.Function.AbstractTest;
-import common.Function.PageGenerator;
-import common.Global_Constant;
+import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
+import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
+import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
+import actions.common.DriverBrowser.BrowserDriver;
+import actions.common.DriverBrowser.DriverManager;
+import actions.common.Function.AbstractTest;
+import actions.common.Function.PageGenerator;
+import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -17,9 +17,8 @@ import org.testng.annotations.Test;
 public class TestcaseOfPost extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
-    NewsFeed_Login loginPage;
-    NewsfeedTabPageObject newsFeedPage;
-    PersonalTimelinePageObject perTimelinePage;
+    NewsFeedLogin loginPage;
+    NewsFeedHomepage newsFeedPage;
     EditorFunction postPage;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
@@ -31,14 +30,14 @@ public class TestcaseOfPost extends AbstractTest {
     public void preconditionTest(String browserName){
         driverManager = BrowserDriver.getBrowser(browserName);
         log.info("Precondition - Step 01 - Open Browser");
-        driver = driverManager.getDriver(Global_Constant.URL_NEWS_FEED_LOGIN);
+        driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginPage= PageGenerator.getLoginPage(driver);
 
         log.info("Precondition - Step 02 - Enter Username");
-        loginPage.enterUsernameToLogin(Global_Constant.FEED_EMAIL_ACCOUNT);
+        loginPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
 
         log.info("Precondition - Step 03 - Enter Password");
-        loginPage.enterPasswordToLogin(Global_Constant.FEED_EMAIL_PASSWORD);
+        loginPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
 
         log.info("Precondition - Step 04 - Click Signin button");
         loginPage.clickSignUpButton();
@@ -78,8 +77,6 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Check Button Share Post - Step 04 - Check status Shared button");
         verifyTrue(postPage.checkButtonSharePostIsEnable());
-
-
     }
 //    @Test
 //    public void NormalPost_03_Check_Button_Share_Post_When_User_Remove_Content(){

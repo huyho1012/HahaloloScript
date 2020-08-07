@@ -3,7 +3,7 @@ package actions.PageObject.newsfeed.Starting;
 import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
 import actions.common.Function.AbstractPage;
 import actions.common.Function.PageGenerator;
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import interfaces.Newsfeed.StartWeb.VerificationAccountPageUI;
 import org.openqa.selenium.WebDriver;
 
@@ -48,14 +48,14 @@ public class NewsFeedVerifyAccount extends AbstractPage {
     }
     public String getVerificationAccountCode(String emailAddress) {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        openNewWindow(driver, Global_Constant.URL_MAILINATOR);
-        waitElementToVisible(driver, Global_Constant.MAIl_SEARCH_BOX);
-        sendKeyToElement(driver, Global_Constant.MAIl_SEARCH_BOX, emailAddress);
-        clickToElement(driver, Global_Constant.SEARCH_BOX);
-        clickToElement(driver, Global_Constant.EMAIL_VERIFY_ACCOUNT);
-        switchToFrameOrIFrame(driver, Global_Constant.FRAME_BODY_MESSAGE);
-        waitElementToVisible(driver,Global_Constant.VERIFY_CODE_VALUE);
-        String code = getTextOfElement(driver, Global_Constant.VERIFY_CODE_VALUE);
+        openNewWindow(driver, GlobalVariables.URL_MAILINATOR);
+        waitElementToVisible(driver, GlobalVariables.MAIl_SEARCH_BOX);
+        sendKeyToElement(driver, GlobalVariables.MAIl_SEARCH_BOX, emailAddress);
+        clickToElement(driver, GlobalVariables.SEARCH_BOX);
+        clickToElement(driver, GlobalVariables.EMAIL_VERIFY_ACCOUNT);
+        switchToFrameOrIFrame(driver, GlobalVariables.FRAME_BODY_MESSAGE);
+        waitElementToVisible(driver, GlobalVariables.VERIFY_CODE_VALUE);
+        String code = getTextOfElement(driver, GlobalVariables.VERIFY_CODE_VALUE);
         driver.close();
         driver.switchTo().window(tabs.get(0));
         return code;

@@ -9,7 +9,7 @@ import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
 import actions.common.Function.PageGenerator;
-import actions.common.Global_Constant;
+import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -34,10 +34,10 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     @BeforeClass
     public void getBrowser(String browserName){
     driverManager = BrowserDriver.getBrowser(browserName);
-    driver= driverManager.getDriver(Global_Constant.URL_NEWS_FEED_LOGIN);
+    driver= driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
     loginPage = PageGenerator.getLoginPage(driver);
-    loginPage.enterUsernameToLogin(Global_Constant.FEED_EMAIL_ACCOUNT);
-    loginPage.enterPasswordToLogin(Global_Constant.FEED_EMAIL_PASSWORD);
+    loginPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
+    loginPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
     loginPage.clickToLoginButton();
     newsfeedPage = PageGenerator.getNewsFeedPage(driver);
     newsfeedPage.changeLanguageDisplay();

@@ -1,16 +1,16 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-import PageObject.Censor.AccountManager.CensorAccountList;
-import PageObject.Censor.CensorHomePage;
-import PageObject.Censor.CensorLogin;
-import PageObject.newsfeed.PageFeed.NewsfeedTabPageObject;
-import PageObject.newsfeed.Starting.NewsFeed_Login;
-import PageObject.newsfeed.Starting.NewsFeed_VerifyAccount;
-import common.DriverBrowser.BrowserDriver;
-import common.DriverBrowser.DriverManager;
-import common.Function.AbstractTest;
-import common.Function.PageGenerator;
-import common.Global_Constant;
+import actions.PageObject.Censor.AccountManager.CensorAccountList;
+import actions.PageObject.Censor.CensorHomePage;
+import actions.PageObject.Censor.CensorLogin;
+import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
+import actions.common.DriverBrowser.BrowserDriver;
+import actions.common.DriverBrowser.DriverManager;
+import actions.common.Function.AbstractTest;
+import actions.common.Function.PageGenerator;
+import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,13 +19,17 @@ import org.testng.annotations.Test;
 
 public class ITTestcase extends AbstractTest {
     WebDriver driver;
-    NewsFeed_Login loginPage;
     DriverManager driverManager;
-    NewsfeedTabPageObject newsFeedPage;
+
+    // Khai báo pageobject
+    NewsFeedLogin loginPage;
+    NewsFeedHomepage newsFeedPage;
     CensorLogin censorLoginPage;
     CensorHomePage censorHomePage;
     CensorAccountList censorAccountListPage;
-    NewsFeed_VerifyAccount verifyAccountPage;
+    NewsFeedVerifyAccount verifyAccountPage;
+
+    // Data
     String passWord ="123456";
     String confirmPassword = "123456";
     String firstName = "Huy";
@@ -36,7 +40,7 @@ public class ITTestcase extends AbstractTest {
     @BeforeTest
     public void openBrowser(String browserName){
         driverManager = BrowserDriver.getBrowser(browserName);
-        driver = driverManager.getDriver(Global_Constant.URL_NEWS_FEED_LOGIN);
+        driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginPage = PageGenerator.getLoginPage(driver);
     }
     @Test
@@ -88,10 +92,10 @@ public class ITTestcase extends AbstractTest {
         censorLoginPage = loginPage.gotoCensorLoginPage();
 
         log.info("Step 3.2 - Block account - Login Censor - Enter Username");
-        censorLoginPage.enterUsername(Global_Constant.BACKEND_USER_NAME);
+        censorLoginPage.enterUsername(GlobalVariables.BACKEND_USER_NAME);
 
         log.info("Step 3.3 - Block account - Login Censor - Enter Password");
-        censorLoginPage.enterPassword(Global_Constant.BACKEND_PASSWORD);
+        censorLoginPage.enterPassword(GlobalVariables.BACKEND_PASSWORD);
 
         log.info("Step 3.4 - Block account - Login Censor - Enter Captcha - Delay");
         censorLoginPage.setTimeDelay(10);
@@ -116,7 +120,7 @@ public class ITTestcase extends AbstractTest {
         censorAccountListPage.searchAccount(driver,email);
 
         log.info("Step 3.10 - Block account - Account Moderation - Block Account");
-        censorAccountListPage.clickToBlockAccount(driver,email,"Khóa tài khoản",Global_Constant.BACKEND_PASSWORD);
+        censorAccountListPage.clickToBlockAccount(driver,email,"Khóa tài khoản",GlobalVariables.BACKEND_PASSWORD);
 
         log.info("Step 3.11 - Block account - Account Moderation - Check Account is blocked successfully");
         verifyTrue(censorAccountListPage.checkAccountIsBlockedSuccessfully(driver,email,"Đã bị khóa"));
@@ -127,7 +131,7 @@ public class ITTestcase extends AbstractTest {
         verifyTrue(censorLoginPage.checkLogoutSuccess());
 
         log.info("Step 4.1 - Login - Login with blocked account - Go to NewsFeed Login");
-        censorLoginPage.openNewWindow(driver,Global_Constant.URL_NEWS_FEED_LOGIN);
+        censorLoginPage.openNewWindow(driver,GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginPage = PageGenerator.getLoginPage(driver);
 
         log.info("Step 4.2 - Login - Login with blocked account - Enter a Username");

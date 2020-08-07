@@ -11,6 +11,7 @@ import actions.PageObject.newsfeed.AccountSetting.NewsFeedAccSettingGeneral;
 import actions.PageObject.newsfeed.PageFeed.*;
 import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
 import actions.PageObject.newsfeed.PersonalWall.Handnote.NewsFeedHandnoteTour;
+import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
 import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
 import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
 import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
@@ -60,23 +61,37 @@ public class PageGenerator {
     public static EditorFunction openExperiencePostEditor(WebDriver driver){
         return new EditorFunction(driver);
     }
-
     public static BackendLoginPageObject getLoginBackendPage(WebDriver driver){
         return new BackendLoginPageObject(driver);
     }
+    // Khởi tạo page cho Censor
     public static backendDashboardPageObject getBackendDashboardPage(WebDriver driver){
         return new backendDashboardPageObject(driver);
     }
-
     public static CensorLogin getCensorLoginPage(WebDriver driver){
         return new CensorLogin(driver);
     }
     public static CensorHomePage getCensorHomePage(WebDriver driver){
         return new CensorHomePage(driver);
     }
-
     public static CensorAccountList getAccountManagerList(WebDriver driver){
         return new CensorAccountList(driver);
+    }
+    // Khởi tạo tab cho Personal About
+    public static PersonalAbout getPersonalOverviewTab(WebDriver driver){
+        return new PersonalAbout(driver);
+    }
+    public static PersonalAbout getPersonalEducationTab(WebDriver driver){
+        return new PersonalAbout(driver);
+    }
+    public static PersonalAbout getPersonalPlaceLivingTab(WebDriver driver){
+        return new PersonalAbout(driver);
+    }
+    public static PersonalAbout getPersonalDetailAboutTab(WebDriver driver){
+        return new PersonalAbout(driver);
+    }
+    public static PersonalAbout getPersonalBasicInfoTab(WebDriver driver){
+        return new PersonalAbout(driver);
     }
 }
 

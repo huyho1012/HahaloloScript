@@ -1,6 +1,6 @@
 package actions.common;
 
-public class Global_Constant {
+public class GlobalVariables {
 
     // Tài khoản NewsFeed - Business - Wallet
     public static String FEED_EMAIL_ACCOUNT = "khotrauchien@mailinator.com";
@@ -15,7 +15,6 @@ public class Global_Constant {
     // URL Hahalolo
     public static final String URL_NEWS_FEED_LOGIN = "https://test-newsfeed.hahalolo.com/auth/signin";
     public static final String URL_BUSINESS_PAGE = "https://test-business.hahalolo.com/";
-    public static final String URL_MAILINATOR = "https://www.mailinator.com/";
     public static final String URL_BACKEND_LOGIN = "https://test-backend.hahalolo.com/auth/signin";
     public static final String URL_CENSOR_LINK = "https://test-censor.hahalolo.com/auth/signin";
 
@@ -27,11 +26,12 @@ public class Global_Constant {
 
     // Đường dẫn thư mục
     public static final String ROOT_FOLDER = System.getProperty("user.dir");
-    public static final String UPLOAD_FOLDER = ROOT_FOLDER+"\\FileUpload\\";
-    public static final String uploadMultipleByChromeAuto = Global_Constant.ROOT_FOLDER + "\\libraries\\AutoIT\\chromeUploadMultiple.exe";
-    public static final String uploadMultipleByFirefoxAuto = Global_Constant.ROOT_FOLDER + "\\libraries\\AutoIT\\firefoxUploadMultiple.exe";
+    public static final String UPLOAD_FOLDER = ROOT_FOLDER+"\\SupportHelper\\FileUpload\\";
+    public static final String UPLOAD_FILE_FIREFOX_PATH = GlobalVariables.ROOT_FOLDER + "\\SupportHelper\\AutoIT\\chromeUploadMultiple.exe";
+    public static final String UPLOAD_FILE_CHROME_PATH = GlobalVariables.ROOT_FOLDER + "\\SupportHelper\\AutoIT\\firefoxUploadMultiple.exe";
 
     // Mailinator
+    public static final String URL_MAILINATOR = "https://www.mailinator.com/";
     public static final String MAIl_SEARCH_BOX = "//input[@id = 'addOverlay']";
     public static final String SEARCH_BOX = "//button[@id = 'go-to-public']";
     public static final String EMAIL_VERIFY_ACCOUNT = "//a[contains(text(),'Xác thực tài khoản Hahalolo')]";

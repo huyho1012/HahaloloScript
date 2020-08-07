@@ -2,9 +2,11 @@ package actions.PageObject.newsfeed.PageFeed;
 
 import actions.PageObject.newsfeed.Common.HeaderMenu;
 import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
+import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
 import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
 import actions.common.Function.PageGenerator;
 import interfaces.Newsfeed.Common.HeaderPageUI;
+import interfaces.Newsfeed.Common.sidebarLeftUI;
 import interfaces.Newsfeed.Common.sidebarRightUI;
 import interfaces.Newsfeed.PageFeed.NewsFeedPageIU;
 import org.openqa.selenium.WebDriver;
@@ -55,20 +57,26 @@ public class NewsFeedHomepage extends HeaderMenu {
     }
 
     public void updateBirthday(WebDriver driver, String dayItem, String monthItem, String yearItem) {
-        driver.switchTo().alert();
-        setTimeDelay(1);
         selectItemInCustomDropdown(driver,NewsFeedPageIU.SELECTED_DAY_DROP_DOWN,NewsFeedPageIU.SELECTED_DAY_ITEM,dayItem);
-        setTimeDelay(1);
         selectItemInCustomDropdown(driver,NewsFeedPageIU.SELECTED_MONTH_DROP_DOWN,NewsFeedPageIU.SELECTED_MONTH_ITEM,monthItem);
-        setTimeDelay(1);
         selectItemInCustomDropdown(driver,NewsFeedPageIU.SELECTED_YEAR_DROP_DOWN,NewsFeedPageIU.SELECTED_YEAR_ITEM,yearItem);
     }
 
-    public void updateGender() {
+    public void updateGender(WebDriver driver , String genderValue) {
+        waitElementToClickAble(driver,NewsFeedPageIU.GENDER_OPTION,genderValue);
+        clickToElement(driver,NewsFeedPageIU.GENDER_OPTION,genderValue);
     }
-    public void updateCountry() {
+    public void updateCountry(WebDriver driver, String countryItem) {
+        selectItemInCustomDropdown(driver,NewsFeedPageIU.COUNTRY_DROPDOWN,NewsFeedPageIU.COUNTRY_ITEM,countryItem);
+    }
+    public void clickUpdateButton() {
+        waitElementToClickAble(driver,NewsFeedPageIU.UPLOAD_BUTTON);
+        clickToElement(driver,NewsFeedPageIU.UPLOAD_BUTTON);
     }
 
-    public void clickUpdateButton() {
+    public PersonalAbout clickEditProfile() {
+        waitElementToClickAble(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
+        clickToElement(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
+        return PageGenerator.getPersonalOverviewTab(driver);
     }
 }

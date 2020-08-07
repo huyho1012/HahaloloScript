@@ -3,6 +3,7 @@ package actions.common.Function;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -29,12 +30,10 @@ public class AbstractTest {
         }
         return text;
     }
-
     protected int randomEmail() {
         Random rd = new Random();
         return rd.nextInt(1000);
     }
-
     protected boolean verifyTrue(boolean condition) {
         boolean status = true;
         try {
@@ -46,7 +45,6 @@ public class AbstractTest {
         }
         return status;
     }
-
     protected boolean verifyFalse(boolean condition) {
         boolean status = true;
         try {
@@ -69,8 +67,7 @@ public class AbstractTest {
         }
         return status;
     }
-
-    public void closeBrowserAndDriver(WebDriver driver) {
+    protected void closeBrowserAndDriver(WebDriver driver) {
         try {
             String osName = System.getProperty("os.name").toLowerCase();
             String cmd = "";
@@ -98,5 +95,43 @@ public class AbstractTest {
             process.waitFor();
         } catch (Exception e) {
         }
+    }
+
+    protected String getCurrentDay() {
+        DateTime nowUTC = new DateTime();
+        int day = nowUTC.getDayOfMonth();
+        if (day < 10) {
+            String dayValue = "0" + day;
+            return dayValue;
+        }
+        return day + "";
+    }
+    protected String getCurrentMonth() {
+        DateTime now = new DateTime();
+        int month = now.getMonthOfYear();
+        if (month < 10) {
+            String monthValue = "0" + month;
+            return monthValue;
+        }
+        return month + "";
+    }
+
+    protected String getCurrentYear() {
+        DateTime now = new DateTime();
+        return now.getYear() + "";
+    }
+
+    protected String getToday() {
+        return getCurrentDay() + "/" + getCurrentMonth() + "/" + getCurrentYear();
+    }
+
+    protected String getFullName(String firstName, String midName, String lastName){
+        return  firstName.trim() + midName.trim() + lastName.trim();
+    }
+    protected String getFullName(String firstName, String lastName){
+        return  firstName.trim() + lastName.trim();
+    }
+    protected String getBirthday(String day, String month, String year){
+        return day+ "-" + month + "-" + year;
     }
 }

@@ -1,9 +1,10 @@
 package actions.PageObject.Backend;
 
-import common.Function.PageGenerator;
-import common.Function.AbstractPage;
+
+import actions.common.Function.AbstractPage;
+import actions.common.Function.PageGenerator;
+import interfaces.Backend.LoginPageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.Backend.LoginPageUI;
 
 public class BackendLoginPageObject extends AbstractPage {
     WebDriver driver;
