@@ -111,9 +111,6 @@ public class SignUpITTestcase extends AbstractTest {
         perAboutPage.clickToSettingItem(driver,"ic-cog-c");
         accountSettingPage = PageGenerator.getAccountSettingPage(driver);
         verifyTrue(accountSettingPage.checkFullNameIsDisplay(driver,fullName));
-
-
-
         log.info("Check Update Info - Step 3.1 - ");
     }
 //    @AfterTest
