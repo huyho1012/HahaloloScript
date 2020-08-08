@@ -165,10 +165,16 @@ public abstract class AbstractPage {
         return driver.findElements(byXpath(locator));
     }
 
-    public void sendKeyToElement(WebDriver driver, String locator, String value){
+    public void sendKeyToElement(WebDriver driver, String locator, String data){
         element = findElement(driver,locator);
         element.clear();
-        element.sendKeys(value);
+        element.sendKeys(data);
+    }
+
+    public void sendKeyToElement(WebDriver driver, String locator, String data, String... values){
+        element = findElement(driver,castToObject(locator, values));
+        element.clear();
+        element.sendKeys(data);
     }
 
     public void clickToElement(WebDriver driver, String locator){

@@ -28,8 +28,8 @@ public class ExtentReportListener implements IReporter {
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         htmlReport = new ExtentHtmlReporter(System.getProperty("user.dir") + "/ExtentReportV4/ExtentReport.html");
         htmlReport.config().setTheme(Theme.DARK);
-        htmlReport.config().setDocumentTitle("Bank Guru E2E Testing");
-        htmlReport.config().setReportName("Functional UI");
+        htmlReport.config().setDocumentTitle("Hahalolo Report Function");
+        htmlReport.config().setReportName("Integration test");
         htmlReport.config().setEncoding("utf-8");
         extent = new ExtentReports();
         extent.attachReporter(htmlReport);

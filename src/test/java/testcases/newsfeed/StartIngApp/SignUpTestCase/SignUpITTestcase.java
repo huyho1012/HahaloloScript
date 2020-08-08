@@ -1,5 +1,4 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
-
 import actions.PageObject.newsfeed.AccountSetting.NewsFeedAccSettingGeneral;
 import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
@@ -15,13 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 public class SignUpITTestcase extends AbstractTest {
-
     WebDriver driver;
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();
-
     // Khai báo PageObject
     NewsFeedLogin loginPage;
     NewsFeedHomepage newsFeedPage;
@@ -59,19 +55,19 @@ public class SignUpITTestcase extends AbstractTest {
     public void TC_01_SingUp_With_Valid_Email(){
         log.info("Register Account - Step 1");
         log.info("Register Account - Step 1.1 - Enter First name");
-        loginPage.inputDataOnFirstNameSignUp(firstName);
+        loginPage.enterDataToTextBoxField(driver,"nv104", firstName);
 
         log.info("Register Account - Step 1.2 - Enter Last name");
-        loginPage.inputDataOnLastNameSignUp(lastName);
+        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
 
         log.info("Register Account - Step 1.3 - Enter Email");
-        loginPage.inputDataOnPhoneEmailSignUp(email);
+        loginPage.enterDataToTextBoxField(driver,"nv108",email);
 
         log.info("Register Account - Step 1.4 - Password");
-        loginPage.inputDataOnPasswordSignUp(passWord);
+        loginPage.enterDataToTextBoxField(driver,"nv109",passWord);
 
         log.info("Register Account - Step 1.5 - Enter Confirm Password");
-        loginPage.inputDataOnConfirmPasswordSignUp(confirmPassword);
+        loginPage.enterDataToTextBoxField(driver,"repeatPassword",confirmPassword);
 
         log.info("Register Account - Step 1.6 - Click Signup Button");
         verifyAccountPage = loginPage.clickSignUpButton();
@@ -107,7 +103,7 @@ public class SignUpITTestcase extends AbstractTest {
         perAboutPage.clickToBasicInfo();
         verifyTrue(perAboutPage.checkDataValueAccount(driver,"Email",email));
         verifyTrue(perAboutPage.checkDataValueAccount(driver,"Ngày sinh",birthday));
-        verifyTrue(perAboutPage.checkDataValueAccount(driver,"Giới tính",gender));
+        verifyTrue(perAboutPage.checkDataValueAccount(driver,"Giới tính","Nam"));
         perAboutPage.clickToSettingItem(driver,"ic-cog-c");
         accountSettingPage = PageGenerator.getAccountSettingPage(driver);
         verifyTrue(accountSettingPage.checkFullNameIsDisplay(driver,fullName));

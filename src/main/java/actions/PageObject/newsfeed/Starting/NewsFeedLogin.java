@@ -16,51 +16,15 @@ public class NewsFeedLogin extends HeaderMenu {
     public NewsFeedLogin(WebDriver webDriver){
         driver = webDriver;
     }
-    public void enterUsernameToLogin(String userName) {
-        waitElementToVisible(driver, LoginPageUI.USER_NAME_LOGIN_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.USER_NAME_LOGIN_TEXT_BOX,userName);
-    }
-    public void enterPasswordToLogin(String passWord) {
-        waitElementToVisible(driver, LoginPageUI.PASSWORD_LOGIN_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.PASSWORD_LOGIN_TEXT_BOX,passWord);
+    public void enterDataToTextBoxField(WebDriver driver, String dataValue, String nameTextBox) {
+        waitElementToVisible(driver, LoginPageUI.DYNAMIC_TEXT_BOX, nameTextBox);
+        sendKeyToElement(driver,LoginPageUI.DYNAMIC_TEXT_BOX,dataValue, nameTextBox);
     }
 
     public NewsFeedHomepage clickToLoginButton() {
         waitElementToClickAble(driver,LoginPageUI.LOGIN_BUTTON);
         clickToElement(driver,LoginPageUI.LOGIN_BUTTON);
         return new NewsFeedHomepage(driver);
-    }
-    public String getValidateErrUsernameLogin(){
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_USERNAME);
-        return getTextOfElement(driver, LoginPageUI.VALIDATE_ERROR_MESSAGE_USERNAME);
-    }
-    public String getValidateErrPassLogin(){
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_PASSWORD);
-        return getTextOfElement(driver, LoginPageUI.VALIDATE_ERROR_MESSAGE_PASSWORD);
-    }
-
-    public void inputDataOnFirstNameSignUp(String firstName) {
-        waitElementToVisible(driver,LoginPageUI.FIRST_NAME_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.FIRST_NAME_TEXT_BOX,firstName);
-    }
-    public void inputDataOnLastNameSignUp(String lastName) {
-        waitElementToVisible(driver,LoginPageUI.LAST_NAME_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.LAST_NAME_TEXT_BOX,lastName);
-    }
-
-    public void inputDataOnPhoneEmailSignUp(String phoneEmail) {
-        waitElementToVisible(driver,LoginPageUI.PHONE_EMAIL_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.PHONE_EMAIL_TEXT_BOX,phoneEmail);
-    }
-
-    public void inputDataOnPasswordSignUp(String passWord) {
-        waitElementToVisible(driver,LoginPageUI.PASSWORD_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.PASSWORD_TEXT_BOX,passWord);
-    }
-
-    public void inputDataOnConfirmPasswordSignUp(String confirmPass) {
-        waitElementToVisible(driver,LoginPageUI.CONFIRM_PASSWORD_TEXT_BOX);
-        sendKeyToElement(driver,LoginPageUI.CONFIRM_PASSWORD_TEXT_BOX,confirmPass);
     }
 
     public NewsFeedVerifyAccount clickSignUpButton() {
@@ -69,20 +33,16 @@ public class NewsFeedLogin extends HeaderMenu {
         return PageGenerator.getVerifyAccountPage(driver);
     }
 
-    public String getValidateFirstNameSignUp() {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_FIRST_NAME);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_FIRST_NAME);
-    }
-    public void checkLanguageButton(){
+    public void changeLanguageSystemToVI(){
         waitElementToVisible(driver, LoginPageUI.VIETNAMESE_BUTTON);
         if(!checkIsDisplayedElement(driver, LoginPageUI.VIETNAMESE_BUTTON)){
             clickToElement(driver,LoginPageUI.VIETNAMESE_BUTTON);
         }
     }
 
-    public String getValidateLastNameSignUp() {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_LAST_NAME);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_LAST_NAME);
+    public String getValidateErrMessage(WebDriver driver, String nameField) {
+        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
+        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
     }
 
     public boolean changePhoneCode(String phoneCode) {
@@ -91,20 +51,6 @@ public class NewsFeedLogin extends HeaderMenu {
             selectItemInCustomDropdown(driver,LoginPageUI.PHONE_CODE_AREA,"//span[@class ='phone-code']",phoneCode);
             return true;
         }return false;
-    }
-
-    public String getValidatePhoneEmailSignUp() {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_PHONE_EMAIL);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_PHONE_EMAIL);
-    }
-
-    public String getValidatePasswordSignUp() {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_PASS_WORD);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_PASS_WORD);
-    }
-    public String getValidateConfirmPassSignUp() {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_CONFIRM_PASS);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE_FROM_CONFIRM_PASS);
     }
 
     public boolean checkLogoutSuccess() {

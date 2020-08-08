@@ -11,7 +11,11 @@ public class NewsFeedAccSettingGeneral extends HeaderMenu {
     }
 
     public boolean checkFullNameIsDisplay(WebDriver driver,String name) {
-        waitElementToVisible(driver, AccountSettingUI.fullNameDate);
-        return (getTextOfElement(driver,AccountSettingUI.fullNameDate).equals(name));
+        waitElementToVisible(driver, AccountSettingUI.FULL_NAME_DATA);
+        return (getTextOfElement(driver,AccountSettingUI.FULL_NAME_DATA).trim().equals(name.trim()));
+    }
+    public String getFullNameIsDisplay(WebDriver driver){
+        waitElementToVisible(driver,AccountSettingUI.FULL_NAME_DATA);
+        return  getTextOfElement(driver,AccountSettingUI.FULL_NAME_DATA);
     }
 }

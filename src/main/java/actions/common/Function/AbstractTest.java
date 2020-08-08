@@ -129,7 +129,7 @@ public class AbstractTest {
         return  firstName.trim() + midName.trim() + lastName.trim();
     }
     protected String getFullName(String firstName, String lastName){
-        return  firstName.trim() + lastName.trim();
+        return  (lastName.trim()+ " " + firstName.trim()).trim();
     }
     protected String getBirthday(String day, String month, String year){
         return day+ "-" + month + "-" + year;

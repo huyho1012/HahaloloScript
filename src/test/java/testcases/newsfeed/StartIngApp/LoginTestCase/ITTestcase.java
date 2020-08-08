@@ -144,7 +144,7 @@ public class ITTestcase extends AbstractTest {
         loginPage.clickToLoginButton();
 
         log.info("Step 4.5 - Login - Login with blocked account - Check message verification");
-        verifyEquals(loginPage.getValidateErrPassLogin(),"Tên tài khoản hoặc mật khẩu sai");
+        verifyEquals(loginPage.getValidateErrMessage(driver,"password"),"Tên tài khoản hoặc mật khẩu sai");
     }
 
     @AfterTest
