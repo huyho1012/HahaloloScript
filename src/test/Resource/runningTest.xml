@@ -9,8 +9,10 @@
     <test name="Test with firefox">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-<!--            <class name="hahalolo.newsfeed.StartIngApp.LoginTestCase.ITTestcase"></class>-->
-            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.SignUpITTestcase"></class>
+<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase"></class>-->
+<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.ITTestcase"></class>-->
+            <class name="testcases.newsfeed.StartIngApp."></class>
+<!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
         </classes>
     </test>
 

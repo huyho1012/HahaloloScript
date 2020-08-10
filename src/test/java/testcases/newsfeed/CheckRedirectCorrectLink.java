@@ -36,8 +36,8 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     driverManager = BrowserDriver.getBrowser(browserName);
     driver= driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
     loginPage = PageGenerator.getLoginPage(driver);
-    loginPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
-    loginPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
+    loginPage.enterDataToTextBoxField(driver,"identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
+    loginPage.enterDataToTextBoxField(driver,"password",GlobalVariables.FEED_EMAIL_PASSWORD);
     loginPage.clickToLoginButton();
     newsfeedPage = PageGenerator.getNewsFeedPage(driver);
     newsfeedPage.changeLanguageDisplay();

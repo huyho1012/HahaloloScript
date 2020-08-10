@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test with firefox"
+           tests="10"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="23.420">
+  <properties />
+  
+  
+            <testcase name="TC04_Login_With_Password_Less_than_6_Chars" time="0.796" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC_Login_With_Valid_Email" time="9.735" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC03_Login_With_Blank_Password" time="0.718" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC03_Login_With_Password_Incorrect" time="1.055" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC_Login_With_Valid_Phone" time="6.933" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC01_Login_With_Blank_Info" time="1.010" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="TC05_Login_With_Password_More_than_129_Chars" time="1.236" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC03_Login_With_Invalid_Phone" time="0.645" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC02_Login_With_Blank_Username" time="0.548" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+                <testcase name="Login_TC03_Login_With_Invalid_Email" time="0.744" classname="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase" />
+      
+</testsuite>

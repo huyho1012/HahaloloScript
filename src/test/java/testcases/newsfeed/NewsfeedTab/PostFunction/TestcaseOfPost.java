@@ -34,10 +34,10 @@ public class TestcaseOfPost extends AbstractTest {
         loginPage= PageGenerator.getLoginPage(driver);
 
         log.info("Precondition - Step 02 - Enter Username");
-        loginPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
+        loginPage.enterDataToTextBoxField(driver,"identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
 
         log.info("Precondition - Step 03 - Enter Password");
-        loginPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
+        loginPage.enterDataToTextBoxField(driver,"password",GlobalVariables.FEED_EMAIL_PASSWORD);
 
         log.info("Precondition - Step 04 - Click Signin button");
         loginPage.clickSignUpButton();

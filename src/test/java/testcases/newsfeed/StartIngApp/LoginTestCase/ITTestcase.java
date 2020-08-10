@@ -48,19 +48,19 @@ public class ITTestcase extends AbstractTest {
         log.info("Step 1 - Register Account");
 
         log.info("Step 1.1 - Register Account - Enter First Name");
-        loginPage.inputDataOnFirstNameSignUp(firstName);
+        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
 
         log.info("Step 1.2 - Register Account - Enter Last Name");
-        loginPage.inputDataOnLastNameSignUp(lastName);
+        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
 
         log.info("Step 1.3 - Register Account - Enter Email");
-        loginPage.inputDataOnPhoneEmailSignUp(email);
+        loginPage.enterDataToTextBoxField(driver,"nv108",email);
 
         log.info("Step 1.4 - Register Account - Enter Password");
-        loginPage.inputDataOnPasswordSignUp(passWord);
+        loginPage.enterDataToTextBoxField(driver,"nv109",passWord);
 
         log.info("Step 1.5 - Register Account - Enter Confirm password");
-        loginPage.inputDataOnConfirmPasswordSignUp(confirmPassword);
+        loginPage.enterDataToTextBoxField(driver,"repeatPassword",confirmPassword);
 
         log.info("Step 1.6 - Register Account - Click Register button");
         verifyAccountPage = loginPage.clickSignUpButton();
@@ -135,10 +135,10 @@ public class ITTestcase extends AbstractTest {
         loginPage = PageGenerator.getLoginPage(driver);
 
         log.info("Step 4.2 - Login - Login with blocked account - Enter a Username");
-        loginPage.enterUsernameToLogin(email);
+        loginPage.enterDataToTextBoxField(driver,"identity",email);
 
         log.info("Step 4.3 - Login - Login with blocked account - Enter a password");
-        loginPage.enterPasswordToLogin(passWord);
+        loginPage.enterDataToTextBoxField(driver,"password",passWord);
 
         log.info("Step 4.4 - Login - Login with blocked account - Click Login button");
         loginPage.clickToLoginButton();

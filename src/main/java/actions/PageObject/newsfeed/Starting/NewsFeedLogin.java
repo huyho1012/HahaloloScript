@@ -16,11 +16,15 @@ public class NewsFeedLogin extends HeaderMenu {
     public NewsFeedLogin(WebDriver webDriver){
         driver = webDriver;
     }
-    public void enterDataToTextBoxField(WebDriver driver, String dataValue, String nameTextBox) {
-        waitElementToVisible(driver, LoginPageUI.DYNAMIC_TEXT_BOX, nameTextBox);
-        sendKeyToElement(driver,LoginPageUI.DYNAMIC_TEXT_BOX,dataValue, nameTextBox);
+    public void enterDataToTextBoxField(WebDriver driver, String nameField ,String dataValue) {
+        waitElementToVisible(driver, LoginPageUI.DYNAMIC_TEXT_BOX, nameField);
+        sendKeyToElement(driver,LoginPageUI.DYNAMIC_TEXT_BOX,dataValue, nameField);
     }
 
+    public String getValidateErrMessage(WebDriver driver, String nameField) {
+        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
+        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
+    }
     public NewsFeedHomepage clickToLoginButton() {
         waitElementToClickAble(driver,LoginPageUI.LOGIN_BUTTON);
         clickToElement(driver,LoginPageUI.LOGIN_BUTTON);
@@ -38,11 +42,6 @@ public class NewsFeedLogin extends HeaderMenu {
         if(!checkIsDisplayedElement(driver, LoginPageUI.VIETNAMESE_BUTTON)){
             clickToElement(driver,LoginPageUI.VIETNAMESE_BUTTON);
         }
-    }
-
-    public String getValidateErrMessage(WebDriver driver, String nameField) {
-        waitElementToVisible(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
-        return getTextOfElement(driver,LoginPageUI.VALIDATE_ERROR_MESSAGE,nameField);
     }
 
     public boolean changePhoneCode(String phoneCode) {
@@ -68,5 +67,11 @@ public class NewsFeedLogin extends HeaderMenu {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         openNewWindow(driver, GlobalVariables.URL_CENSOR_LINK);
         return  PageGenerator.getCensorLoginPage(driver);
+    }
+
+    public boolean checkNewsFeedLoginPageDisplay() {
+        waitForPageLoading(driver);
+        waitElementToVisible(driver,LoginPageUI.TITLE_REGISTER_FORM);
+        return checkIsDisplayedElement(driver,LoginPageUI.TITLE_REGISTER_FORM);
     }
 }
