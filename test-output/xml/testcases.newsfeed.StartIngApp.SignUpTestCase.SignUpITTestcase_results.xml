@@ -8,6 +8,6 @@
   <properties />
   
   
-            <testcase name="TC_01_SingUp_With_Valid_Email" time="45.348" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.SignUpITTestcase" />
+            <testcase name="TC_01_SingUp_With_Valid_Email" time="45.348" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest" />
       
 </testsuite>

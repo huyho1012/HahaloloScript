@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-public class SignUpITTestcase extends AbstractTest {
+public class IntegrationTest extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();

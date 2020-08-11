@@ -17,7 +17,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class ITTestcase extends AbstractTest {
+public class IntegrationTest extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
 

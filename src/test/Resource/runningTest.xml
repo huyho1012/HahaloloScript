@@ -9,8 +9,8 @@
     <test name="Test with firefox">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.ValidationTestcase"></class>-->
-<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.ITTestcase"></class>-->
+<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.Validation"></class>-->
+<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>-->
             <class name="testcases.newsfeed.StartIngApp."></class>
 <!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
         </classes>

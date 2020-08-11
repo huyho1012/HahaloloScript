@@ -534,7 +534,7 @@ public class Validation extends AbstractTest {
     @Test
     public void confirmPassValidate_02_SingUp_With_Confirm_Password_Less_Than_6_Chars(){
         log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","H@ang @anh");
+        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
         log.info("Enter Last name");
         loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
         log.info("Enter Account");
@@ -551,7 +551,7 @@ public class Validation extends AbstractTest {
     @Test
     public void confirmPassValidate_03_SingUp_With_ConfirmPass_Greater_Than_128_Chars(){
         log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","H@ang @anh");
+        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
         log.info("Enter Last name");
         loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
         log.info("Enter Account");
@@ -559,7 +559,7 @@ public class Validation extends AbstractTest {
         log.info("Enter Password");
         loginPage.enterDataToTextBoxField(driver,"nv109","123456");
         log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
+        loginPage.enterDataToTextBoxField(driver,"repeatPassword",randomPassword(129));
         log.info("Click Sign up button");
         loginPage.clickSignUpButton();
         log.info("Verify error validation message");
