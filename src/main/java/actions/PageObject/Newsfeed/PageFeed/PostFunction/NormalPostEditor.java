@@ -74,4 +74,24 @@ public class NormalPostEditor extends EditorFunctionObject {
         clickToElement(driver, EditorUI.BUTTON_CLOSE_EDITOR);
         return PageGenerator.getNewsFeedPage(driver);
     }
+
+    public boolean checkFunctionInsertEmojiIsDisplay() {
+        return checkIsDisplayedElement(driver,EditorUI.EMOJI_INSERT_FUNCTION);
+    }
+    public boolean checkFunctionTaggingUserIsDisplay() {
+        return checkIsDisplayedElement(driver,EditorUI.TAGGING_FUNCTION);
+    }
+    public boolean checkFunctionAddLocationIsDisplay() {
+        return checkIsDisplayedElement(driver,EditorUI.ADD_LOCATION_FUNCTION);
+    }
+    public boolean checkFunctionAddImageIsDisplay() {
+        return checkIsDisplayedElement(driver,EditorUI.ADD_IMAGE_FUNCTION);
+    }
+    public boolean checkFunctionAddFeelingIsDisplay() {
+        return checkIsDisplayedElement(driver,EditorUI.ADD_FELLING_FUNCTION);
+    }
+
+    public void clickOVerPopup(WebDriver driver) {
+        moveByOffset(driver);
+    }
 }

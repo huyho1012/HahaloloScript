@@ -9,6 +9,7 @@ import actions.common.Function.PageGenerator;
 import interfaces.Newsfeed.Common.HeaderPageUI;
 import interfaces.Newsfeed.Common.sidebarLeftUI;
 import interfaces.Newsfeed.Common.sidebarRightUI;
+import interfaces.Newsfeed.Editor.EditorUI;
 import interfaces.Newsfeed.TabFeed.NewsFeedPageIU;
 import org.openqa.selenium.WebDriver;
 
@@ -40,7 +41,7 @@ public class NewsFeedHomepage extends HeaderMenu {
         return checkIsDisplayedElement(driver, HeaderPageUI.CART_FUNCTION);
     }
 
-    public NormalPostEditor clickToNormalPostFunction(WebDriver driver) {
+    public NormalPostEditor clickToNormalPostFunction() {
         waitElementToClickAble(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         clickToElement(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         return PageGenerator.openNormalPostEditor(driver);
@@ -87,4 +88,5 @@ public class NewsFeedHomepage extends HeaderMenu {
         waitElementToClickAble(driver,NewsFeedPageIU.React_Button);
         clickToElement(driver,NewsFeedPageIU.React_Button);
     }
+
 }

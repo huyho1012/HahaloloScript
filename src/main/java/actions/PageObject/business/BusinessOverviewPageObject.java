@@ -1,4 +1,4 @@
-package actions.PageObject.Business.Business;
+package actions.PageObject.business;
 
 import org.openqa.selenium.WebDriver;
 

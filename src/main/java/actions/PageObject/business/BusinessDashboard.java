@@ -1,4 +1,4 @@
-package actions.PageObject.Business.Business;
+package actions.PageObject.business;
 
 import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.common.Function.PageGenerator;

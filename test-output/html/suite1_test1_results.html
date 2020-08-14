@@ -12,7 +12,7 @@
 <body>
 <h1>Test with firefox</h1>
 <p>
-  Test duration: 90.293s
+  Test duration: 65.313s
 </p>
 
 
@@ -20,30 +20,33 @@
   <table class="resultsTable">
     <tr><th colspan="3" class="header failed">Failed Tests</th></tr>
           <tr>
-        <td colspan="3" class="group">testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost</td>
+        <td colspan="3" class="group">testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost</td>
       </tr>
             
 <tr>
   <td class="method">
-                  TC03_VALIDATE_POST_CONTENT
+                  TC04_VALIDATE_POST_CONTENT
       </td>
   <td class="duration">
-    77.142s
+    54.886s
   </td>
   <td class="result">
         
     
         
 
-        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>java.lang.NullPointerException</b></a><br />
+        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for alert to be present (tried for 30 second(s) with 500 milliseconds interval)<br/>
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;<br/>
+System info: host: &apos;DESKTOP-LF4PDD0&apos;, ip: &apos;172.16.99.20&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;14.0.1&apos;<br/>
+Driver info: org.openqa.selenium.chrome.ChromeDriver<br/>
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.125, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: C:\Users\WIN10~1\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:58629}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}<br/>
+Session ID: d5cdab98bb45052b766101fb88cdf03f</b></a><br />
     <div class="stackTrace" id="exception-0">
-              java.base/java.util.Objects.requireNonNull(Objects.java:222)<br />
-              org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:106)<br />
-              org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:85)<br />
-              org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)<br />
-              actions.common.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:387)<br />
-              actions.PageObject.Newsfeed.PageFeed.PostFunction.EditorFunctionObject.clickToSharePostButton(EditorFunctionObject.java:109)<br />
-              testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost.TC03_VALIDATE_POST_CONTENT(TestcaseOfPost.java:106)<br />
+              org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)<br />
+              org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)<br />
+              actions.common.Function.AbstractPage.waitPresenceAlert(AbstractPage.java:81)<br />
+              actions.common.Function.AbstractPage.getAlertText(AbstractPage.java:97)<br />
+              testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost.TC04_VALIDATE_POST_CONTENT(TestcaseOfPost.java:135)<br />
               java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
               java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
               java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />

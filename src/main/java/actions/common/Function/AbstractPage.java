@@ -255,6 +255,9 @@ public abstract class AbstractPage {
         action = new Actions(driver);
         action.moveToElement(element).perform();
     }
+    public void moveByOffset(WebDriver driver){
+        action.moveByOffset(30,40).click().perform();
+    }
 
     public void hoverMouseToElement(WebDriver driver, String locator, String...values){
         element = findElement(driver, castToObject(locator, values));

@@ -1,4 +1,4 @@
-package testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost;
+package testcases.newsfeed.PostFunction.NormalPost;
 
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
@@ -30,7 +30,7 @@ public class Validation extends AbstractTest {
     @Test
     public void Share_Button_01_Check_Status_Button_When_User_No_Input(){
         log.info("Check Button Share Post - Step 01 - Open Post Normal Editor");
-        newsFeedHomepage.clickToNormalPostFunction(driver);
+        newsFeedHomepage.clickToNormalPostFunction();
         editorTab = PageGenerator.openNormalPostEditor(driver);
 
         log.info("Check Share Post button - Step 02 - Check form Editor post display");

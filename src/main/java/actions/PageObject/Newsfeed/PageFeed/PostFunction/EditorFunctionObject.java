@@ -105,7 +105,7 @@ public class EditorFunctionObject extends AbstractPage {
         clickToElement(driver,PostModelUI.ITEM_FUNCTION_ON_POST,postContent,authorName,functionPost);
     }
 
-    public void clickToSharePostButton( ) {
+    public void clickToSharePostButton(WebDriver driver ) {
         waitElementToClickAble(driver,PostModelUI.CREATE_POST_BUTTON);
         clickToElement(driver,PostModelUI.CREATE_POST_BUTTON);
     }

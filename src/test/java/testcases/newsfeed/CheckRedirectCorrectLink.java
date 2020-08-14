@@ -1,8 +1,7 @@
 package testcases.newsfeed;
 
-import actions.PageObject.Business.Business.BusinessDashboard;
+import actions.PageObject.business.BusinessDashboard;
 import actions.PageObject.Newsfeed.AccountSetting.GeneralSettingPageObject;
-import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.*;
 import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
@@ -15,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 public class CheckRedirectCorrectLink extends AbstractTest {
     DriverManager driverManager;

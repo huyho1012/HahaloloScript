@@ -6,7 +6,7 @@
            skipped="0"
            time="77.142">
   <properties />
-            <testcase name="TC03_VALIDATE_POST_CONTENT" time="77.142" classname="testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost">
+            <testcase name="TC03_VALIDATE_POST_CONTENT" time="77.142" classname="TestcaseOfPost">
                 <failure type="java.lang.NullPointerException"
                   message="(null)"
               >
@@ -17,7 +17,7 @@
   org.openqa.selenium.support.ui.WebDriverWait.<init>(WebDriverWait.java:45)
   actions.common.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:387)
   actions.PageObject.Newsfeed.PageFeed.PostFunction.EditorFunctionObject.clickToSharePostButton(EditorFunctionObject.java:109)
-  testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost.TC03_VALIDATE_POST_CONTENT(TestcaseOfPost.java:106)
+  TestcaseOfPost.TC03_VALIDATE_POST_CONTENT(TestcaseOfPost.java:106)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
   java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

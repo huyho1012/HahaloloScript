@@ -1,7 +1,8 @@
-package testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost;
+package testcases.newsfeed.PostFunction.NormalPost;
 
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
+import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
@@ -13,12 +14,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+
 public class TestcaseOfPost extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     NewsFeedLogin loginPage;
     NewsFeedHomepage newsFeedPage;
     NormalPostEditor normalPostEditor;
+    PersonalTimelinePageObject perTimelinePage;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
     String authorName = "Chúa Tể Khô";
@@ -41,19 +44,43 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Precondition - Step 05 - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Precondition - Step 06 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
+        newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
 
     }
 //    @Test
 //    public void TC01_Check_Display_of_Editor_Case_New_Post() {
+//        log.info("Check Title of post normal");
 //        verifyEquals(normalPostEditor.getTitleOfNormalPost(driver),"Tạo bài viết");
+//        log.info("Check placeholder of post normal");
 //        verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
+//        log.info("Check status of button Share post");
 //        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        log.info("Check default Scope dropdown");
 //        verifyEquals(normalPostEditor.getScopeDisplayOnDropdown(driver),"Công khai");
+//        log.info("Check function display on post normal");
+//        verifyTrue(normalPostEditor.checkFunctionInsertEmojiIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionTaggingUserIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddLocationIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddImageIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddFeelingIsDisplay());
+//    }
+
+//    @Test
+//    public void TC02_Check_Action_Close_Normal() {
+//
+//        normalPostEditor.clickOVerPopup(driver);
+//        verifyTrue(newsFeedPage.checkSharePostButtonIsDisplay(driver));
+//        log.info("Click close icon when no input");
+//        newsFeedPage = normalPostEditor.clickClosePostEditor();
+//        verifyFalse(newsFeedPage.checkSharePostButtonIsDisplay());
+//
+//        log.info("Reload Page To create new TC");
+//        newsFeedPage.refreshPage(driver);
+//
 //    }
 //    @Test
-//    public void TC02_Button_Share_Check_Status_Button(){
+//    public void TC03_Button_Share_Check_Status_Button(){
 //        log.info("Step 1 - Check default status button");
 //        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
 //
@@ -97,13 +124,100 @@ public class TestcaseOfPost extends AbstractTest {
 //        newsFeedPage = normalPostEditor.clickClosePostEditor();
 //    }
     @Test
-    public void TC03_VALIDATE_POST_CONTENT(){
-        log.info("Step 1 - Check When not input content");
+    public void TC04_VALIDATE_POST_CONTENT(){
+//        log.info("Step 1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction();
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+        log.info("Step 2 - Check When not input content");
         normalPostEditor.inputPostNormalContent(driver,"");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
 
+        log.info("Step 3 - Check post content > 100000 character");
         normalPostEditor.inputPostNormalContent(driver,randomParagraphs(50));
-        normalPostEditor.clickToSharePostButton();
+        normalPostEditor.clickToSharePostButton(driver);
+        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000");
+        normalPostEditor.clickButtonOk();
+
+        log.info("Step 3 - Check post content > 100000 character");
+        normalPostEditor.inputPostNormalContent(driver,randomPassword(10000));
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with html code");
+        normalPostEditor.inputPostNormalContent(driver,GlobalVariables.HTML_CODE);
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with html code");
+        normalPostEditor.inputPostNormalContent(driver,GlobalVariables.SCRIPT_CODE);
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with only Emoji");
+        normalPostEditor.insertEmoji(driver,2);
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with Content + Emoji");
+        normalPostEditor.inputPostNormalContent(driver,contentPost);
+        normalPostEditor.insertEmoji(driver,2);
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with Content");
+        normalPostEditor.inputPostNormalContent(driver,contentPost);
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with specialCharacter");
+        normalPostEditor.inputPostNormalContent(driver,"");
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+
+        log.info("Step 4 - Check post content with whitespace before and after");
+        normalPostEditor.inputPostNormalContent(driver,"");
+        normalPostEditor.clickToSharePostButton(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToUserHomePage();
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+        perTimelinePage.clickToLogoHahalolo(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
     }
 //    @Test
 //    public void TC_01_CreateNewNormalPost(){

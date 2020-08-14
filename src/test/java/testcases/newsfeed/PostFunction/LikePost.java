@@ -1,4 +1,4 @@
-package testcases.newsfeed.NewsfeedTab.PostFunction;
+package testcases.newsfeed.PostFunction;
 
 import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;

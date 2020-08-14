@@ -8,16 +8,17 @@ import actions.PageObject.Censor.CensorHomePage;
 import actions.PageObject.Censor.CensorLogin;
 import actions.PageObject.EditorDemo.postConfig;
 import actions.PageObject.Newsfeed.AccountSetting.GeneralSettingPageObject;
+import actions.PageObject.Newsfeed.PageFeed.*;
 import actions.PageObject.Newsfeed.PersonalWall.About.*;
 import actions.PageObject.Wallet.WalletLoginPageObject;
-import actions.PageObject.Business.Business.BusinessDashboard;
-import actions.PageObject.Business.Business.BusinessOverviewPageObject;
-import actions.PageObject.Newsfeed.PageFeed.*;
+import actions.PageObject.business.BusinessDashboard;
+import actions.PageObject.business.BusinessOverviewPageObject;
 import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
 import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
 import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
+
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
@@ -81,7 +82,7 @@ public class PageGenerator {
         return new UserHandNotePageObject(driver);
     }
 
-    // About
+    // Personal - About
     public static OverviewPageObject getPersonalOverviewTab(WebDriver driver){
         return new OverviewPageObject(driver);
     }
@@ -98,10 +99,6 @@ public class PageGenerator {
         return new BasicInfoPageObject(driver);
     }
 
-    public static postConfig getEditorDemoPage(WebDriver driver) {
-        return new postConfig(driver);
-    }
-
     // Wallet
     public static WalletLoginPageObject createWalletLoginPage(WebDriver driver){
         return new WalletLoginPageObject(driver);
@@ -114,7 +111,6 @@ public class PageGenerator {
     public static BusinessOverviewPageObject createBusinessOverviewPage(WebDriver driver){
         return new BusinessOverviewPageObject(driver);
     }
-
 
     public static GeneralSettingPageObject createAccountSettingGeneralTab(WebDriver driver) {
         return new GeneralSettingPageObject(driver);

@@ -1,10 +1,7 @@
 package actions.PageObject.Newsfeed.Common;
 
 import actions.PageObject.Wallet.WalletLoginPageObject;
-import actions.PageObject.Business.Business.BusinessOverviewPageObject;
-import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
 import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.Function.AbstractPage;
 import actions.common.Function.PageGenerator;
 import interfaces.Newsfeed.Common.HeaderPageUI;
