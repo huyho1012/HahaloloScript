@@ -1,5 +1,6 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
@@ -19,6 +20,7 @@ public class Validation extends AbstractTest {
     // Khai báo pageObject
     NewsFeedLogin newFeedLoginPage;
     NewsFeedHomepage newsFeedPage;
+    HeaderMenu headerMenu;
     @Parameters("browser")
     @BeforeClass
     public void preconditionMethod(String browserName){
@@ -125,7 +127,7 @@ public class Validation extends AbstractTest {
         newsFeedPage = newFeedLoginPage.clickToLoginButton();
         verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Logout account");
-        newsFeedPage.clickToSettingItem(driver,"ic-logout-c");
+        headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
         newFeedLoginPage = PageGenerator.getLoginPage(driver);
         verifyTrue(newFeedLoginPage.checkNewsFeedLoginPageDisplay());
     }
@@ -139,7 +141,7 @@ public class Validation extends AbstractTest {
         newsFeedPage = newFeedLoginPage.clickToLoginButton();
         verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Logout account");
-        newsFeedPage.clickToSettingItem(driver,"ic-logout-c");
+        headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
         newFeedLoginPage = PageGenerator.getLoginPage(driver);
         verifyTrue(newFeedLoginPage.checkNewsFeedLoginPageDisplay());
     }

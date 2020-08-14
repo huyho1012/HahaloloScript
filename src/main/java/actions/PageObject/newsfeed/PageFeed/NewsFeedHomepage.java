@@ -2,6 +2,7 @@ package actions.PageObject.Newsfeed.PageFeed;
 
 import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
+import actions.PageObject.Newsfeed.PersonalWall.About.OverviewPageObject;
 import actions.PageObject.Newsfeed.PersonalWall.About.PersonalAbout;
 import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import actions.common.Function.PageGenerator;
@@ -39,7 +40,7 @@ public class NewsFeedHomepage extends HeaderMenu {
         return checkIsDisplayedElement(driver, HeaderPageUI.CART_FUNCTION);
     }
 
-    public NormalPostEditor clickToNormalPostFunction() {
+    public NormalPostEditor clickToNormalPostFunction(WebDriver driver) {
         waitElementToClickAble(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         clickToElement(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         return PageGenerator.openNormalPostEditor(driver);
@@ -74,7 +75,7 @@ public class NewsFeedHomepage extends HeaderMenu {
         clickToElement(driver,NewsFeedPageIU.UPLOAD_BUTTON);
     }
 
-    public PersonalAbout clickEditProfile() {
+    public OverviewPageObject clickEditProfile() {
         waitElementToClickAble(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
         clickToElement(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
         return PageGenerator.getPersonalOverviewTab(driver);

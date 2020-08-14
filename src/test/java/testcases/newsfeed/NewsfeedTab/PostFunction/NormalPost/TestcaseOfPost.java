@@ -18,7 +18,7 @@ public class TestcaseOfPost extends AbstractTest {
     DriverManager driverManager;
     NewsFeedLogin loginPage;
     NewsFeedHomepage newsFeedPage;
-    NormalPostEditor postPage;
+    NormalPostEditor normalPostEditor;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
     String authorName = "Chúa Tể Khô";
@@ -31,62 +31,87 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Precondition - Step 01 - Open Browser");
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginPage= PageGenerator.getLoginPage(driver);
-
         log.info("Precondition - Step 02 - Enter Username");
         loginPage.enterDataToTextBoxField(driver,"identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
-
         log.info("Precondition - Step 03 - Enter Password");
         loginPage.enterDataToTextBoxField(driver,"password",GlobalVariables.FEED_EMAIL_PASSWORD);
-
-        log.info("Precondition - Step 04 - Click Signin button");
-        loginPage.clickSignUpButton();
+        log.info("Precondition - Step 04 - Click Login button");
+        loginPage.clickToLoginButton();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
         log.info("Precondition - Step 05 - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess());
-    }
+        log.info("Precondition - Step 06 - Open Normal Post Editor");
+        newsFeedPage.clickToNormalPostFunction(driver);
+        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
 
-    @Test
-    public void NormalPost_02_Check_Button_Share_Post_When_Has_Input(){
-        log.info("Check Button Share Post - Step 01 - Open Post Normal Editor");
-        newsFeedPage.clickToNormalPostFunction();
-        postPage = PageGenerator.openNormalPostEditor(driver);
-
-        log.info("Check Button Share Post - Step 02 - Verify Normal Post Display");
-        verifyTrue(postPage.checkCreatePostModalIsDisplay());
-
-        log.info("Check Button Share Post - Step 03 - Input content");
-        postPage.inputPostNormalContent(contentPost);
-
-        log.info("Check Button Share Post - Step 04 - Check status Shared button");
-//        verifyTrue(postPage.checkButtonSharePostIsEnable());
     }
 //    @Test
-//    public void NormalPost_03_Check_Button_Share_Post_When_User_Remove_Content(){
-//        log.info("Check Button Share Post - Step 01 - Go to personalWall");
-//        newsFeedPage.setTimeDelay(1);
-//        newsFeedPage.clickToNormalPostFunction();
-//        postPage = PageGenerator.openNormalPostEditor(driver);
-//
-//        log.info("Check Button Share Post - Step 02 - Verify Normal Post Display");
-//        verifyTrue(postPage.checkNormalPostEditorDisplay());
-//
-//        log.info("Check Button Share Post - Step 03 - Input content");
-//        postPage.inputPostNormalContent(contentPostNormal);
-//
-//        log.info("Check Button Share Post - Step 04 - Check button Share Post disable");
-//        verifyFalse(postPage.checkSharedButtonIsDisable());
-//
-//        log.info("Check Button Share Post - Step 05 - Close Post Normal Editor");
-//        postPage.closeNormalPostEditor();
+//    public void TC01_Check_Display_of_Editor_Case_New_Post() {
+//        verifyEquals(normalPostEditor.getTitleOfNormalPost(driver),"Tạo bài viết");
+//        verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        verifyEquals(normalPostEditor.getScopeDisplayOnDropdown(driver),"Công khai");
 //    }
+//    @Test
+//    public void TC02_Button_Share_Check_Status_Button(){
+//        log.info("Step 1 - Check default status button");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 1 - Check status button when user input data");
+//        normalPostEditor.inputPostNormalContent(driver,contentPost);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 2 - Check status button when user remove data");
+//        normalPostEditor.inputPostNormalContent(driver,"");
+//        normalPostEditor.setTimeDelay(2);
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 3 - Check status button when user insert emoji");
+//        normalPostEditor.insertEmoji(driver,4);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 3 - Check status button when user add feeling - case noInput");
+//        normalPostEditor.chooseFeeling(driver,"thú vị");
+//        normalPostEditor.inputPostNormalContent(driver,"");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 4 - Check status button when user add location - case noInput");
+//        normalPostEditor.chooseLocationAddress(driver,"Ho Chi Minh City");
+//        normalPostEditor.inputPostNormalContent(driver,"");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 5 - Check status button when user tag friend - case noInput");
+//        normalPostEditor.chooseUserTagging(driver,"Huy Hồ","1");
+//        normalPostEditor.inputPostNormalContent(driver,"");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 6 - Check status button when user add image");
+//        normalPostEditor.chooseImageToInsert(driver, file1,file2);
+//        normalPostEditor.setTimeDelay(3);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//        normalPostEditor.removeImage(driver);
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        normalPostEditor.removeFeeling(driver,"thú vị");
+//        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
+//        normalPostEditor.removeOneUserTagging(driver,1);
+//        newsFeedPage = normalPostEditor.clickClosePostEditor();
+//    }
+    @Test
+    public void TC03_VALIDATE_POST_CONTENT(){
+        log.info("Step 1 - Check When not input content");
+        normalPostEditor.inputPostNormalContent(driver,"");
+        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+
+        normalPostEditor.inputPostNormalContent(driver,randomParagraphs(50));
+        normalPostEditor.clickToSharePostButton();
+    }
 //    @Test
 //    public void TC_01_CreateNewNormalPost(){
 //        log.info("Create Post - Step 01 - Open Editor function");
 //        postPage = newsFeedPage.clickToNormalPostFunction();
 //        postPage = PageGenerator.openNormalPostEditor(driver);
 //
-//        log.info("Create Post - Step 02 - Check Editor Post normal display");
+//        log.info("Create Post - Step 02 - Check Editor Post normal display");||||
 //        verifyTrue(postPage.checkCreatePostModalIsDisplay());
 //
 //        log.info("Create Post - Step 03 - Enter content");

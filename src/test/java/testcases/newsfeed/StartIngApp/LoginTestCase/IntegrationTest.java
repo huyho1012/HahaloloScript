@@ -3,6 +3,7 @@ package testcases.newsfeed.StartIngApp.LoginTestCase;
 import actions.PageObject.Censor.AccountManager.CensorAccountList;
 import actions.PageObject.Censor.CensorHomePage;
 import actions.PageObject.Censor.CensorLogin;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
@@ -28,6 +29,7 @@ public class IntegrationTest extends AbstractTest {
     CensorHomePage censorHomePage;
     CensorAccountList censorAccountListPage;
     NewsFeedVerifyAccount verifyAccountPage;
+    HeaderMenu headerMenu;
 
     // Data
     String passWord ="123456";
@@ -82,7 +84,7 @@ public class IntegrationTest extends AbstractTest {
         newsFeedPage.clickCancelUpdateNewInfo();
 
         log.info("Step 2.2 - Logout account - Click logout button");
-        newsFeedPage.clickToSettingItem(driver,"ic-logout-c");
+        headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
         loginPage = PageGenerator.getLoginPage(driver);
 
         log.info("Step 2.3 - Logout account - Click logout button");

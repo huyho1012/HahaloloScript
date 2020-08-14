@@ -30,11 +30,11 @@ public class Validation extends AbstractTest {
     @Test
     public void Share_Button_01_Check_Status_Button_When_User_No_Input(){
         log.info("Check Button Share Post - Step 01 - Open Post Normal Editor");
-        newsFeedHomepage.clickToNormalPostFunction();
+        newsFeedHomepage.clickToNormalPostFunction(driver);
         editorTab = PageGenerator.openNormalPostEditor(driver);
 
         log.info("Check Share Post button - Step 02 - Check form Editor post display");
-        verifyTrue(editorTab.checkCreatePostModalIsDisplay());
+        verifyTrue(editorTab.checkCreatePostModalIsDisplay(driver));
 
         log.info("Check Share Post button - Step 03 - Check status");
 //        verifyFalse(editorTab.checkButtonSharePostIsEnable());

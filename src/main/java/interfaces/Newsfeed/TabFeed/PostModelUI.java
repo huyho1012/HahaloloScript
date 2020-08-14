@@ -15,24 +15,11 @@ public class PostModelUI {
 
     public static final String CLOSE_BUTTON_EDITOR_POST = "//button[@id = 'js_btn_nav_editor_close']";
 
-    public static final String EMOJI_POP_UP = "//div[@id = 'js-popup-emoji']";
-    public static final String EMOJI_ITEM = "//a[@class = 'emoji-list__item'][position()= '%s']";
 
-    public static final String SEARCH_USER_TAGGING = "//div[@id = '_input_friends']/input";
-    public static final String USER_TAGGING_LIST = "//div[@id= 'js-list-user-tagin']";
-    public static final String USER_ITEM = "//div[contains(@class,'list-item-user')][position()='%s']";
 
-    public static final String SEARCH_LOCATION = "//div[@id= '_input_locations']";
-    public static final String LOCATION_LIST = "//div[@id='js-list-location-tagin']";
-    public static final String LOCATION_ITEM = "//div[contains(@class,'list-item-location')][position()='%s']";
-
-    public static final String FEELING_FUNCTION = "//div[@id= 'js-feeling-activity']";
-    public static final String FEELING_LIST = "//div[@id= 'js-droplist-menu-feeling']";
-    public static final String SEARCH_USER_FEELING = "//div[@id = 'js_tagger_input_feeling']/input";
-    public static final String FEELING_ITEM = "//div[contains(@class,'feeling-item')][position()='%s']";
 
     public static final String LIST_UPLOADED_IMAGE = "//div[@id ='list-editor-attachment']";
-    public static final String BUTTON_REMOVE_ITEM_IMAGE = "//div[@id='list-editor-attachment']//div[@class='editor-attachment__item'][position()='%s']/i[contains(@class,'attachment__remove')]";
+
 
     public static final String ADD_PHOTO_BUTTON = "//div[@class='editor-attachment__add-photo']";
 

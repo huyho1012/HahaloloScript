@@ -1,7 +1,10 @@
 package testcases.newsfeed;
 
 import actions.PageObject.Business.Business.BusinessDashboard;
+import actions.PageObject.Newsfeed.AccountSetting.GeneralSettingPageObject;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.*;
+import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
@@ -9,6 +12,7 @@ import actions.common.Function.AbstractTest;
 import actions.common.Function.PageGenerator;
 import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -17,16 +21,12 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     DriverManager driverManager;
     WebDriver driver;
     NewsFeedLogin loginPage;
-    NewsFeedExperience experiencePage;
-    NewsFeedHotel hotelPage;
-    NewsFeedTour tourPage;
-    NewsFeedShopping shopPage;
     NewsFeedHomepage newsfeedPage;
-    NewsFeedFlight flightPage;
     String titlePage;
     BusinessDashboard businessPage;
-    NewsFeedAccSettingGeneral accountSettingPage;
-    NewsFeedHandnoteTour handNotePage;
+    UserHandNotePageObject handNotePage;
+    GeneralSettingPageObject accountSettingGeneral;
+
 
     @Parameters("browser")
     @BeforeClass
@@ -65,33 +65,31 @@ public class CheckRedirectCorrectLink extends AbstractTest {
 //    }
 //    @Test
 //    public void TC02_switchToSettingFunctionOnHeader() {
-//        newsfeedPage = PageGenerator.getNewsFeed(driver);
-//        newsfeedPage.clickToSettingItem(driver, "ic-handnotes-c");
-//        handNotePage = PageGenerator.tourHandNotePage(driver);
-//        handNotePage.clickToSettingItem(driver,"ic-cog-c");
-//        accountSettingPage = PageGenerator.getAccountSettingPage(driver);
-//        accountSettingPage.clickToSettingItem(driver,"ic-business-c");
+//        newsfeedPage.clickItemOnSettingMenu(driver, "Sổ tay");
+//        handNotePage = PageGenerator.createUserHandnotePage(driver);
+//        handNotePage.clickItemOnSettingMenu(driver,"Thiết lập tài khoản");
+//        accountSettingGeneral = PageGenerator.createAccountSettingGeneralTab(driver);
+//        accountSettingGeneral.clickItemOnSettingMenu(driver,"Tài khoản kinh doanh");
 //        businessPage = PageGenerator.getBusinessDashboardPage(driver);
-//        titlePage = driver.getWindowHandle();
-//        businessPage.switchToAnotherWindow(driver,titlePage);
-//        businessPage.clickToSettingItem(driver,"ic-logout-c");
+//        businessPage.switchToAnotherWindowByID(driver,titlePage);
+//        businessPage.clickItemOnSettingMenu(driver,"Đăng xuất");
 //        loginPage = PageGenerator.getLoginPage(driver);
 //
 //    }
-    @Test
-    public void TC03_Check_Action_On_Helping_Menu(){
-
-        newsfeedPage.clickFunctionOnHelping(driver,"Điều khoản");
-        newsfeedPage.switchToAnotherWindowByID(driver,titlePage);
-        driver.switchTo().window(titlePage);
-        newsfeedPage.clickFunctionOnHelping(driver,"Trung tâm hỗ trợ");
-        newsfeedPage.switchToAnotherWindowByID(driver,titlePage);
-        driver.switchTo().window(titlePage);
-        newsfeedPage.clickFunctionOnHelping(driver,"Giới thiệu");
-    }
-
-//    @AfterTest(alwaysRun = true)
-//    public void closeTestcase(){
-//        closeBrowserAndDriver(driver);
+//    @Test
+//    public void TC03_Check_Action_On_Helping_Menu(){
+//
+//        newsfeedPage.clickFunctionOnHelping(driver,"Điều khoản");
+//        newsfeedPage.switchToAnotherWindowByID(driver,titlePage);
+//        driver.switchTo().window(titlePage);
+//        newsfeedPage.clickFunctionOnHelping(driver,"Trung tâm hỗ trợ");
+//        newsfeedPage.switchToAnotherWindowByID(driver,titlePage);
+//        driver.switchTo().window(titlePage);
+//        newsfeedPage.clickFunctionOnHelping(driver,"Giới thiệu");
 //    }
+
+    @AfterTest(alwaysRun = true)
+    public void closeTestcase(){
+        closeBrowserAndDriver(driver);
+    }
 }

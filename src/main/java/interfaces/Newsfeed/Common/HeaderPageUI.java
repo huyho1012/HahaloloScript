@@ -23,7 +23,7 @@ public class HeaderPageUI {
     public static final String MENU_HELPER_ITEM = "//i[@class = 'ic ic-question-circle-primary']/parent::span/following-sibling::div/a";
     // Setting menu
     public static final String MENU_SETTING = "//i[@class = 'ic ic-caret-down primary']";
-    public static final String MENU_SETTING_ITEM = "//i[@class = 'ic ic-caret-down primary']/parent::span/following-sibling::div/a";
+    public static final String MENU_SETTING_ITEM = "//i[@class = 'ic ic-caret-down primary']/parent::span/following-sibling::div/a/span/following-sibling::span";
 
 
 }

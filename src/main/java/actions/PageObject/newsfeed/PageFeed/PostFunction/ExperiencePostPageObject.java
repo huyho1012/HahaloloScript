@@ -5,7 +5,7 @@ import interfaces.Newsfeed.Editor.EditorUI;
 import interfaces.Newsfeed.TabFeed.PostModelUI;
 import org.openqa.selenium.WebDriver;
 
-public class ExperiencePostPageObject extends EditorPostPageObject{
+public class ExperiencePostPageObject extends EditorFunctionObject {
     WebDriver driver;
     public ExperiencePostPageObject(WebDriver webDriver){
         driver = webDriver;

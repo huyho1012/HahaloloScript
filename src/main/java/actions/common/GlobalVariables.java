@@ -27,8 +27,8 @@ public class GlobalVariables {
     // Đường dẫn thư mục
     public static final String ROOT_FOLDER = System.getProperty("user.dir");
     public static final String UPLOAD_FOLDER = ROOT_FOLDER+"\\SupportHelper\\FileUpload\\";
-    public static final String UPLOAD_FILE_FIREFOX_PATH = GlobalVariables.ROOT_FOLDER + "\\SupportHelper\\AutoIT\\chromeUploadMultiple.exe";
-    public static final String UPLOAD_FILE_CHROME_PATH = GlobalVariables.ROOT_FOLDER + "\\SupportHelper\\AutoIT\\firefoxUploadMultiple.exe";
+    public static final String UPLOAD_FILE_FIREFOX_PATH = GlobalVariables.ROOT_FOLDER + "\\src\\test\\Resource\\AutoIT\\chromeUploadMultiple.exe";
+    public static final String UPLOAD_FILE_CHROME_PATH = GlobalVariables.ROOT_FOLDER + "\\src\\test\\Resource\\AutoIT\\firefoxUploadMultiple.exe";
 
     // Mailinator
     public static final String URL_MAILINATOR = "https://www.mailinator.com/";

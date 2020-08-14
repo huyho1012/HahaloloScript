@@ -1,5 +1,6 @@
 package testcases.newsfeed.NewsfeedTab.PostFunction;
 
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
@@ -17,6 +18,8 @@ public class LikePost extends AbstractTest {
     WebDriver driver;
     DataHelper data = DataHelper.getData();
     DriverManager driverManager;
+
+    HeaderMenu headerMenu;
     NewsFeedVerifyAccount verifyAccountPage;
     NewsFeedHomepage newsFeedPage;
     NewsFeedLogin loginPage;
@@ -36,7 +39,7 @@ public class LikePost extends AbstractTest {
             newsFeedPage.setTimeDelay(2);
             newsFeedPage.openURL(driver,"https://www.hahalolo.com/post/5f3272803862a146b327939c");
             newsFeedPage.clickLike();
-            newsFeedPage.clickToSettingItem(driver,"ic-logout-c");
+            headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
         }
     }
 

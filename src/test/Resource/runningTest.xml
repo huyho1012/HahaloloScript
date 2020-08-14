@@ -14,7 +14,8 @@
 <!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation"></class>-->
 <!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
 <!--            <class name="testcases.newsfeed.NewsfeedTab.PostFunction.LikePost"></class>-->
-                <class name= "testcases.Editor.NormalPost"></class>
+<!--                <class name= "testcases.Editor.NormalPost"></class>-->
+            <class name="testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost"></class>
         </classes>
     </test>
 

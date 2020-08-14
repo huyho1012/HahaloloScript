@@ -7,6 +7,7 @@ import actions.PageObject.Censor.AccountManager.CensorAccountList;
 import actions.PageObject.Censor.CensorHomePage;
 import actions.PageObject.Censor.CensorLogin;
 import actions.PageObject.EditorDemo.postConfig;
+import actions.PageObject.Newsfeed.AccountSetting.GeneralSettingPageObject;
 import actions.PageObject.Newsfeed.PersonalWall.About.*;
 import actions.PageObject.Wallet.WalletLoginPageObject;
 import actions.PageObject.Business.Business.BusinessDashboard;
@@ -43,9 +44,6 @@ public class PageGenerator {
     }
     public static NewsFeedTour getTourFeed(WebDriver driver){
         return new NewsFeedTour(driver);
-    }
-    public static NewsFeedHandnoteTour tourHandNotePage(WebDriver driver){
-        return new NewsFeedHandnoteTour(driver);
     }
 
     public static BusinessDashboard getBusinessDashboardPage(WebDriver driver){
@@ -110,9 +108,7 @@ public class PageGenerator {
     }
 
     // Account Setting
-    public static UserAccountSettingPageObject createAccountSettingPage(WebDriver driver){
-        return new UserAccountSettingPageObject(driver);
-    }
+
 
     // Business
     public static BusinessOverviewPageObject createBusinessOverviewPage(WebDriver driver){
@@ -120,5 +116,8 @@ public class PageGenerator {
     }
 
 
+    public static GeneralSettingPageObject createAccountSettingGeneralTab(WebDriver driver) {
+        return new GeneralSettingPageObject(driver);
+    }
 }
 

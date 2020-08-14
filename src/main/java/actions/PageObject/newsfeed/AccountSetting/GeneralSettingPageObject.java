@@ -1,10 +1,11 @@
 package actions.PageObject.Newsfeed.AccountSetting;
 
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import actions.common.Function.AbstractPage;
 import interfaces.Newsfeed.AccountSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
-public class GeneralSettingPageObject extends AbstractPage {
+public class GeneralSettingPageObject extends HeaderMenu {
 
     WebDriver driver;
     public GeneralSettingPageObject(WebDriver webDriver){

@@ -256,6 +256,11 @@ public abstract class AbstractPage {
         action.moveToElement(element).perform();
     }
 
+    public void hoverMouseToElement(WebDriver driver, String locator, String...values){
+        element = findElement(driver, castToObject(locator, values));
+        action = new Actions(driver);
+        action.moveToElement(element).perform();
+    }
     public void rightClickToElement(WebDriver driver, String locator){
         element = findElement(driver,locator);
         action = new Actions(driver);
@@ -401,7 +406,7 @@ public abstract class AbstractPage {
     }
     public void removeTextOnElement(WebDriver driver, String locator){
         element = findElement(driver,locator);
-        elements.clear();
+        element.clear();
     }
     public boolean checkAreElementsIsDisplay(WebDriver driver, String locator){
         elements = findElements(driver,locator);
@@ -469,12 +474,7 @@ public abstract class AbstractPage {
         select = new Select(findElement(driver,castToObject(locator, values)));
         return select.isMultiple();
     }
-    public void clickToSettingItem(WebDriver driver, String itemMenu) {
-        setTimeDelay(2);
-        waitElementToClickAble(driver, HeaderPageUI.MENU_SETTING);
-        clickToElement(driver, HeaderPageUI.MENU_SETTING);
-        clickToElement(driver, HeaderPageUI.SETTING_ITEM_FUNCTION,itemMenu);
-    }
+
     public void selectItemInCustomDropdown(WebDriver driver , String dropdownMenu, String dropdownItem, String expectedItem, String...values){
         clickToElement(driver,castToObject(dropdownMenu,values));
         setTimeDelay(1);
@@ -492,5 +492,9 @@ public abstract class AbstractPage {
             }
         }
     }
-
+    public void clickToElementByJS(WebDriver driver, String locator, String... values){
+        jsExecutor = (JavascriptExecutor) driver;
+        element = findElement(driver,castToObject(locator, values));
+        jsExecutor.executeScript("arguments[0].click();",element);
+    }
 }

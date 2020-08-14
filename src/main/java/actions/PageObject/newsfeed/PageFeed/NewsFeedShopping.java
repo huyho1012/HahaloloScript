@@ -9,8 +9,8 @@ public class NewsFeedShopping extends HeaderMenu {
         driver = webDriver;
     }
 
-    public String getTitle(String tabMenu) {
-        waitElementToVisible(driver, HeaderPageUI.NEWS_FEED_MENU,tabMenu);
-        return driver.getTitle();
-    }
+//    public String getTitle(String tabMenu) {
+//        waitElementToVisible(driver, HeaderPageUI.NEWS_FEED_MENU,tabMenu);
+//        return driver.getTitle();
+//    }
 }
