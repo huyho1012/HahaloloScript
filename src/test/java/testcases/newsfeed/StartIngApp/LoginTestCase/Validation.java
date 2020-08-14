@@ -1,7 +1,7 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;

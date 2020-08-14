@@ -1,6 +1,6 @@
-package actions.PageObject.newsfeed.PageFeed;
+package actions.PageObject.Newsfeed.PageFeed;
 
-import actions.PageObject.newsfeed.Common.HeaderMenu;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
 import interfaces.Newsfeed.Common.HeaderPageUI;
 import org.openqa.selenium.WebDriver;
 public class NewsFeedShopping extends HeaderMenu {

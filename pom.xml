@@ -150,10 +150,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <property>
+                    <properties>
                         <name>usedefaultlisteners</name>
                         <value>false</value>
-                    </property>
+                    </properties>
                     <suiteXmlFiles>
                         <file>src/test/Resource/runningTest.xml</file>
                     </suiteXmlFiles>

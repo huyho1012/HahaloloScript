@@ -1,7 +1,7 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
 
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
+import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;

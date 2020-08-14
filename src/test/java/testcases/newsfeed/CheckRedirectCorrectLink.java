@@ -1,10 +1,8 @@
 package testcases.newsfeed;
 
-import actions.PageObject.business.Business.BusinessDashboard;
-import actions.PageObject.newsfeed.AccountSetting.NewsFeedAccSettingGeneral;
-import actions.PageObject.newsfeed.PageFeed.*;
-import actions.PageObject.newsfeed.PersonalWall.Handnote.NewsFeedHandnoteTour;
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.Business.Business.BusinessDashboard;
+import actions.PageObject.Newsfeed.PageFeed.*;
+import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;

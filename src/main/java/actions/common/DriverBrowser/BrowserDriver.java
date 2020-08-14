@@ -18,6 +18,9 @@ public class BrowserDriver {
             case "coc coc":
                 driverManager = new CocCocDriverManager();
                 break;
+            case "chrome-headless":
+                driverManager = new ChromeHeadLessDriverManager();
+                break;
             default:
                 driverManager = new EdgeDriverManager();
                 break;

@@ -1,7 +1,7 @@
-package actions.PageObject.newsfeed.PageFeed;
+package actions.PageObject.Newsfeed.PageFeed;
 
-import actions.PageObject.newsfeed.Common.HeaderMenu;
-import interfaces.Newsfeed.PageFeed.ExperienceTabPageUI;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
+import interfaces.Newsfeed.TabFeed.ExperienceTabPageUI;
 import org.openqa.selenium.WebDriver;
 
 public class NewsFeedExperience extends HeaderMenu {

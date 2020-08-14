@@ -346,7 +346,7 @@ public abstract class AbstractPage {
         element = findElement(driver,locator);
         jsExecutor.executeScript("arguments[0].setAttribute('value', '" + valueName +"')", element);
     }
-    public void scrollToElement(WebDriver driver , String locator, String valueName){
+    public void scrollToElement(WebDriver driver , String locator){
         jsExecutor = (JavascriptExecutor) driver;
         element = findElement(driver,locator);
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);",element);
@@ -471,8 +471,8 @@ public abstract class AbstractPage {
     }
     public void clickToSettingItem(WebDriver driver, String itemMenu) {
         setTimeDelay(2);
-        waitElementToClickAble(driver, HeaderPageUI.SETTING_FUNCTION);
-        clickToElement(driver, HeaderPageUI.SETTING_FUNCTION);
+        waitElementToClickAble(driver, HeaderPageUI.MENU_SETTING);
+        clickToElement(driver, HeaderPageUI.MENU_SETTING);
         clickToElement(driver, HeaderPageUI.SETTING_ITEM_FUNCTION,itemMenu);
     }
     public void selectItemInCustomDropdown(WebDriver driver , String dropdownMenu, String dropdownItem, String expectedItem, String...values){

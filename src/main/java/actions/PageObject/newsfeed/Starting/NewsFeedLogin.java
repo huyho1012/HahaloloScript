@@ -1,9 +1,9 @@
-package actions.PageObject.newsfeed.Starting;
+package actions.PageObject.Newsfeed.Starting;
 
 import actions.PageObject.Backend.BackendLoginPageObject;
 import actions.PageObject.Censor.CensorLogin;
-import actions.PageObject.newsfeed.Common.HeaderMenu;
-import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
+import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.common.Function.PageGenerator;
 import actions.common.GlobalVariables;
 import interfaces.Newsfeed.StartWeb.LoginPageUI;

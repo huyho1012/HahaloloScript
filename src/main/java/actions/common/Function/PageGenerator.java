@@ -6,15 +6,17 @@ import actions.PageObject.Backend.backendDashboardPageObject;
 import actions.PageObject.Censor.AccountManager.CensorAccountList;
 import actions.PageObject.Censor.CensorHomePage;
 import actions.PageObject.Censor.CensorLogin;
-import actions.PageObject.business.Business.BusinessDashboard;
-import actions.PageObject.newsfeed.AccountSetting.NewsFeedAccSettingGeneral;
-import actions.PageObject.newsfeed.PageFeed.*;
-import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
-import actions.PageObject.newsfeed.PersonalWall.Handnote.NewsFeedHandnoteTour;
-import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
-import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
+import actions.PageObject.EditorDemo.postConfig;
+import actions.PageObject.Newsfeed.PersonalWall.About.*;
+import actions.PageObject.Wallet.WalletLoginPageObject;
+import actions.PageObject.Business.Business.BusinessDashboard;
+import actions.PageObject.Business.Business.BusinessOverviewPageObject;
+import actions.PageObject.Newsfeed.PageFeed.*;
+import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
+import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
+import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
+import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
@@ -45,9 +47,7 @@ public class PageGenerator {
     public static NewsFeedHandnoteTour tourHandNotePage(WebDriver driver){
         return new NewsFeedHandnoteTour(driver);
     }
-    public static NewsFeedAccSettingGeneral getAccountSettingPage(WebDriver driver){
-        return new NewsFeedAccSettingGeneral(driver);
-    }
+
     public static BusinessDashboard getBusinessDashboardPage(WebDriver driver){
         return new BusinessDashboard(driver);
     }
@@ -55,16 +55,16 @@ public class PageGenerator {
         return new PersonalTimelinePageObject(driver);
     }
     // Khởi tạo model Editor
-    public static EditorFunction openNormalPostEditor(WebDriver driver){
-        return new EditorFunction(driver);
+    public static NormalPostEditor openNormalPostEditor(WebDriver driver){
+        return new NormalPostEditor(driver);
     }
-    public static EditorFunction openExperiencePostEditor(WebDriver driver){
-        return new EditorFunction(driver);
+    public static NormalPostEditor openExperiencePostEditor(WebDriver driver){
+        return new NormalPostEditor(driver);
     }
     public static BackendLoginPageObject getLoginBackendPage(WebDriver driver){
         return new BackendLoginPageObject(driver);
     }
-    // Khởi tạo page cho Censor
+    // Censor
     public static backendDashboardPageObject getBackendDashboardPage(WebDriver driver){
         return new backendDashboardPageObject(driver);
     }
@@ -77,21 +77,48 @@ public class PageGenerator {
     public static CensorAccountList getAccountManagerList(WebDriver driver){
         return new CensorAccountList(driver);
     }
-    // Khởi tạo tab cho Personal About
-    public static PersonalAbout getPersonalOverviewTab(WebDriver driver){
-        return new PersonalAbout(driver);
+
+    // Khởi tạo tab cho Personal Wall
+    public static UserHandNotePageObject createUserHandnotePage(WebDriver driver){
+        return new UserHandNotePageObject(driver);
     }
-    public static PersonalAbout getPersonalEducationTab(WebDriver driver){
-        return new PersonalAbout(driver);
+
+    // About
+    public static OverviewPageObject getPersonalOverviewTab(WebDriver driver){
+        return new OverviewPageObject(driver);
     }
-    public static PersonalAbout getPersonalPlaceLivingTab(WebDriver driver){
-        return new PersonalAbout(driver);
+    public static WorkAndEducationPageObject getPersonalEducationTab(WebDriver driver){
+        return new WorkAndEducationPageObject(driver);
     }
-    public static PersonalAbout getPersonalDetailAboutTab(WebDriver driver){
-        return new PersonalAbout(driver);
+    public static PlaceLivingPageObject getPersonalPlaceLivingTab(WebDriver driver){
+        return new PlaceLivingPageObject(driver);
     }
-    public static PersonalAbout getPersonalBasicInfoTab(WebDriver driver){
-        return new PersonalAbout(driver);
+    public static DetailsAboutYouPageObject getPersonalDetailAboutTab(WebDriver driver){
+        return new DetailsAboutYouPageObject(driver);
     }
+    public static BasicInfoPageObject getPersonalAboutBasicInfo(WebDriver driver) {
+        return new BasicInfoPageObject(driver);
+    }
+
+    public static postConfig getEditorDemoPage(WebDriver driver) {
+        return new postConfig(driver);
+    }
+
+    // Wallet
+    public static WalletLoginPageObject createWalletLoginPage(WebDriver driver){
+        return new WalletLoginPageObject(driver);
+    }
+
+    // Account Setting
+    public static UserAccountSettingPageObject createAccountSettingPage(WebDriver driver){
+        return new UserAccountSettingPageObject(driver);
+    }
+
+    // Business
+    public static BusinessOverviewPageObject createBusinessOverviewPage(WebDriver driver){
+        return new BusinessOverviewPageObject(driver);
+    }
+
+
 }
 

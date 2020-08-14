@@ -32,7 +32,7 @@ public class AbstractTest {
     }
     protected int randomEmail() {
         Random rd = new Random();
-        return rd.nextInt(1000);
+        return rd.nextInt(10000000);
     }
     protected boolean verifyTrue(boolean condition) {
         boolean status = true;

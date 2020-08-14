@@ -1,14 +1,14 @@
-package actions.PageObject.newsfeed.PageFeed;
+package actions.PageObject.Newsfeed.PageFeed;
 
-import actions.PageObject.newsfeed.Common.HeaderMenu;
-import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
-import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
-import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
+import actions.PageObject.Newsfeed.Common.HeaderMenu;
+import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
+import actions.PageObject.Newsfeed.PersonalWall.About.PersonalAbout;
+import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import actions.common.Function.PageGenerator;
 import interfaces.Newsfeed.Common.HeaderPageUI;
 import interfaces.Newsfeed.Common.sidebarLeftUI;
 import interfaces.Newsfeed.Common.sidebarRightUI;
-import interfaces.Newsfeed.PageFeed.NewsFeedPageIU;
+import interfaces.Newsfeed.TabFeed.NewsFeedPageIU;
 import org.openqa.selenium.WebDriver;
 
 public class NewsFeedHomepage extends HeaderMenu {
@@ -39,7 +39,7 @@ public class NewsFeedHomepage extends HeaderMenu {
         return checkIsDisplayedElement(driver, HeaderPageUI.CART_FUNCTION);
     }
 
-    public EditorFunction clickToNormalPostFunction() {
+    public NormalPostEditor clickToNormalPostFunction() {
         waitElementToClickAble(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         clickToElement(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         return PageGenerator.openNormalPostEditor(driver);
@@ -78,5 +78,12 @@ public class NewsFeedHomepage extends HeaderMenu {
         waitElementToClickAble(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
         clickToElement(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
         return PageGenerator.getPersonalOverviewTab(driver);
+    }
+
+    public void clickLike() {
+        setTimeDelay(2);
+        scrollToElement(driver,NewsFeedPageIU.React_Button);
+        waitElementToClickAble(driver,NewsFeedPageIU.React_Button);
+        clickToElement(driver,NewsFeedPageIU.React_Button);
     }
 }

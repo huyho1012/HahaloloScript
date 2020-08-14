@@ -1,6 +1,6 @@
-package actions.PageObject.newsfeed.Starting;
+package actions.PageObject.Newsfeed.Starting;
 
-import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
 import actions.common.Function.AbstractPage;
 import actions.common.Function.PageGenerator;
 import actions.common.GlobalVariables;

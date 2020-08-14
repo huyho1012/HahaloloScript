@@ -1,9 +1,8 @@
 package testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost;
 
-import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.newsfeed.PageFeed.PostFunction.EditorFunction;
-import actions.PageObject.newsfeed.PersonalWall.PersonalTimelinePageObject;
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
+import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
+import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
+import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -19,7 +18,7 @@ public class TestcaseOfPost extends AbstractTest {
     DriverManager driverManager;
     NewsFeedLogin loginPage;
     NewsFeedHomepage newsFeedPage;
-    EditorFunction postPage;
+    NormalPostEditor postPage;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
     String authorName = "Chúa Tể Khô";
@@ -60,7 +59,7 @@ public class TestcaseOfPost extends AbstractTest {
         postPage.inputPostNormalContent(contentPost);
 
         log.info("Check Button Share Post - Step 04 - Check status Shared button");
-        verifyTrue(postPage.checkButtonSharePostIsEnable());
+//        verifyTrue(postPage.checkButtonSharePostIsEnable());
     }
 //    @Test
 //    public void NormalPost_03_Check_Button_Share_Post_When_User_Remove_Content(){
