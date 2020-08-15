@@ -4,9 +4,9 @@
            failures="1"
            errors="0"
            skipped="0"
-           time="77.142">
+           time="94.415">
   <properties />
-            <testcase name="TC03_VALIDATE_POST_CONTENT" time="77.142" classname="testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost">
+            <testcase name="TC03_VALIDATE_POST_CONTENT" time="94.415" classname="testcases.newsfeed.NewsfeedTab.PostFunction.NormalPost.TestcaseOfPost">
                 <failure type="java.lang.NullPointerException"
                   message="(null)"
               >
