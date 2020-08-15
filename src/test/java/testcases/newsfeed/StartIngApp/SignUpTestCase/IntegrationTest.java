@@ -1,8 +1,7 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
-import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.Newsfeed.PersonalWall.About.PersonalAbout;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
+import PostGenrate.NewsFeedHomepage;
+import Login.LoginPageObject;
+import Register.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -18,7 +17,7 @@ public class IntegrationTest extends AbstractTest {
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();
     // Khai báo PageObject
-    NewsFeedLogin loginPage;
+    LoginPageObject loginPage;
     NewsFeedHomepage newsFeedPage;
     NewsFeedVerifyAccount verifyAccountPage;
 

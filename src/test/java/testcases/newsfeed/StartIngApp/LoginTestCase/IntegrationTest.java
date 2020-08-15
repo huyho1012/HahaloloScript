@@ -1,12 +1,12 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-import actions.PageObject.Censor.AccountManager.CensorAccountList;
-import actions.PageObject.Censor.CensorHomePage;
-import actions.PageObject.Censor.CensorLogin;
-import actions.PageObject.Newsfeed.Common.HeaderMenu;
-import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
+import PostGenrate.NewsFeedHomepage;
+import AccountManager.CensorAccountList;
+import CensorHomePage;
+import Login.CensorLogin;
+import HeaderMain.HeaderMenu;
+import Login.LoginPageObject;
+import Register.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -23,7 +23,7 @@ public class IntegrationTest extends AbstractTest {
     DriverManager driverManager;
 
     // Khai báo pageobject
-    NewsFeedLogin loginPage;
+    LoginPageObject loginPage;
     NewsFeedHomepage newsFeedPage;
     CensorLogin censorLoginPage;
     CensorHomePage censorHomePage;

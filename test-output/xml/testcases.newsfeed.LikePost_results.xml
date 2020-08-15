@@ -39,7 +39,7 @@ Session ID: b636841b3d91ac8f5d79208bcf264d77
   org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
   org.openqa.selenium.remote.RemoteWebElement.isDisplayed(RemoteWebElement.java:326)
   actions.common.Function.AbstractPage.checkIsDisplayedElement(AbstractPage.java:235)
-  actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage.checkLoginSuccess(NewsFeedHomepage.java:39)
+  PostGenrate.NewsFeedHomepage.checkLoginSuccess(PostGenrate.NewsFeedHomepage.java:39)
   LikePost.RegisterAccount(LikePost.java:76)
   LikePost.LikePost(LikePost.java:36)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

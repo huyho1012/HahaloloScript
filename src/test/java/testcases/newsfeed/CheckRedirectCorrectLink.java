@@ -1,10 +1,10 @@
 package testcases.newsfeed;
 
-import actions.PageObject.business.BusinessDashboard;
-import actions.PageObject.Newsfeed.AccountSetting.GeneralSettingPageObject;
-import actions.PageObject.Newsfeed.PageFeed.*;
-import actions.PageObject.Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
+import PostGenrate.NewsFeedHomepage;
+import BusinessDashboard;
+import UserSetting.GeneralSettingPageObject;
+import Handnote.UserHandNotePageObject;
+import Login.LoginPageObject;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -18,7 +18,7 @@ import org.testng.annotations.Parameters;
 public class CheckRedirectCorrectLink extends AbstractTest {
     DriverManager driverManager;
     WebDriver driver;
-    NewsFeedLogin loginPage;
+    LoginPageObject loginPage;
     NewsFeedHomepage newsfeedPage;
     String titlePage;
     BusinessDashboard businessPage;

@@ -1,9 +1,9 @@
 package testcases.newsfeed.PostFunction.NormalPost;
 
-import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.Newsfeed.PageFeed.PostFunction.NormalPostEditor;
-import actions.PageObject.Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
+import PostGenrate.NewsFeedHomepage;
+import Editor.NormalPost.NormalPostEditor;
+import TimeLine.PersonalTimelinePageObject;
+import Login.LoginPageObject;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class TestcaseOfPost extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
-    NewsFeedLogin loginPage;
+    LoginPageObject loginPage;
     NewsFeedHomepage newsFeedPage;
     NormalPostEditor normalPostEditor;
     PersonalTimelinePageObject perTimelinePage;

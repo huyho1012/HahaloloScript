@@ -1,8 +1,8 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-import actions.PageObject.Newsfeed.Common.HeaderMenu;
-import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
+import HeaderMain.HeaderMenu;
+import PostGenrate.NewsFeedHomepage;
+import Login.LoginPageObject;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -18,7 +18,7 @@ public class Validation extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     // Khai báo pageObject
-    NewsFeedLogin newFeedLoginPage;
+    LoginPageObject newFeedLoginPage;
     NewsFeedHomepage newsFeedPage;
     HeaderMenu headerMenu;
     @Parameters("browser")

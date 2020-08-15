@@ -1,9 +1,9 @@
 package testcases.newsfeed.PostFunction;
 
-import actions.PageObject.Newsfeed.Common.HeaderMenu;
-import actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.Newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.Newsfeed.Starting.NewsFeedVerifyAccount;
+import HeaderMain.HeaderMenu;
+import PostGenrate.NewsFeedHomepage;
+import Login.LoginPageObject;
+import Register.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
@@ -22,7 +22,7 @@ public class LikePost extends AbstractTest {
     HeaderMenu headerMenu;
     NewsFeedVerifyAccount verifyAccountPage;
     NewsFeedHomepage newsFeedPage;
-    NewsFeedLogin loginPage;
+    LoginPageObject loginPage;
     String passWord = "123456";
     String confirmPassword = "123456";
     @Parameters("browser")

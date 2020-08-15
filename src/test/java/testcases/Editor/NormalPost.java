@@ -1,12 +1,11 @@
 package testcases.Editor;
 
-import actions.PageObject.EditorDemo.postConfig;
+import EditorPro.postConfig;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
 import actions.common.Function.AbstractTest;
 import actions.common.Function.PageGenerator;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
