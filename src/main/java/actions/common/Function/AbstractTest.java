@@ -20,11 +20,22 @@ public class AbstractTest {
     public String randomParagraphs(int numParagraph){
         return lorem.getParagraphs(numParagraph);
     }
-    protected String randomPassword(int chars) {
+    protected String randomPassword(int numPassChar) {
         String text = null;
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
-        StringBuilder bd = new StringBuilder(chars);
-        for (int i = 0; i < chars; i++) {
+        StringBuilder bd = new StringBuilder(numPassChar);
+        for (int i = 0; i < numPassChar; i++) {
+            int index = (int) (AlphaNumericString.length() * Math.random());
+            text = bd.append(AlphaNumericString.charAt(index)).toString();
+        }
+        return text;
+    }
+
+    protected String randomSentence(int numChar) {
+        String text = null;
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz"+ " ";
+        StringBuilder bd = new StringBuilder(numChar);
+        for (int i = 0; i < numChar; i++) {
             int index = (int) (AlphaNumericString.length() * Math.random());
             text = bd.append(AlphaNumericString.charAt(index)).toString();
         }

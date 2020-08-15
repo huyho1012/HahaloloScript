@@ -1,7 +1,7 @@
 package actions.common;
 
 public class GlobalVariables {
-
+    public static final String ROOT_FOLDER = System.getProperty("user.dir");
     // Tài khoản NewsFeed - Business - Wallet
     public static String FEED_EMAIL_ACCOUNT = "khotrauchien@mailinator.com";
     public static String FEED_EMAIL_PASSWORD = "111111";
@@ -25,10 +25,11 @@ public class GlobalVariables {
     public static final String SCRIPT_CODE = "<script>destroyWebsite();</script>";
 
     // Đường dẫn thư mục
-    public static final String ROOT_FOLDER = System.getProperty("user.dir");
     public static final String UPLOAD_FOLDER = ROOT_FOLDER+"\\SupportHelper\\FileUpload\\";
-    public static final String UPLOAD_FILE_FIREFOX_PATH = GlobalVariables.ROOT_FOLDER + "\\src\\test\\Resource\\AutoIT\\chromeUploadMultiple.exe";
-    public static final String UPLOAD_FILE_CHROME_PATH = GlobalVariables.ROOT_FOLDER + "\\src\\test\\Resource\\AutoIT\\firefoxUploadMultiple.exe";
+    public static final String UPLOAD_MULTI_FILE_FIREFOX = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\chromeUploadMultiple.exe";
+    public static final String UPLOAD_MULTI_FILE_CHROME = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\firefoxUploadMultiple.exe";
+    public static final String UPLOAD_ONE_FILE_FIREFOX = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\chromeUploadOneTime.exe";
+    public static final String UPLOAD_ONE_FILE_CHROME = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\firefoxUploadOneTime.exe";
 
     // Mailinator
     public static final String URL_MAILINATOR = "https://www.mailinator.com/";

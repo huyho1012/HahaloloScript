@@ -21,7 +21,7 @@ public class NormalPost extends AbstractTest {
     public void preconditionTest(String browserName){
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver("https://test-newsfeed.hahalolo.com/editor/index.html");
-        editorDemoPage = PageGenerator.getEditorDemoPage(driver);
+//        editorDemoPage = PageGenerator.getEditorDemoPage(driver);
     }
     @Test
     public void TC_01_CHECK_DEFAULT_PLACEHOLDER(){

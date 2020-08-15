@@ -6,7 +6,7 @@
            skipped="0"
            time="379.918">
   <properties />
-            <testcase name="LikePost" time="379.918" classname="testcases.newsfeed.NewsfeedTab.PostFunction.LikePost">
+            <testcase name="LikePost" time="379.918" classname="LikePost">
                 <failure type="org.openqa.selenium.StaleElementReferenceException"
                   message="stale element reference: element is not attached to the page document
   (Session info: chrome=84.0.4147.105)
@@ -40,8 +40,8 @@ Session ID: b636841b3d91ac8f5d79208bcf264d77
   org.openqa.selenium.remote.RemoteWebElement.isDisplayed(RemoteWebElement.java:326)
   actions.common.Function.AbstractPage.checkIsDisplayedElement(AbstractPage.java:235)
   actions.PageObject.Newsfeed.PageFeed.NewsFeedHomepage.checkLoginSuccess(NewsFeedHomepage.java:39)
-  testcases.newsfeed.NewsfeedTab.PostFunction.LikePost.RegisterAccount(LikePost.java:76)
-  testcases.newsfeed.NewsfeedTab.PostFunction.LikePost.LikePost(LikePost.java:36)
+  LikePost.RegisterAccount(LikePost.java:76)
+  LikePost.LikePost(LikePost.java:36)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
   java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

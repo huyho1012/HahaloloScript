@@ -1,7 +1,6 @@
 package actions.common.Function;
 
 import actions.common.GlobalVariables;
-import interfaces.Newsfeed.Common.HeaderPageUI;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -255,6 +254,9 @@ public abstract class AbstractPage {
         action = new Actions(driver);
         action.moveToElement(element).perform();
     }
+    public void moveByOffset(WebDriver driver){
+        action.moveByOffset(30,40).click().perform();
+    }
 
     public void hoverMouseToElement(WebDriver driver, String locator, String...values){
         element = findElement(driver, castToObject(locator, values));
@@ -324,13 +326,30 @@ public abstract class AbstractPage {
         fullFileName = fullFileName.trim();
         if (driver.toString().contains("firefox")){
             try {
-                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_FILE_CHROME_PATH, fullFileName});
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_MULTI_FILE_CHROME, fullFileName});
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (driver.toString().contains("chrome")){
             try {
-                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_FILE_FIREFOX_PATH, fullFileName});
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_MULTI_FILE_FIREFOX, fullFileName});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        setTimeDelay(3);
+    }
+
+    public void uploadOneFileByAutoIT(WebDriver driver, String fileName){
+        if (driver.toString().contains("firefox")){
+            try {
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_ONE_FILE_FIREFOX, fileName});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (driver.toString().contains("chrome")){
+            try {
+                Runtime.getRuntime().exec(new String[] {GlobalVariables.UPLOAD_ONE_FILE_CHROME, fileName});
             } catch (IOException e) {
                 e.printStackTrace();
             }
