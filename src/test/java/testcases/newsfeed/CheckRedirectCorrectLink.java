@@ -7,7 +7,7 @@ import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
 
-import StartingApp.Login.PageObject.NewsfeedLoginPageObject;
+import StartingApp.Login.LoginNewsfeed;
 import Newsfeed.UserSetting.PageObject.GeneralSettingPageObject;
 import Handnote.UserHandNotePageObject;
 
@@ -21,7 +21,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
 
     DriverManager driverManager;
     WebDriver driver;
-    NewsfeedLoginPageObject loginNewsfeedPage;
+    LoginNewsfeed loginNewsfeedPage;
     NewsFeedTabPageObject newsfeedPage;
     UserHandNotePageObject handNotePage;
     GeneralSettingPageObject accountSettingGeneral;
@@ -30,14 +30,18 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     @Parameters("browser")
     @BeforeClass
     public void getBrowser(String browserName){
-    driverManager = BrowserDriver.getBrowser(browserName);
-    driver= driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-    loginNewsfeedPage = PageGenerator.getLoginPage(driver);
-    loginNewsfeedPage.enterUsernameToLogin(driver,GlobalVariables.FEED_EMAIL_ACCOUNT);
-    loginNewsfeedPage.enterPasswordToLogin(driver,GlobalVariables.FEED_EMAIL_PASSWORD);
-    newsfeedPage = loginNewsfeedPage.clickLoginButton(driver);
-    newsfeedPage.changeLanguageDisplay();
-    currentTab= driver.getWindowHandle();
+        log.info("Precondition - Step 01 - Open browser");
+        driverManager = BrowserDriver.getBrowser(browserName);
+        log.info("Precondition - Step 02 - Login with account");
+        driver= driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
+        loginNewsfeedPage = PageGenerator.createLoginNewsfeedPage(driver);
+        loginNewsfeedPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
+        loginNewsfeedPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
+        loginNewsfeedPage.clickLoginButton();
+        newsfeedPage = PageGenerator.getNewsFeedPage(driver);
+        log.info("Precondition - Step 03 - Check language default display and change language to VI");
+        newsfeedPage.changeLanguageDisplay();
+        currentTab= driver.getWindowHandle();
     }
 //    @Test
 //    public void TC01_switchToTabFeedOnMenu() {

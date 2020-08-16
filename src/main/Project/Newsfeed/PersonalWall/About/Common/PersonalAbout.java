@@ -1,21 +1,12 @@
-package About.Common;
+package Newsfeed.PersonalWall.About.Common;
 
-import About.BasicInfoTab.BasicInfoPageObject;
-import About.DetailsAboutYou.DetailsAboutYouPageObject;
-import About.OverviewTab.OverviewPageObject;
-import About.LivingPlaceTab.PlaceLivingPageObject;
-import About.WorkAndEducation.WorkAndEducationPageObject;
-import Function.AbstractPage;
-import Function.PageGenerator;
+import CommonHelper.Function.AbstractPage;
+import HeaderMain.HeaderMenu;
 import PersonalWall.About.Common.PersonalAboutUI;
 import org.openqa.selenium.WebDriver;
 
-public class PersonalAbout extends AbstractPage {
+public class PersonalAbout extends HeaderMenu {
     WebDriver driver;
-    public PersonalAbout(WebDriver webDriver){
-        driver = webDriver;
-    }
-
     public boolean checkDataValueAccount(WebDriver driver, String valuePer, String valueData){
         waitElementToVisible(driver, PersonalAboutUI.VALUE_OF_PERSONAL,valuePer);
         if(getTextOfElement(driver,PersonalAboutUI.VALUE_OF_PERSONAL,valuePer).equals(valueData)){
@@ -24,32 +15,27 @@ public class PersonalAbout extends AbstractPage {
             return false;
     }
 
-    public OverviewPageObject clickToOverViewTab(){
+    public void clickToOverViewTab(){
         waitElementToVisible(driver,PersonalAboutUI.OVERVIEW_TAB);
         clickToElement(driver,PersonalAboutUI.OVERVIEW_TAB);
-        return PageGenerator.getPersonalOverviewTab(driver);
     }
 
-    public WorkAndEducationPageObject clickToWorkAndEduTab(){
+    public void clickToWorkAndEduTab(){
         waitElementToVisible(driver,PersonalAboutUI.EDUCATION_WORK_TAB);
         clickToElement(driver,PersonalAboutUI.EDUCATION_WORK_TAB);
-        return PageGenerator.getPersonalEducationTab(driver);
     }
 
-    public BasicInfoPageObject clickToBasicInfoTab(){
+    public void clickToBasicInfoTab(){
         waitElementToVisible(driver,PersonalAboutUI.BASIC_INFO_TAB);
         clickToElement(driver,PersonalAboutUI.BASIC_INFO_TAB);
-        return PageGenerator.getPersonalAboutBasicInfo(driver);
     }
 
-    public PlaceLivingPageObject clickToPlaceLivingTab(){
+    public void clickToPlaceLivingTab(){
         waitElementToVisible(driver,PersonalAboutUI.LIVING_PLACE_TAB);
         clickToElement(driver,PersonalAboutUI.LIVING_PLACE_TAB);
-        return PageGenerator.getPersonalPlaceLivingTab(driver);
     }
-    public DetailsAboutYouPageObject clickToDetailAboutYouTab(){
+    public void clickToDetailAboutYouTab(){
         waitElementToVisible(driver,PersonalAboutUI.DETAILS_ABOUT_TAB);
         clickToElement(driver,PersonalAboutUI.DETAILS_ABOUT_TAB);
-        return PageGenerator.getPersonalDetailAboutTab(driver);
     }
 }

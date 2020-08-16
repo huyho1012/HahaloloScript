@@ -1,20 +1,22 @@
 package CommonHelper.Function;
-import About.BasicInfoTab.BasicInfoPageObject;
 import About.DetailsAboutYou.DetailsAboutYouPageObject;
 import About.LivingPlaceTab.PlaceLivingPageObject;
-import About.OverviewTab.OverviewPageObject;
 import About.WorkAndEducation.WorkAndEducationPageObject;
 import Backend.Dashboard.BackendDashboardPageObject;
+import Business.Business.Dashboard.BusinessDashboard;
 import Business.Business.Overview.BusinessOverviewPageObject;
+import Censor.AccountManager.CensorAccountList;
 import Censor.Dashboard.CensorDashboardPageObject;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
 import Newsfeed.Editor.ExperiencePost.Feeds.NewsFeedExperience;
 import Newsfeed.Flight.Feed.NewsFeedFlight;
 import Newsfeed.Hotel.NewsFeedHotel;
+import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
+import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.Shop.NewsFeedShopping;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
-import StartingApp.Login.PageObject.*;
-import StartingApp.Register.PageObject.VerifyAccountPageObject;
+import StartingApp.Login.*;
+import StartingApp.Register.VerifyAccountPageObject;
 import Newsfeed.UserSetting.PageObject.GeneralSettingPageObject;
 import Newsfeed.Editor.ExperiencePost.Action.ExperiencePostPageObject;
 import Handnote.UserHandNotePageObject;
@@ -24,13 +26,13 @@ import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
     // Khởi tạo Newsfeed Start App
-    public static NewsfeedLoginPageObject getLoginPage(WebDriver driver){
-        return new NewsfeedLoginPageObject(driver);
+    public static LoginNewsfeed createLoginNewsfeedPage(WebDriver driver){
+        return new LoginNewsfeed(driver);
     }
     public static ForgotPassWordPageObject getForgotPassWord (WebDriver driver){
         return  new ForgotPassWordPageObject(driver);
     }
-    public static VerifyAccountPageObject getVerifyAccountPage (WebDriver driver){
+    public static VerifyAccountPageObject createVerifyAccountPage(WebDriver driver){
         return new VerifyAccountPageObject(driver);
     }
     public static NewsFeedExperience getExperienceFeed(WebDriver driver){
@@ -49,9 +51,6 @@ public class PageGenerator {
     public static NewsFeedTabPageObject getNewsFeedPage(WebDriver driver){
         return new NewsFeedTabPageObject(driver);
     }
-    public static NewsFeedTour getTourFeed(WebDriver driver){
-        return new NewsFeedTour(driver);
-    }
 
     public static BusinessDashboard getBusinessDashboardPage(WebDriver driver){
         return new BusinessDashboard(driver);
@@ -59,15 +58,15 @@ public class PageGenerator {
     public static PersonalTimelinePageObject getPersonalTimeLinePage(WebDriver driver){
         return new PersonalTimelinePageObject(driver);
     }
-    public static BackendLoginPageObject getLoginBackendPage(WebDriver driver){
-        return new BackendLoginPageObject(driver);
+    public static LoginBackend getLoginBackendPage(WebDriver driver){
+        return new LoginBackend(driver);
     }
     // Censor
     public static BackendDashboardPageObject getBackendDashboardPage(WebDriver driver){
         return new BackendDashboardPageObject(driver);
     }
-    public static CensorLoginPageObject getCensorLoginPage(WebDriver driver){
-        return new CensorLoginPageObject(driver);
+    public static LoginCensor getCensorLoginPage(WebDriver driver){
+        return new LoginCensor(driver);
     }
     public static CensorAccountList getAccountManagerList(WebDriver driver){
         return new CensorAccountList(driver);
@@ -79,6 +78,7 @@ public class PageGenerator {
     }
 
     // Hàm khảo tạo các tab Personal - About
+
     public static OverviewPageObject getPersonalOverviewTab(WebDriver driver){
         return new OverviewPageObject(driver);
     }
@@ -96,8 +96,8 @@ public class PageGenerator {
     }
 
     // Hàm khảo tạo Trang Login - Wallet
-    public static WalletLoginPageObject createWalletLoginPage(WebDriver driver){
-        return new WalletLoginPageObject(driver);
+    public static LoginWallet createWalletLoginPage(WebDriver driver){
+        return new LoginWallet(driver);
     }
     // Account Setting
 

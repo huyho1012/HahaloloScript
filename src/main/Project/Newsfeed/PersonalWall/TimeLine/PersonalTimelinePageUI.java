@@ -1,4 +1,4 @@
-package PersonalWall.TimeLine;
+package Newsfeed.PersonalWall.TimeLine;
 
 public class PersonalTimelinePageUI {
 

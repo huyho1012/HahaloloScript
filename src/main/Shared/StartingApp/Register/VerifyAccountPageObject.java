@@ -1,4 +1,4 @@
-package StartingApp.Register.PageObject;
+package StartingApp.Register;
 
 import CommonHelper.Function.AbstractPage;
 import CommonHelper.Function.PageGenerator;
@@ -35,18 +35,16 @@ public class VerifyAccountPageObject extends AbstractPage {
         sendKeyToElement(driver, RegisterPageUI.VERIFY_CODE_TEXT_BOX,verifyCode);
     }
 
-    public NewsFeedTabPageObject clickVerifyButton() {
+    public void clickVerifyButton() {
         waitElementToClickAble(driver, RegisterPageUI.VERIFY_BUTTON);
         clickToElement(driver, RegisterPageUI.VERIFY_BUTTON);
-        setTimeDelay(1);
-        return PageGenerator.getNewsFeedPage(driver);
     }
 
-    public String getVerifyCode() {
+    public String getErrMessageOfVerifyAccount() {
         waitElementToVisible(driver, RegisterPageUI.VERIFY_MESSAGE_CODE);
         return getTextOfElement(driver, RegisterPageUI.VERIFY_MESSAGE_CODE);
     }
-    public String getVerificationAccountCode(String emailAddress) {
+    public String copyVerifyCodeOnMail(String emailAddress) {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         openNewWindow(driver, GlobalVariables.URL_MAILINATOR);
         waitElementToVisible(driver, GlobalVariables.MAIl_SEARCH_BOX);

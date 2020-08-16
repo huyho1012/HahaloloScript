@@ -1,11 +1,7 @@
 package Newsfeed.TabFeed;
 
-import Function.PageGenerator;
 import HeaderMain.HeaderMenu;
-import Newsfeed.Editor.NormalPost.NormalPostEditor;
-import About.OverviewTab.OverviewPageObject;
-import TimeLine.PersonalTimelinePageObject;
-import Common.Menu.Common.HeaderPageUI;
+import HeaderMain.HeaderPageUI;
 import Common.Menu.Common.sidebarLeftUI;
 import Common.Menu.Common.sidebarRightUI;
 import org.openqa.selenium.WebDriver;
@@ -38,16 +34,14 @@ public class NewsFeedTabPageObject extends HeaderMenu {
         return checkIsDisplayedElement(driver, HeaderPageUI.CART_FUNCTION);
     }
 
-    public NormalPostEditor clickToNormalPostFunction() {
+    public void clickToNormalPostFunction() {
         waitElementToClickAble(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
         clickToElement(driver, NewsFeedPageIU.NORMAL_POST_FUNCTION);
-        return PageGenerator.openNormalPostEditor(driver);
     }
 
-    public PersonalTimelinePageObject clickToUserHomePage() {
+    public void clickToUserHomePage() {
         waitElementToVisible(driver, HeaderPageUI.PERSONAL_URL_LINK);
         clickToElement(driver,HeaderPageUI.PERSONAL_URL_LINK);
-        return PageGenerator.getPersonalTimeLinePage(driver);
     }
 
     public void clickCancelUpdateNewInfo() {
@@ -73,10 +67,9 @@ public class NewsFeedTabPageObject extends HeaderMenu {
         clickToElement(driver,NewsFeedPageIU.UPLOAD_BUTTON);
     }
 
-    public OverviewPageObject clickEditProfile() {
+    public void clickEditProfile() {
         waitElementToClickAble(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
         clickToElement(driver, sidebarLeftUI.EDIT_PROFILE_BUTTON);
-        return PageGenerator.getPersonalOverviewTab(driver);
     }
 
     public void clickLike() {

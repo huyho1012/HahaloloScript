@@ -7,7 +7,7 @@ import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
-import StartingApp.Login.PageObject.NewsfeedLoginPageObject;
+import StartingApp.Login.LoginNewsfeed;
 import TimeLine.PersonalTimelinePageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class TestcaseOfPost extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
-    NewsfeedLoginPageObject loginNewsfeedPage;
+    LoginNewsfeed loginNewsfeedPage;
     NewsFeedTabPageObject newsFeedPage;
     NormalPostEditor normalPostEditor;
     PersonalTimelinePageObject perTimelinePage;
@@ -33,13 +33,14 @@ public class TestcaseOfPost extends AbstractTest {
         driverManager = BrowserDriver.getBrowser(browserName);
         log.info("Precondition - Step 01 - Open Browser");
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-        loginNewsfeedPage= PageGenerator.getLoginPage(driver);
+        loginNewsfeedPage= PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Precondition - Step 02 - Enter Username");
-        loginNewsfeedPage.enterUsernameToLogin(driver,GlobalVariables.FEED_EMAIL_ACCOUNT);
+        loginNewsfeedPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
         log.info("Precondition - Step 03 - Enter Password");
-        loginNewsfeedPage.enterPasswordToLogin(driver,GlobalVariables.FEED_EMAIL_PASSWORD);
+        loginNewsfeedPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
         log.info("Precondition - Step 04 - Click Login button");
-        newsFeedPage= loginNewsfeedPage.clickLoginButton(driver);
+        loginNewsfeedPage.clickLoginButton();
+        PageGenerator.createNewsfeedTab(driver);
         log.info("Precondition - Step 05 - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess());
     }
@@ -198,7 +199,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 3 - Check post content -  >= 2 paragraphs");
@@ -216,7 +217,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content - HTML code");
@@ -234,7 +235,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content - Script code");
@@ -252,7 +253,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content with only Emoji");
@@ -270,7 +271,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content with Content + Emoji");
@@ -290,7 +291,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content - special Character");
@@ -308,7 +309,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 4 - Check post content - Whitespace before and after");
@@ -326,7 +327,7 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
         log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoHahalolo(driver);
+        perTimelinePage.clickToLogoPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
     }
 //    @Test

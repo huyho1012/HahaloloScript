@@ -1,10 +1,10 @@
 package Censor.AccountManager;
 
-import Account.CensorAccountListUI;
+import Censor.Account.CensorAccountListUI;
 import Censor.Dashboard.CensorHomeUI;
 import CommonHelper.Function.AbstractPage;
 import CommonHelper.Function.PageGenerator;
-import StartingApp.Login.PageObject.CensorLoginPageObject;
+import StartingApp.Login.LoginCensor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
@@ -26,19 +26,18 @@ public class CensorAccountList extends AbstractPage {
     }
 
     public void clickToBlockAccount(WebDriver driver, String accountName,String statusAccount, String password) {
-        waitElementToVisible(driver,CensorAccountListUI.BLOCKED_STATUS,accountName,statusAccount);
-        clickToElement(driver,CensorAccountListUI.BLOCKED_STATUS,accountName,statusAccount);
+        waitElementToVisible(driver,CensorAccountListUI.BLOCKED,accountName,statusAccount);
+        clickToElement(driver,CensorAccountListUI.BLOCKED,accountName,statusAccount);
         waitElementToVisible(driver,CensorAccountListUI.TITLE_CONFIRM_PASS_POPUP);
         sendKeyToElement(driver,CensorAccountListUI.CONFIRM_PASS_FIELD,password);
         clickToElement(driver,CensorAccountListUI.CONFIRM_BUTTON);
     }
-
     public boolean checkAccountIsBlockedSuccessfully(WebDriver driver,String emailUser, String statusAccount) {
-        waitElementToVisible(driver, CensorAccountListUI.BLOCKED_STATUS, emailUser,statusAccount);
-        return checkIsDisplayedElement(driver, CensorAccountListUI.BLOCKED_STATUS, emailUser,statusAccount);
+        waitElementToVisible(driver, CensorAccountListUI.BLOCKED, emailUser,statusAccount);
+        return checkIsDisplayedElement(driver, CensorAccountListUI.BLOCKED, emailUser,statusAccount);
     }
 
-    public CensorLoginPageObject clickLogoutButton() {
+    public LoginCensor clickLogoutButton() {
         waitElementToClickAble(driver, CensorHomeUI.LOGOUT_ICON);
         clickToElement(driver, CensorHomeUI.LOGOUT_ICON);
         return PageGenerator.getCensorLoginPage(driver);

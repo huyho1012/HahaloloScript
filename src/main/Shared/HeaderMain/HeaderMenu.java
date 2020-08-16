@@ -2,9 +2,7 @@ package HeaderMain;
 
 import CommonHelper.Function.AbstractPage;
 import CommonHelper.Function.PageGenerator;
-import StartingApp.Login.PageObject.WalletLoginPageObject;
 import TimeLine.PersonalTimelinePageObject;
-import Common.Menu.Common.HeaderPageUI;
 import org.openqa.selenium.WebDriver;
 
 public class HeaderMenu extends AbstractPage {
@@ -21,15 +19,14 @@ public class HeaderMenu extends AbstractPage {
         clickToElement(driver,HeaderPageUI.HOMEPAGE_LINK);
     }
 
-    public WalletLoginPageObject goToWalletLoginPage(WebDriver driver){
+    public void goToWalletLoginPage(WebDriver driver){
         waitElementToVisible(driver,HeaderPageUI.WALLET_FUNCTION);
         clickToElement(driver,HeaderPageUI.WALLET_FUNCTION);
-        return PageGenerator.createWalletLoginPage(driver);
     }
 
-    public void clickToLogoHahalolo(WebDriver driver){
-        waitElementToClickAble(driver,HeaderPageUI.LOGO_HAHALOLO);
-        clickToElement(driver, HeaderPageUI.LOGO_HAHALOLO);
+    public void clickToLogoPage(WebDriver driver){
+        waitElementToClickAble(driver,HeaderPageUI.LOGO_HALO);
+        clickToElement(driver, HeaderPageUI.LOGO_HALO);
     }
     public PersonalTimelinePageObject clickToAvatarUser(WebDriver driver){
         waitElementToClickAble(driver,HeaderPageUI.AVATAR_USER);

@@ -1,7 +1,7 @@
-package Common.Menu.Common;
+package HeaderMain;
 
 public class HeaderPageUI {
-    public static final String LOGO_HAHALOLO = "//a[@class= 'logo-top']";
+    public static final String LOGO_HALO = "//a[@class= 'logo-top']";
     public static final String AVATAR_USER = "//a[@class ='uri']";
     public static final String MAIN_SEARCH_FIELD = "//div[@id = 'js-search-tmp']";
 

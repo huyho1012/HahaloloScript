@@ -4,7 +4,7 @@ import HeaderMain.HeaderMenu;
 import Newsfeed.UserSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
-public class GeneralSettingPageObject extends HeaderMenu {
+public class GeneralSettingPageObject extends AccountSettingCommonPageObject {
 
     WebDriver driver;
     public GeneralSettingPageObject(WebDriver webDriver){
@@ -12,7 +12,7 @@ public class GeneralSettingPageObject extends HeaderMenu {
     }
 
     // Tab Overview
-    public String getFullNameIsDisplay(WebDriver driver) {
+    public String getFullNameIsDisplay() {
         waitElementToVisible(driver, AccountSettingUI.FULL_NAME_DATA);
         return getTextOfElement(driver,AccountSettingUI.FULL_NAME_DATA);
     }
