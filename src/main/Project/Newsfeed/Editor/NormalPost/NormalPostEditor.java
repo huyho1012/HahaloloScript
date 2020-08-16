@@ -1,9 +1,9 @@
-package Editor.NormalPost;
+package Newsfeed.Editor.NormalPost;
 
-import PostGenrate.NewsFeedHomepage;
-import Editor.Common.FunctionPageObject;
-import actions.common.Function.PageGenerator;
-import Editor.Common.CommonEditorUI;
+import CommonHelper.Function.PageGenerator;
+import Newsfeed.Editor.Common.CommonEditorUI;
+import Newsfeed.Editor.Common.FunctionPageObject;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import org.openqa.selenium.WebDriver;
 
 public class NormalPostEditor extends FunctionPageObject {
@@ -55,8 +55,6 @@ public class NormalPostEditor extends FunctionPageObject {
         uploadMultipleFileByAutoIT(driver,values);
     }
 
-
-
     public void removeImage(WebDriver driver) {
         int numImage = countElements(driver, CommonEditorUI.LIST_IMAGE_ATTACHMENT);
         for(int i = numImage ; i > 0; i--){
@@ -74,7 +72,7 @@ public class NormalPostEditor extends FunctionPageObject {
         return getTextOfElement(driver, CommonEditorUI.DEFAULT_SCOPE);
     }
 
-    public NewsFeedHomepage clickClosePostEditor() {
+    public NewsFeedTabPageObject clickClosePostEditor() {
         clickToElement(driver, CommonEditorUI.BUTTON_CLOSE_EDITOR);
         return PageGenerator.getNewsFeedPage(driver);
     }

@@ -1,8 +1,8 @@
 package HeaderMain;
 
-import Function.AbstractPage;
-import Function.PageGenerator;
-import WalletLoginPageObject;
+import CommonHelper.Function.AbstractPage;
+import CommonHelper.Function.PageGenerator;
+import StartingApp.Login.PageObject.WalletLoginPageObject;
 import TimeLine.PersonalTimelinePageObject;
 import Common.Menu.Common.HeaderPageUI;
 import org.openqa.selenium.WebDriver;

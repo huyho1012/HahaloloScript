@@ -1,17 +1,18 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-import PostGenrate.NewsFeedHomepage;
-import AccountManager.CensorAccountList;
-import CensorHomePage;
-import Login.CensorLogin;
+
+import Censor.AccountManager.CensorAccountList;
+import Censor.Dashboard.CensorDashboardPageObject;
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.PageGenerator;
+import CommonHelper.GlobalVariables;
 import HeaderMain.HeaderMenu;
-import Login.LoginPageObject;
-import Register.NewsFeedVerifyAccount;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import StartingApp.Login.PageObject.CensorLoginPageObject;
+import StartingApp.Register.PageObject.RegisterPageObject;
+import StartingApp.Register.PageObject.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -23,12 +24,13 @@ public class IntegrationTest extends AbstractTest {
     DriverManager driverManager;
 
     // Khai báo pageobject
-    LoginPageObject loginPage;
-    NewsFeedHomepage newsFeedPage;
-    CensorLogin censorLoginPage;
-    CensorHomePage censorHomePage;
+
+    RegisterPageObject signUpPage;
+    NewsFeedTabPageObject newsFeedPage;
+    CensorLoginPageObject censorLoginPageObjectPage;
+    CensorDashboardPageObject censorHomePage;
     CensorAccountList censorAccountListPage;
-    NewsFeedVerifyAccount verifyAccountPage;
+    VerifyAccountPageObject verifyAccountPage;
     HeaderMenu headerMenu;
 
     // Data
@@ -43,14 +45,14 @@ public class IntegrationTest extends AbstractTest {
     public void openBrowser(String browserName){
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-        loginPage = PageGenerator.getLoginPage(driver);
+        signUpPage = PageGenerator.get(driver);
     }
     @Test
     public void Login_TC01_Login_With_Blocked_Account_Email(){
         log.info("Step 1 - Register Account");
 
         log.info("Step 1.1 - Register Account - Enter First Name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
+        newsfeedLoginPage.(driver,"nv104",firstName);
 
         log.info("Step 1.2 - Register Account - Enter Last Name");
         loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
@@ -91,19 +93,19 @@ public class IntegrationTest extends AbstractTest {
         verifyTrue(loginPage.checkLogoutSuccess());
 
         log.info("Step 3.1 - Block account - Login Censor - Go to Login page");
-        censorLoginPage = loginPage.gotoCensorLoginPage();
+        censorLoginPageObjectPage = loginPage.gotoCensorLoginPage();
 
         log.info("Step 3.2 - Block account - Login Censor - Enter Username");
-        censorLoginPage.enterUsername(GlobalVariables.BACKEND_USER_NAME);
+        censorLoginPageObjectPage.enterUsername(driver, GlobalVariables.BACKEND_USER_NAME);
 
         log.info("Step 3.3 - Block account - Login Censor - Enter Password");
-        censorLoginPage.enterPassword(GlobalVariables.BACKEND_PASSWORD);
+        censorLoginPageObjectPage.enterPasswordToLogin(driver,GlobalVariables.BACKEND_PASSWORD);
 
         log.info("Step 3.4 - Block account - Login Censor - Enter Captcha - Delay");
-        censorLoginPage.setTimeDelay(10);
+        censorLoginPageObjectPage.setTimeDelay(10);
 
         log.info("Step 3.5 - Block account - Login Censor - Click Login Button");
-        censorHomePage = censorLoginPage.clickLoginButton();
+        censorHomePage = censorLoginPageObjectPage.clickLoginButton(driver);
 
         log.info("Step 3.5 - Block account - Login Censor - Check Login Censor successfully");
         verifyTrue(censorHomePage.checkLoginCensorSuccess());
@@ -128,12 +130,12 @@ public class IntegrationTest extends AbstractTest {
         verifyTrue(censorAccountListPage.checkAccountIsBlockedSuccessfully(driver,email,"Đã bị khóa"));
 
         log.info("Step 3.12 - Block account - Account Moderation - Logout censor project");
-        censorLoginPage= censorAccountListPage.clickLogoutButton();
+        censorLoginPageObjectPage = censorAccountListPage.clickLogoutButton();
 
-        verifyTrue(censorLoginPage.checkLogoutSuccess());
+        verifyTrue(censorLoginPageObjectPage.checkLogoutCensorSuccess());
 
         log.info("Step 4.1 - Login - Login with blocked account - Go to NewsFeed Login");
-        censorLoginPage.openNewWindow(driver,GlobalVariables.URL_NEWS_FEED_LOGIN);
+        censorLoginPageObjectPage.openNewWindow(driver,GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginPage = PageGenerator.getLoginPage(driver);
 
         log.info("Step 4.2 - Login - Login with blocked account - Enter a Username");

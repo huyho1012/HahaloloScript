@@ -1,7 +1,7 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
 import HeaderMain.HeaderMenu;
-import PostGenrate.NewsFeedHomepage;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import Login.LoginPageObject;
 import actions.common.DriverBrowser.BrowserDriver;
 import actions.common.DriverBrowser.DriverManager;
@@ -19,7 +19,7 @@ public class Validation extends AbstractTest {
     DriverManager driverManager;
     // Khai báo pageObject
     LoginPageObject newFeedLoginPage;
-    NewsFeedHomepage newsFeedPage;
+    NewsFeedTabPageObject newsFeedPage;
     HeaderMenu headerMenu;
     @Parameters("browser")
     @BeforeClass

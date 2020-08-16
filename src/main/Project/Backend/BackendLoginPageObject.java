@@ -1,4 +1,5 @@
 
+import Backend.Dashboard.BackendDashboardPageObject;
 import Function.AbstractPage;
 import Function.PageGenerator;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public class BackendLoginPageObject extends AbstractPage {
         sendKeyToElement(driver, LoginPageUI.PASSWORD_TEXT_BOX,passWord);
     }
 
-    public backendDashboardPageObject clickLoginButton() {
+    public BackendDashboardPageObject clickLoginButton() {
         waitElementToClickAble(driver,LoginPageUI.LOGIN_BUTTON);
         clickToElement(driver,LoginPageUI.LOGIN_BUTTON);
         return PageGenerator.getBackendDashboardPage(driver);

@@ -1,7 +1,6 @@
-package Editor.Common;
+package Newsfeed.Editor.Common;
 
-import actions.common.Function.AbstractPage;
-import Editor.Common.CommonEditorUI;
+import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public class FunctionPageObject extends AbstractPage {

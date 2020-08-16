@@ -1,10 +1,10 @@
-package AccountManager;
+package Censor.AccountManager;
 
-import Login.CensorLogin;
-import actions.common.Function.AbstractPage;
-import actions.common.Function.PageGenerator;
 import Account.CensorAccountListUI;
-import CensorHomeUI;
+import Censor.Dashboard.CensorHomeUI;
+import CommonHelper.Function.AbstractPage;
+import CommonHelper.Function.PageGenerator;
+import StartingApp.Login.PageObject.CensorLoginPageObject;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
@@ -38,7 +38,7 @@ public class CensorAccountList extends AbstractPage {
         return checkIsDisplayedElement(driver, CensorAccountListUI.BLOCKED_STATUS, emailUser,statusAccount);
     }
 
-    public CensorLogin clickLogoutButton() {
+    public CensorLoginPageObject clickLogoutButton() {
         waitElementToClickAble(driver, CensorHomeUI.LOGOUT_ICON);
         clickToElement(driver, CensorHomeUI.LOGOUT_ICON);
         return PageGenerator.getCensorLoginPage(driver);

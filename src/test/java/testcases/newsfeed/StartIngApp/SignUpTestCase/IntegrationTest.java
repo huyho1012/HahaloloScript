@@ -1,5 +1,5 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
-import PostGenrate.NewsFeedHomepage;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import Login.LoginPageObject;
 import Register.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
@@ -18,7 +18,7 @@ public class IntegrationTest extends AbstractTest {
     DataHelper data = DataHelper.getData();
     // Khai báo PageObject
     LoginPageObject loginPage;
-    NewsFeedHomepage newsFeedPage;
+    NewsFeedTabPageObject newsFeedPage;
     NewsFeedVerifyAccount verifyAccountPage;
 
     // Khai báo giá trị

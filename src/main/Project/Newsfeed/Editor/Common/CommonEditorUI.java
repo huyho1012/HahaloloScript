@@ -1,4 +1,4 @@
-package Editor.Common;
+package Newsfeed.Editor.Common;
 
 public class CommonEditorUI {
 

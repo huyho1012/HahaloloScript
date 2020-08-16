@@ -1,7 +1,7 @@
 package testcases.newsfeed.PostFunction;
 
 import HeaderMain.HeaderMenu;
-import PostGenrate.NewsFeedHomepage;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import Login.LoginPageObject;
 import Register.NewsFeedVerifyAccount;
 import actions.common.DriverBrowser.BrowserDriver;
@@ -21,7 +21,7 @@ public class LikePost extends AbstractTest {
 
     HeaderMenu headerMenu;
     NewsFeedVerifyAccount verifyAccountPage;
-    NewsFeedHomepage newsFeedPage;
+    NewsFeedTabPageObject newsFeedPage;
     LoginPageObject loginPage;
     String passWord = "123456";
     String confirmPassword = "123456";

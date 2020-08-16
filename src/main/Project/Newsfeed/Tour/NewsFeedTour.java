@@ -1,5 +1,5 @@
 import HeaderMain.HeaderMenu;
-import PostGenrate.TourTabPageUI;
+import Newsfeed.Tour.TourTabPageUI;
 import org.openqa.selenium.WebDriver;
 
 public class NewsFeedTour extends HeaderMenu {

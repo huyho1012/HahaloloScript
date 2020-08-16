@@ -1,27 +1,28 @@
 package testcases.newsfeed;
 
-import PostGenrate.NewsFeedHomepage;
-import BusinessDashboard;
-import UserSetting.GeneralSettingPageObject;
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.PageGenerator;
+import CommonHelper.GlobalVariables;
+import Newsfeed.TabFeed.NewsFeedTabPageObject;
+
+import StartingApp.Login.PageObject.NewsfeedLoginPageObject;
+import Newsfeed.UserSetting.PageObject.GeneralSettingPageObject;
 import Handnote.UserHandNotePageObject;
-import Login.LoginPageObject;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 public class CheckRedirectCorrectLink extends AbstractTest {
+    String currentTab;
+
     DriverManager driverManager;
     WebDriver driver;
-    LoginPageObject loginPage;
-    NewsFeedHomepage newsfeedPage;
-    String titlePage;
-    BusinessDashboard businessPage;
+    NewsfeedLoginPageObject loginNewsfeedPage;
+    NewsFeedTabPageObject newsfeedPage;
     UserHandNotePageObject handNotePage;
     GeneralSettingPageObject accountSettingGeneral;
 
@@ -31,13 +32,12 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     public void getBrowser(String browserName){
     driverManager = BrowserDriver.getBrowser(browserName);
     driver= driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-    loginPage = PageGenerator.getLoginPage(driver);
-    loginPage.enterDataToTextBoxField(driver,"identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
-    loginPage.enterDataToTextBoxField(driver,"password",GlobalVariables.FEED_EMAIL_PASSWORD);
-    loginPage.clickToLoginButton();
-    newsfeedPage = PageGenerator.getNewsFeedPage(driver);
+    loginNewsfeedPage = PageGenerator.getLoginPage(driver);
+    loginNewsfeedPage.enterUsernameToLogin(driver,GlobalVariables.FEED_EMAIL_ACCOUNT);
+    loginNewsfeedPage.enterPasswordToLogin(driver,GlobalVariables.FEED_EMAIL_PASSWORD);
+    newsfeedPage = loginNewsfeedPage.clickLoginButton(driver);
     newsfeedPage.changeLanguageDisplay();
-    titlePage= driver.getWindowHandle();
+    currentTab= driver.getWindowHandle();
     }
 //    @Test
 //    public void TC01_switchToTabFeedOnMenu() {
