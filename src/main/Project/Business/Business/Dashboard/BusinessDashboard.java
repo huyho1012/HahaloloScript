@@ -1,9 +1,8 @@
 package Business.Business.Dashboard;
 
+import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import HeaderMain.HeaderMenu;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
 import org.openqa.selenium.WebDriver;
 
 public class BusinessDashboard extends HeaderMenu {

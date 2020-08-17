@@ -8,7 +8,7 @@ import CommonHelper.GlobalVariables;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
 
 import StartingApp.Login.LoginNewsfeed;
-import Newsfeed.UserSetting.PageObject.GeneralSettingPageObject;
+import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
 import Handnote.UserHandNotePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTabPageObject newsfeedPage;
     UserHandNotePageObject handNotePage;
-    GeneralSettingPageObject accountSettingGeneral;
+    GeneralSettingAccount accountSettingGeneral;
 
 
     @Parameters("browser")

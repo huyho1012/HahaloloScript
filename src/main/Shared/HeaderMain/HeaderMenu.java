@@ -1,8 +1,6 @@
 package HeaderMain;
 
 import CommonHelper.Function.AbstractPage;
-import CommonHelper.Function.PageGenerator;
-import TimeLine.PersonalTimelinePageObject;
 import org.openqa.selenium.WebDriver;
 
 public class HeaderMenu extends AbstractPage {
@@ -28,10 +26,9 @@ public class HeaderMenu extends AbstractPage {
         waitElementToClickAble(driver,HeaderPageUI.LOGO_HALO);
         clickToElement(driver, HeaderPageUI.LOGO_HALO);
     }
-    public PersonalTimelinePageObject clickToAvatarUser(WebDriver driver){
+    public void clickToAvatarUser(WebDriver driver){
         waitElementToClickAble(driver,HeaderPageUI.AVATAR_USER);
         clickToElement(driver, HeaderPageUI.AVATAR_USER);
-        return PageGenerator.getPersonalTimeLinePage(driver);
     }
     public void enterKeyWordOnSearchMain(WebDriver driver,String keyWord){
         waitElementToVisible(driver,HeaderPageUI.MAIN_SEARCH_FIELD);

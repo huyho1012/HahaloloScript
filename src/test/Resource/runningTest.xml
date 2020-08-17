@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="All Test Suite" paralle  ="false">
     <listeners>
-        <listener class-name="actions.common.LogAndReport.MethodListener"></listener>
+        <listener class-name="CommonHelper.LogAndReport.MethodListener"></listener>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
-        <listener class-name="actions.common.LogAndReport.ExtentReportListener"/>
+        <listener class-name="CommonHelper.LogAndReport.ExtentReportListener"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
     <test name="Test with firefox">
@@ -14,7 +14,7 @@
 <!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation"></class>-->
 <!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
 <!--            <class name="LikePost"></class>-->
-               <class name= "testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost"></class>-->
+               <class name= "testcases.newsfeed.Test2"></class>-->
         </classes>
     </test>
 

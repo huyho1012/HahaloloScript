@@ -1,8 +1,9 @@
 package Backend.Dashboard;
 
+import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public class BackendDashboardPageObject extends Function.AbstractPage {
+public class BackendDashboardPageObject extends AbstractPage {
     WebDriver driver;
     public BackendDashboardPageObject(WebDriver webDriver){
         driver = webDriver;

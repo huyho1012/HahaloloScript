@@ -461,4 +461,5 @@ public abstract class AbstractPage {
         element = findElement(driver,castToObject(locator, values));
         jsExecutor.executeScript("arguments[0].click();",element);
     }
+
 }

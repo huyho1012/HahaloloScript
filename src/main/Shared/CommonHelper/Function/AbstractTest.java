@@ -8,6 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.Random;
 
 public class AbstractTest {
@@ -140,5 +144,17 @@ public class AbstractTest {
     }
     protected String getBirthday(String day, String month, String year){
         return day+ "-" + month + "-" + year;
+    }
+
+    public String getContentToClipBoard(){
+        String content;
+        try {
+            return content = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null).getTransferData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

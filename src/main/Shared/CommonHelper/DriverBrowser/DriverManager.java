@@ -1,6 +1,5 @@
 package CommonHelper.DriverBrowser;
-
-import Function.AbstractPage;
+import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class DriverManager extends AbstractPage {

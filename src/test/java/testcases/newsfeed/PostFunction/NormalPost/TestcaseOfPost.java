@@ -6,9 +6,9 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
+import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import StartingApp.Login.LoginNewsfeed;
-import TimeLine.PersonalTimelinePageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -47,7 +47,7 @@ public class TestcaseOfPost extends AbstractTest {
     @Test
     public void TC01_Check_Display_of_Editor_Case_New_Post() {
         log.info("Check Title of post normal");
-        verifyEquals(normalPostEditor.getTitleOfNormalPost(driver),"Tạo bài viết");
+        verifyEquals(normalPostEditor.getTitleOfNormalPost(),"Tạo bài viết");
         log.info("Check placeholder of post normal");
         verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
         log.info("Check status of button Share post");
@@ -77,91 +77,66 @@ public class TestcaseOfPost extends AbstractTest {
 //    }
     @Test
     public void TC03_Button_Share_Check_Status_Button(){
-        log.info("Step 1 - Check default status button");
+        log.info("Step 1 - Default (No content input)");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 1 - Check status button when user input data");
-        normalPostEditor.inputNormalPostContent(driver,contentPost);
-        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 2 - Check status button when user remove data");
-        normalPostEditor.inputNormalPostContent(driver,"");
-        normalPostEditor.setTimeDelay(2);
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 3 - Check status button when user insert emoji");
-        normalPostEditor.insertEmoji(driver,4);
-        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 3 - Check status button when user add feeling - case noInput");
+        log.info("Step 2 - User only add feeling");
         normalPostEditor.chooseFeeling(driver,"thú vị");
-        normalPostEditor.inputNormalPostContent(driver,"");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 4 - Check status button when user add location - case noInput");
+        normalPostEditor.removeFeeling(driver,"thú vị");
+        log.info("Step 3 - User only add location");
         normalPostEditor.chooseLocationAddress(driver,"Ho Chi Minh City");
-        normalPostEditor.inputNormalPostContent(driver,"");
+        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 5 - Check status button when user tag friend - case noInput");
+        log.info("Step 4 - User only tag friend");
         normalPostEditor.chooseUserTagging(driver,"Huy Hồ",1);
-        normalPostEditor.inputNormalPostContent(driver,"");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 6 - Check status button when user add image");
+        normalPostEditor.removeOneUserTagging(driver,1);
+        log.info("Step 6 - User add image");
         normalPostEditor.uploadImageToNormalPost(driver, file1,file2);
         normalPostEditor.setTimeDelay(3);
         verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+        log.info("Step 7 - User remove image");
         normalPostEditor.removeImage(driver);
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        normalPostEditor.removeFeeling(driver,"thú vị");
-        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
-        normalPostEditor.removeOneUserTagging(driver,1);
-        newsFeedPage = normalPostEditor.clickClosePostEditor();
+        log.info("Step 8 - User input content");
+        normalPostEditor.inputNormalPostContent(contentPost);
+        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+        log.info("Step 9 - User remove content");
+        normalPostEditor.inputNormalPostContent("");
+        log.info("Step 9 - User input whitespace content");
+        normalPostEditor.inputNormalPostContent("     ");
+        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+        log.info("Step 10 - User insert emoji");
+        normalPostEditor.insertEmoji(driver,4);
+        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+        normalPostEditor.clearNormalPostContent();
     }
     @Test
     public void TC04_VALIDATE_POST_CONTENT(){
-        log.info("Step 1 - Check post content - Not input");
-        log.info("Step 1.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 1.2 - Do not input ");
-        normalPostEditor.inputNormalPostContent(driver,"");
-        log.info("Step 1.3 - Check status of Share post button");
+        log.info("Step 1 - Do not input ");
+        normalPostEditor.inputNormalPostContent("");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+        System.out.println("Finish Step 1");
 
-        System.out.println("Complete 1");
-
-        log.info("Step 2 - Check post content - Case Input All Whitespace");
-        log.info("Step 2.1 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,"          ");
-        log.info("Step 2.2 - Check status of Share post button");
+        log.info("Step 2 - All Whitespace");
+        normalPostEditor.inputNormalPostContent("          ");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+        System.out.println("Finish Step 2");
 
-        System.out.println("Complete 2");
-
-        log.info("Step 3 - Check post content - Case > 100000 character");
-        log.info("Step 3.1 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,randomSentence(10001));
-        log.info("Step 3.2 - Click Share post button");
+        log.info("Step 3 - > 100000 character");
+        normalPostEditor.inputNormalPostContent(randomSentence(10001));
         normalPostEditor.clickToCreatePost();
-        log.info("Step 3.3 - Check error message");
         verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000");
         normalPostEditor.clickButtonOk(driver);
-        System.out.println("Complete 3");
+        System.out.println("Finish Step 3");
 
-        log.info("Step 4 - Check post  - Valid content");
-        log.info("Step 4.1 - Input valid content");
-        normalPostEditor.inputNormalPostContent(driver,contentPost);
-        log.info("Step 4.2 - Click Share post button");
+        log.info("Step 4 - Valid content");
+        normalPostEditor.inputNormalPostContent(contentPost);
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 2.3 - Go to Personal Timeline");
         newsFeedPage.clickToUserHomePage();
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 2.4 - Check post has been created successfully");
         perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
-        log.info("Step 2.5 - Back to newsfeed");
         perTimelinePage.backPreviousPage(driver);
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         System.out.println("Complete 4");
@@ -171,7 +146,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 4.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,randomSentence(10000));
+        normalPostEditor.inputNormalPostContent(randomSentence(10000));
         log.info("Step 4.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -189,7 +164,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,randomParagraphs(1));
+        normalPostEditor.inputNormalPostContent(randomParagraphs(1));
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -207,7 +182,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,randomParagraphs(2));
+        normalPostEditor.inputNormalPostContent(randomParagraphs(2));
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -225,7 +200,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,GlobalVariables.HTML_CODE);
+        normalPostEditor.inputNormalPostContent(GlobalVariables.HTML_CODE);
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -243,7 +218,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,GlobalVariables.SCRIPT_CODE);
+        normalPostEditor.inputNormalPostContent(GlobalVariables.SCRIPT_CODE);
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -279,7 +254,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,contentPost);
+        normalPostEditor.inputNormalPostContent(contentPost);
         log.info("Step 5.2 - Input Emoji");
         normalPostEditor.insertEmoji(driver,2);
         log.info("Step 5.3 - Click Share post button");
@@ -299,7 +274,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,"@@@ $$@ASdas $@# $@34q");
+        normalPostEditor.inputNormalPostContent("@@@ $$@ASdas $@# $@34q");
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
@@ -317,7 +292,7 @@ public class TestcaseOfPost extends AbstractTest {
         newsFeedPage.clickToNormalPostFunction();
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(driver,"  Hahaha Bạn tôi ơi  ");
+        normalPostEditor.inputNormalPostContent("  Hahaha Bạn tôi ơi  ");
         log.info("Step 5.3 - Click Share post button");
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);

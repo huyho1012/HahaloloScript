@@ -1,13 +1,14 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.PageGenerator;
+import CommonHelper.GlobalVariables;
 import HeaderMain.HeaderMenu;
+
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
-import Login.LoginPageObject;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
+import StartingApp.Login.LoginNewsfeed;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +19,7 @@ public class Validation extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     // Khai báo pageObject
-    LoginPageObject newFeedLoginPage;
+    LoginNewsfeed newFeedLoginPage;
     NewsFeedTabPageObject newsFeedPage;
     HeaderMenu headerMenu;
     @Parameters("browser")
@@ -26,124 +27,126 @@ public class Validation extends AbstractTest {
     public void preconditionMethod(String browserName){
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-        newFeedLoginPage = PageGenerator.getLoginPage(driver);
+        newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
     public void Login_TC01_Login_With_Blank_Info(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","");
+        newFeedLoginPage.enterUsernameToLogin("");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","");
+        newFeedLoginPage.enterPasswordToLogin("");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"identity"),"Tài khoản là bắt buộc.");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"password"),"Mật khẩu là bắt buộc.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfUsername(),"Tài khoản là bắt buộc.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfPassword(),"Mật khẩu là bắt buộc.");
     }
     @Test
     public void Login_TC02_Login_With_Blank_Username(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","");
+        newFeedLoginPage.enterUsernameToLogin("");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","123456");
+        newFeedLoginPage.enterPasswordToLogin("123456");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"identity"),"Tài khoản là bắt buộc.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfUsername(),"Tài khoản là bắt buộc.");
     }
     @Test
     public void Login_TC03_Login_With_Password_Incorrect(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","0936709449");
+        newFeedLoginPage.enterUsernameToLogin("0936709449");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","123456");
+        newFeedLoginPage.enterPasswordToLogin("123456");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"password"),"Tên tài khoản hoặc mật khẩu sai");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfPassword(),"Tên tài khoản hoặc mật khẩu sai");
     }
     @Test
     public void Login_TC03_Login_With_Blank_Password(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","0936709449");
+        newFeedLoginPage.enterUsernameToLogin("0936709449");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","");
+        newFeedLoginPage.enterPasswordToLogin("");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"password"),"Mật khẩu là bắt buộc.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfPassword(),"Mật khẩu là bắt buộc.");
     }
     @Test
     public void Login_TC03_Login_With_Invalid_Email(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","huyho1210@gmail.");
+        newFeedLoginPage.enterUsernameToLogin("huyho1210@gmail.");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","123456");
+        newFeedLoginPage.enterPasswordToLogin("123456");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"identity"),"Tài khoản không hợp lệ.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfUsername(),"Tài khoản không hợp lệ.");
     }
     @Test
     public void Login_TC03_Login_With_Invalid_Phone(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","0123456");
+        newFeedLoginPage.enterUsernameToLogin("0123456");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","123456");
+        newFeedLoginPage.enterPasswordToLogin("123456");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"identity"),"Tài khoản không hợp lệ.");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfUsername(),"Tài khoản không hợp lệ.");
     }
     @Test
     public void TC04_Login_With_Password_Less_than_6_Chars(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","balo_04@mailinator.com");
+        newFeedLoginPage.enterUsernameToLogin("balo_04@mailinator.com");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","12345");
+        newFeedLoginPage.enterPasswordToLogin("12345");
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"password"),"Giới hạn tối thiểu của Mật khẩu là 6 kí tự");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfPassword(),"Giới hạn tối thiểu của Mật khẩu là 6 kí tự");
     }
     @Test
     public void TC05_Login_With_Password_More_than_129_Chars(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","balo_04@mailinator.com");
+        newFeedLoginPage.enterUsernameToLogin("balo_04@mailinator.com");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password",randomPassword(129));
+        newFeedLoginPage.enterPasswordToLogin(randomPassword(129));
         log.info("Click Login button");
-        newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
         log.info("Verify error message");
-        verifyEquals(newFeedLoginPage.getValidateErrMessage(driver,"password"),"Giới hạn tối đa của Mật khẩu là 128 kí tự");
+        verifyEquals(newFeedLoginPage.getErrorMessageOfPassword(),"Giới hạn tối đa của Mật khẩu là 128 kí tự");
     }
     @Test
     public void Login_TC_Login_With_Valid_Email(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","balo_04@mailinator.com");
+        newFeedLoginPage.enterUsernameToLogin("balo_04@mailinator.com");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","123456");
+        newFeedLoginPage.enterPasswordToLogin("123456");
         log.info("Click Login button");
-        newsFeedPage = newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Logout account");
         headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
-        newFeedLoginPage = PageGenerator.getLoginPage(driver);
-        verifyTrue(newFeedLoginPage.checkNewsFeedLoginPageDisplay());
+        newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+        verifyTrue(newFeedLoginPage.checkLoginNewsfeedPageIsDisplay());
     }
     @Test
     public void Login_TC_Login_With_Valid_Phone(){
         log.info("Enter a Username");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"identity","0936709449");
+        newFeedLoginPage.enterUsernameToLogin("0936709449");
         log.info("Enter a password");
-        newFeedLoginPage.enterDataToTextBoxField(driver,"password","20b87bis");
+        newFeedLoginPage.enterPasswordToLogin("20b87bis");
         log.info("Click Login button");
-        newsFeedPage = newFeedLoginPage.clickToLoginButton();
+        newFeedLoginPage.clickLoginButton();
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Logout account");
         headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
-        newFeedLoginPage = PageGenerator.getLoginPage(driver);
-        verifyTrue(newFeedLoginPage.checkNewsFeedLoginPageDisplay());
+        newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+        verifyTrue(newFeedLoginPage.checkLoginNewsfeedPageIsDisplay());
     }
     @AfterTest
     public void closeBrowserAndDriver(){

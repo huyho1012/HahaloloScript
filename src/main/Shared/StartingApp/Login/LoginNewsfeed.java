@@ -43,7 +43,7 @@ public class LoginNewsfeed extends AbstractPage {
     }
 
     // Lấy
-    public String getErrorMessageOfUsername(WebDriver driver){
+    public String getErrorMessageOfUsername(){
         waitElementToVisible(driver, CommonLoginUI.VALIDATE_USER_NAME_ERROR_MESSAGE);
         return getTextOfElement(driver, CommonLoginUI.VALIDATE_USER_NAME_ERROR_MESSAGE);
     }

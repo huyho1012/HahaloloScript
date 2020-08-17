@@ -2,19 +2,20 @@ package Newsfeed.Editor.NormalPost;
 
 import CommonHelper.Function.PageGenerator;
 import Newsfeed.Editor.Common.CommonEditorUI;
-import Newsfeed.Editor.Common.FunctionPageObject;
+import Newsfeed.Editor.Common.Function;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import org.openqa.selenium.WebDriver;
 
-public class NormalPostEditor extends FunctionPageObject {
+public class NormalPostEditor extends Function {
     WebDriver driver;
     public NormalPostEditor(WebDriver webDriver){
         driver= webDriver;
     }
 
     // Hàm get title của Normal Editor
-    public String getTitleOfNormalPost(WebDriver driver){
-        return getTextOfElement(driver, CommonEditorUI.NORMAL_POST);
+    public String getTitleOfNormalPost(){
+        waitElementToVisible(driver, NormalPostUI.TITLE_POPUP);
+        return getTextOfElement(driver, NormalPostUI.TITLE_POPUP);
     }
 
     // Hàm kiểm tra Khởi tạo hiển thị Normal Editor
@@ -22,7 +23,7 @@ public class NormalPostEditor extends FunctionPageObject {
         if(checkIsDisplayedElement(driver, CommonEditorUI.CREATE_BUTTON) && !checkStatusOfShareButton(driver)
                 && checkIsDisplayedElement(driver, CommonEditorUI.SCOPE_POST_DROPDOWN) && checkIsDisplayedElement(driver, CommonEditorUI.TAGGING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_LOCATION_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.ADD_FELLING_FUNCTION)
-                && checkIsDisplayedElement(driver, CommonEditorUI.ADD_IMAGE_FUNCTION) && getTitleOfNormalPost(driver).contains("Tạo bài viết")
+                && checkIsDisplayedElement(driver, CommonEditorUI.ADD_IMAGE_FUNCTION) && getTitleOfNormalPost().contains("Tạo bài viết")
                 && checkIsDisplayedElement(driver, CommonEditorUI.EMOJI_INSERT_FUNCTION))
             return true;
         return false;
@@ -34,7 +35,7 @@ public class NormalPostEditor extends FunctionPageObject {
                 && checkIsDisplayedElement(driver, CommonEditorUI.SCOPE_POST_DROPDOWN) && checkIsDisplayedElement(driver, CommonEditorUI.TAGGING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_LOCATION_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.ADD_FELLING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_IMAGE_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.EMOJI_INSERT_FUNCTION)
-                && getTitleOfNormalPost(driver).contains("Chỉnh sửa bài viết"))
+                && getTitleOfNormalPost().contains("Chỉnh sửa bài viết"))
             return true;
         return false;
     }
@@ -44,9 +45,9 @@ public class NormalPostEditor extends FunctionPageObject {
         return checkIsEnableElement(driver, CommonEditorUI.CREATE_BUTTON);
     }
 
-    public void inputNormalPostContent(WebDriver driver, String contentPost) {
-        waitElementToVisible(driver, CommonEditorUI.NORMAL_POST_CONTENT);
-        sendKeyToElement(driver, CommonEditorUI.NORMAL_POST_CONTENT, contentPost);
+    public void inputNormalPostContent(String contentPost) {
+        waitElementToVisible(driver, NormalPostUI.POST_CONTENT);
+        sendKeyToElement(driver, NormalPostUI.POST_CONTENT, contentPost);
     }
 
     // Hàm upload image
@@ -56,25 +57,27 @@ public class NormalPostEditor extends FunctionPageObject {
     }
 
     public void removeImage(WebDriver driver) {
-        int numImage = countElements(driver, CommonEditorUI.LIST_IMAGE_ATTACHMENT);
+        int numImage = countElements(driver, NormalPostUI
+                .LIST_IMAGE_ATTACHMENT);
         for(int i = numImage ; i > 0; i--){
-            hoverMouseToElement(driver, CommonEditorUI.ITEM_IMAGE,String.valueOf(i));
-            clickToElement(driver, CommonEditorUI.BUTTON_REMOVE_ITEM_IMAGE,String.valueOf(i));
+            hoverMouseToElement(driver, NormalPostUI.ITEM_IMAGE,String.valueOf(i));
+            clickToElement(driver, NormalPostUI.BUTTON_REMOVE_ITEM_IMAGE,String.valueOf(i));
         }
     }
 
-    // Hàm get placeholer
+    // Hàm get placeholder
     public String getPlaceHolderPostNormal() {
-        return getAttributeOfElement(driver, CommonEditorUI.NORMAL_POST_CONTENT,"data-placeholder");
+        waitElementToVisible(driver,NormalPostUI.POST_CONTENT);
+        return getAttributeOfElement(driver, NormalPostUI.POST_CONTENT,"data-placeholder");
     }
 
     public String getScopeDisplayOnDropdown(WebDriver driver){
         return getTextOfElement(driver, CommonEditorUI.DEFAULT_SCOPE);
     }
 
-    public NewsFeedTabPageObject clickClosePostEditor() {
+    public void clickClosePostEditor() {
+        waitElementToClickAble(driver, CommonEditorUI.BUTTON_CLOSE_EDITOR);
         clickToElement(driver, CommonEditorUI.BUTTON_CLOSE_EDITOR);
-        return PageGenerator.getNewsFeedPage(driver);
     }
 
     public boolean checkFunctionInsertEmojiIsDisplay() {
@@ -99,5 +102,10 @@ public class NormalPostEditor extends FunctionPageObject {
 
     public String getMessageErrLimitChar() {
         return getTextOfElement(driver, CommonEditorUI.MESSAGE_VALIDATION_POST_NORMAL);
+    }
+
+    public void clearNormalPostContent() {
+        waitElementToVisible(driver, NormalPostUI.POST_CONTENT);
+        removeTextOnElement(driver, NormalPostUI.POST_CONTENT);
     }
 }

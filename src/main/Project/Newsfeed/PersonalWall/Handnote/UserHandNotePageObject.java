@@ -1,4 +1,4 @@
-package Handnote;
+package Newsfeed.PersonalWall.Handnote;
 
 import HeaderMain.HeaderMenu;
 import org.openqa.selenium.WebDriver;

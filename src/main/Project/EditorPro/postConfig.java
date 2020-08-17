@@ -1,7 +1,6 @@
 package EditorPro;
 
-
-import actions.common.Function.AbstractPage;
+import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public class postConfig extends AbstractPage {

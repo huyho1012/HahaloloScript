@@ -6,12 +6,10 @@ import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
-import Newsfeed.PersonalWall.About.Common.PersonalAbout;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
 
-import Newsfeed.UserSetting.PageObject.AccountSettingCommonPageObject;
-import Newsfeed.UserSetting.PageObject.GeneralSettingPageObject;
+import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
 import StartingApp.Login.LoginNewsfeed;
 import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +26,7 @@ public class IntegrationTest extends AbstractTest {
     VerifyAccountPageObject verifyAccountPage;
     OverviewPageObject perOverviewTab;
     BasicInfoPageObject perBasicInfoTab;
-    GeneralSettingPageObject accGeneralSetting;
+    GeneralSettingAccount accGeneralSetting;
 
     // Khai báo giá trị
     public String firstName, lastName,email, passWord, confirmPassword;

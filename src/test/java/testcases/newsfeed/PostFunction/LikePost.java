@@ -1,14 +1,14 @@
 package testcases.newsfeed.PostFunction;
 
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.DataHelper;
+import CommonHelper.Function.PageGenerator;
 import HeaderMain.HeaderMenu;
 import Newsfeed.TabFeed.NewsFeedTabPageObject;
-import Login.LoginPageObject;
-import Register.NewsFeedVerifyAccount;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.DataHelper;
-import actions.common.Function.PageGenerator;
+import StartingApp.Login.LoginNewsfeed;
+import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -20,9 +20,9 @@ public class LikePost extends AbstractTest {
     DriverManager driverManager;
 
     HeaderMenu headerMenu;
-    NewsFeedVerifyAccount verifyAccountPage;
+    VerifyAccountPageObject verifyAccountPage;
     NewsFeedTabPageObject newsFeedPage;
-    LoginPageObject loginPage;
+    LoginNewsfeed loginPage;
     String passWord = "123456";
     String confirmPassword = "123456";
     @Parameters("browser")
@@ -30,7 +30,7 @@ public class LikePost extends AbstractTest {
     public void preconditon(String browserName) {
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver("https://www.hahalolo.com");
-        loginPage = PageGenerator.getLoginPage(driver);
+        loginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
     public void LikePost(){
@@ -50,33 +50,33 @@ public class LikePost extends AbstractTest {
             log.info("Step 1 - Register Account");
 
             log.info("Step 1.1 - Register Account - Enter First Name");
-            loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
+            loginPage.enterFirstNameForRegister(firstName);
 
             log.info("Step 1.2 - Register Account - Enter Last Name");
-            loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
+            loginPage.enterLastNameForRegister(lastName);
 
             log.info("Step 1.3 - Register Account - Enter Email");
-            loginPage.enterDataToTextBoxField(driver,"nv108",email);
+            loginPage.enterNewAccountForRegister(email);
 
             log.info("Step 1.4 - Register Account - Enter Password");
-            loginPage.enterDataToTextBoxField(driver,"nv109",passWord);
+            loginPage.enterPasswordForRegister(passWord);
 
             log.info("Step 1.5 - Register Account - Enter Confirm password");
-            loginPage.enterDataToTextBoxField(driver,"repeatPassword",confirmPassword);
+            loginPage.enterConfirmPasswordForRegister(confirmPassword);
 
             log.info("Step 1.6 - Register Account - Click Register button");
-            verifyAccountPage = loginPage.clickSignUpButton();
+            loginPage.clickSignUpButton();
+            verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
 
             log.info("Step 1.7 - Register Account - Check verification account by email display");
             verifyTrue(verifyAccountPage.checkTitlePageVerifyEmail());
-
             log.info("Step 1.8 - Register Account - Click Verify button");
-            verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.getVerificationAccountCode(email));
-            newsFeedPage = verifyAccountPage.clickVerifyButton();
+            verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.copyVerifyCodeOnMail(email));
+            verifyAccountPage.clickVerifyButton();
+            newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
             log.info("Step 1.9 - Register Account - Check account verify successfully");
             verifyTrue(newsFeedPage.checkLoginSuccess());
-
             newsFeedPage.setTimeDelay(4);
         }
     }
