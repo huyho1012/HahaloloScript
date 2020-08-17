@@ -15,9 +15,9 @@ public class VerifyAccountPageObject extends AbstractPage {
         driver = webDriver;
     }
 
-    public Boolean checkAccountDisplayOnRegisterPage(String account) {
+    public String getAccountDisplayOnRegisterPage() {
         waitElementToVisible(driver, RegisterPageUI.CONTENT_VERIFY);
-        return getTextOfElement(driver, RegisterPageUI.CONTENT_VERIFY).contains(account);
+        return getTextOfElement(driver, RegisterPageUI.CONTENT_VERIFY);
     }
 
     public Boolean checkTitlePageVerifyEmail() {

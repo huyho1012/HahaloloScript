@@ -84,12 +84,9 @@ public class LoginNewsfeed extends AbstractPage {
         clickToElement(driver, RegisterPageUI.SIGN_UP_BUTTON);
     }
 
-    public boolean changePhoneCode(String phoneCode) {
-        waitElementToClickAble(driver, RegisterPageUI.PHONE_CODE);
-        if(checkIsDisplayedElement(driver, RegisterPageUI.PHONE_CODE)){
-            selectItemInCustomDropdown(driver, RegisterPageUI.PHONE_CODE, RegisterPageUI.PHONE_CODE_ITEM,phoneCode);
-            return true;
-        }return false;
+    public void changePhoneCode(String phoneCode) {
+        selectItemInCustomDropdown(driver, RegisterPageUI.PHONE_CODE, RegisterPageUI.PHONE_CODE_ITEM,phoneCode);
+
     }
 
 
@@ -117,5 +114,10 @@ public class LoginNewsfeed extends AbstractPage {
     public String getErrValidationOfPhoneCode(){
         waitElementToVisible(driver,RegisterPageUI.ERROR_MESSAGE_OF_PHONE_CODE);
         return getTextOfElement(driver,RegisterPageUI.ERROR_MESSAGE_OF_PHONE_CODE);
+    }
+
+    public void removePhoneCode() {
+        waitElementToVisible(driver, RegisterPageUI.PHONE_CODE);
+        removeTextOnElement(driver, RegisterPageUI.PHONE_CODE);
     }
 }

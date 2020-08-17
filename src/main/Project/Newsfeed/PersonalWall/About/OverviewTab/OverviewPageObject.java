@@ -8,4 +8,9 @@ public class OverviewPageObject extends PersonalAbout {
     public OverviewPageObject(WebDriver webDriver){
         driver = webDriver;
     }
+
+    public String getEmailOfUserOnWidgetIntro() {
+        waitElementToVisible(driver, OverviewPageUI.EMAIL_USER_INFO);
+        return  getTextOfElement(driver,OverviewPageUI.EMAIL_USER_INFO);
+    }
 }

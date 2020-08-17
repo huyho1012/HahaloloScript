@@ -1,4 +1,5 @@
-package About.OverviewTab;
+package Newsfeed.PersonalWall.About.OverviewTab;
 
 public class OverviewPageUI {
+    public static final String EMAIL_USER_INFO= "//span[contains(@data-bind,'contactAndBasicInfoVM.nv215')]";
 }

@@ -12,8 +12,8 @@ public class RegisterPageUI {
     public static final String USERNAME = "";
     public static final String PASSWORD = "";
     public static final String CONFIRM_PASSWORD = "";
-    public static final String PHONE_CODE = "//div[@class = 'selectize-input items has-options full has-items']";
-    public static final String PHONE_CODE_ITEM = "//span[@class ='phone-code']";
+    public static final String PHONE_CODE = "//div[@id = 'select-phone-area-code']//input";
+    public static final String PHONE_CODE_ITEM = "//div[@id = 'select-phone-area-code']//div[@class = 'item']";
 
     public static final String ERROR_MESSAGE_OF_FIRST_NAME = "";
     public static final String ERROR_MESSAGE_OF_LAST_NAME = "";
