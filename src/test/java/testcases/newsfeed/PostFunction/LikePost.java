@@ -6,7 +6,7 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
 import HeaderMain.HeaderMenu;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class LikePost extends AbstractTest {
 
     HeaderMenu headerMenu;
     VerifyAccountPageObject verifyAccountPage;
-    NewsFeedTabPageObject newsFeedPage;
+    NewsFeedTab newsFeedPage;
     LoginNewsfeed loginPage;
     String passWord = "123456";
     String confirmPassword = "123456";
@@ -50,19 +50,19 @@ public class LikePost extends AbstractTest {
             log.info("Step 1 - Register Account");
 
             log.info("Step 1.1 - Register Account - Enter First Name");
-            loginPage.enterFirstNameForRegister(firstName);
+            loginPage.enterDataOnDynamicTextField("nv104",firstName);
 
             log.info("Step 1.2 - Register Account - Enter Last Name");
-            loginPage.enterLastNameForRegister(lastName);
+            loginPage.enterDataOnDynamicTextField("nv103",lastName);
 
             log.info("Step 1.3 - Register Account - Enter Email");
-            loginPage.enterNewAccountForRegister(email);
+            loginPage.enterDataOnDynamicTextField("nv108",email);
 
             log.info("Step 1.4 - Register Account - Enter Password");
-            loginPage.enterPasswordForRegister(passWord);
+            loginPage.enterDataOnDynamicTextField("nv109", passWord);
 
             log.info("Step 1.5 - Register Account - Enter Confirm password");
-            loginPage.enterConfirmPasswordForRegister(confirmPassword);
+            loginPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
 
             log.info("Step 1.6 - Register Account - Click Register button");
             loginPage.clickSignUpButton();

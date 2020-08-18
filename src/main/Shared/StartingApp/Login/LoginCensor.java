@@ -1,8 +1,6 @@
 package StartingApp.Login;
 
-import Censor.Dashboard.CensorDashboardPageObject;
 import CommonHelper.Function.AbstractPage;
-import CommonHelper.Function.PageGenerator;
 import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;

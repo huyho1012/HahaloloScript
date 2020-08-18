@@ -1,9 +1,7 @@
 package Newsfeed.Editor.NormalPost;
 
-import CommonHelper.Function.PageGenerator;
 import Newsfeed.Editor.Common.CommonEditorUI;
 import Newsfeed.Editor.Common.Function;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
 import org.openqa.selenium.WebDriver;
 
 public class NormalPostEditor extends Function {

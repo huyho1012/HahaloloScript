@@ -1,6 +1,6 @@
 package StartingApp.Login;
 
-import Censor.Dashboard.CensorDashboardPageObject;
+import Censor.Dashboard.CensorDashboard;
 import CommonHelper.Function.AbstractPage;
 import CommonHelper.Function.PageGenerator;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,7 @@ public class LoginBackend extends AbstractPage {
         sendKeyToElement(driver, CommonLoginUI.PASSWORD, passWord);
     }
 
-    public CensorDashboardPageObject clickLoginButton(WebDriver driver) {
+    public CensorDashboard clickLoginButton(WebDriver driver) {
         waitElementToClickAble(driver, CommonLoginUI.LOGIN_BUTTON);
         clickToElement(driver, CommonLoginUI.LOGIN_BUTTON);
         return PageGenerator.createCensorDashboardPage(driver);

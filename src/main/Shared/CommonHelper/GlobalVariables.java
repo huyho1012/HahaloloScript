@@ -22,7 +22,7 @@ public class GlobalVariables {
     public static final long LONG_TIME_OUT = 30;
     public static final long LESS_TIME_OUT = 5;
     public static final String HTML_CODE = "<p> Hello word </p>";
-    public static final String SCRIPT_CODE = "<script>destroyWebsite();</script>";
+    public static final String SCRIPT_CODE = "<script> destroyWebsite();</script>";
 
     // Đường dẫn thư mục
     public static final String UPLOAD_FOLDER = ROOT_FOLDER+"\\SupportHelper\\FileUpload\\";

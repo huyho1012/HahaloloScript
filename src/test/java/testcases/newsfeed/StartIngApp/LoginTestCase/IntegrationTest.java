@@ -1,18 +1,17 @@
 package testcases.newsfeed.StartIngApp.LoginTestCase;
 
-
 import Censor.AccountManager.CensorAccountList;
-import Censor.Dashboard.CensorDashboardPageObject;
+import Censor.Dashboard.CensorDashboard;
 import CommonHelper.DriverBrowser.BrowserDriver;
 import CommonHelper.DriverBrowser.DriverManager;
 import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import HeaderMain.HeaderMenu;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginCensor;
 import StartingApp.Login.LoginNewsfeed;
-import StartingApp.Register.RegisterAccount;
 import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -23,23 +22,22 @@ import org.testng.annotations.Test;
 public class IntegrationTest extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
+    DataHelper dataHelper = DataHelper.getData();
 
-    // Khai báo pageobject
-
-    RegisterAccount signUpPage;
-    NewsFeedTabPageObject newsFeedPage;
+    NewsFeedTab newsFeedPage;
     LoginCensor censorLoginPage;
-    CensorDashboardPageObject censorHomePage;
+    CensorDashboard censorHomePage;
     CensorAccountList censorAccountListPage;
     VerifyAccountPageObject verifyAccountPage;
     HeaderMenu headerMenu;
     LoginNewsfeed loginNewsFeedPage;
 
-    // Data
+    // Generate Data
+    String verifyCode;
     String passWord ="123456";
     String confirmPassword = "123456";
-    String firstName = "Huy";
-    String lastName = "Hò";
+    String firstName = dataHelper.getFirstName();
+    String lastName = dataHelper.getLastName();
     String email = "tester.hahalolo" + randomEmail() + "@mailinator.com";
 
     @Parameters("browser")
@@ -55,15 +53,15 @@ public class IntegrationTest extends AbstractTest {
     public void Login_TC01_Login_With_Blocked_Account_Email(){
         log.info("Step 1 - Register Account");
         log.info("Step 1.1 - Enter First Name");
-        loginNewsFeedPage.enterFirstNameForRegister(firstName);
+        loginNewsFeedPage.enterDataOnDynamicTextField("nv104",firstName);
         log.info("Step 1.2 -  Enter Last Name");
-        loginNewsFeedPage.enterLastNameForRegister(lastName);
+        loginNewsFeedPage.enterDataOnDynamicTextField("nv103",lastName);
         log.info("Step 1.3 - Enter Email");
-        loginNewsFeedPage.enterNewAccountForRegister(email);
+        loginNewsFeedPage.enterDataOnDynamicTextField("nv108",email);
         log.info("Step 1.4 - Enter Password");
-        loginNewsFeedPage.enterPasswordForRegister(passWord);
+        loginNewsFeedPage.enterDataOnDynamicTextField("nv109",passWord);
         log.info("Step 1.5 - Enter Confirm password");
-        loginNewsFeedPage.enterConfirmPasswordForRegister(confirmPassword);
+        loginNewsFeedPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
         log.info("Step 1.6 - Click Register button");
         loginNewsFeedPage.clickSignUpButton();
         verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
@@ -74,14 +72,15 @@ public class IntegrationTest extends AbstractTest {
         log.info("Step 1.9 - Click verify account");
         verifyAccountPage.clickVerifyButton();
         newsFeedPage = PageGenerator.createNewsfeedTab(driver);
-        verifyTrue(newsFeedPage.checkLoginSuccess());
         log.info("Step 2 - Logout account");
         log.info("Step 2.1 - Wait page loading success");
-        newsFeedPage.setTimeDelay(3);
+        newsFeedPage.setTimeDelay(1);
         log.info("Step 2.1 - Cancel Update Info");
         newsFeedPage.clickCancelUpdateNewInfo();
+        newsFeedPage.changeLanguageDisplay();
+        newsFeedPage.setTimeDelay(2);
         log.info("Step 2.2 - Click logout button");
-        headerMenu.clickItemOnSettingMenu(driver,"Đăng xuất");
+        newsFeedPage.clickItemOnSettingMenu(driver,"Đăng xuất");
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Step 2.3 - Check Logout success");
         verifyTrue(loginNewsFeedPage.checkLoginNewsfeedPageIsDisplay());
@@ -118,19 +117,19 @@ public class IntegrationTest extends AbstractTest {
         censorAccountListPage.openNewWindow(driver,GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Step 4.2 - Enter Username");
-        loginNewsFeedPage.enterUsernameToLogin(email);
+        loginNewsFeedPage.enterDataOnDynamicTextField("identity",email);
         log.info("Step 4.3 - Enter password");
-        loginNewsFeedPage.enterPasswordToLogin(passWord);
+        loginNewsFeedPage.enterDataOnDynamicTextField("password",passWord);
         log.info("Step 4.4 - Click Login button");
         loginNewsFeedPage.clickLoginButton();
         log.info("Step 4.5 - Login - Login with blocked account - Check message verification");
-        verifyEquals(loginNewsFeedPage.getErrorMessageOfPassword(),"Tên tài khoản hoặc mật khẩu sai");
+        verifyEquals(loginNewsFeedPage.getErrorValidationOfTextField("password"),"Tên tài khoản hoặc mật khẩu sai");
     }
 
-    @AfterTest
-    public void closeBrowserAndDriver(){
-        closeBrowserAndDriver(driver);
-    }
+//    @AfterTest
+//    public void closeBrowserAndDriver(){
+//        closeBrowserAndDriver(driver);
+//    }
 }
 
 

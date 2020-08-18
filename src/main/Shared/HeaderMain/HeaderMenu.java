@@ -4,11 +4,10 @@ import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public class HeaderMenu extends AbstractPage {
-
-    public void clickFunctionOnHelping(WebDriver driver, String helperItem){
+    public void clickFunctionOnHelping(WebDriver driver,String helperItem){
         selectItemInCustomDropdown(driver,HeaderPageUI.MENU_HELPER,HeaderPageUI.MENU_HELPER_ITEM,helperItem);
     }
-    public void clickItemOnSettingMenu(WebDriver driver, String settingITem){
+    public void clickItemOnSettingMenu(WebDriver driver,String settingITem){
         selectItemInCustomDropdown(driver,HeaderPageUI.MENU_SETTING,HeaderPageUI.MENU_SETTING_ITEM,settingITem);
     }
 

@@ -3,15 +3,15 @@ package Censor.Dashboard;
 import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public class CensorDashboardPageObject extends AbstractPage {
+public class CensorDashboard extends AbstractPage {
     WebDriver driver;
-    public CensorDashboardPageObject(WebDriver webDriver){
+    public CensorDashboard(WebDriver webDriver){
         driver = webDriver;
     }
 
     public boolean checkLoginCensorSuccess(){
-        waitElementToVisible(driver, CensorHomeUI.NOTI_ICON);
-        return checkIsDisplayedElement(driver, CensorHomeUI.NOTI_ICON);
+        waitElementToVisible(driver, CensorHomeUI.NAV_MENU_BARD);
+        return checkIsDisplayedElement(driver, CensorHomeUI.NAV_MENU_BARD);
     }
 
     public void clickToItemOnMenu(WebDriver driver, String functionName) {
@@ -21,9 +21,9 @@ public class CensorDashboardPageObject extends AbstractPage {
 
     public void checkAndChangeLanguageToVI(WebDriver driver){
         waitForPageLoading(driver);
-        if(checkIsDisplayedElement(driver, CensorHomeUI.ENG_LANGUAGE_ICON)){
-            waitElementToVisible(driver, CensorHomeUI.ENG_LANGUAGE_ICON);
-            clickToElement(driver, CensorHomeUI.ENG_LANGUAGE_ICON);
+        if(getTextOfElement(driver, CensorHomeUI.LANGUAGE_ICON)=="English"){
+            waitElementToVisible(driver, CensorHomeUI.LANGUAGE_ICON);
+            clickToElement(driver, CensorHomeUI.LANGUAGE_ICON);
         }
     }
 }

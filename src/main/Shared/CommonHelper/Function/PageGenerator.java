@@ -6,7 +6,7 @@ import Backend.Dashboard.BackendDashboardPageObject;
 import Business.Business.Dashboard.BusinessDashboard;
 import Business.Business.Overview.BusinessOverviewPageObject;
 import Censor.AccountManager.CensorAccountList;
-import Censor.Dashboard.CensorDashboardPageObject;
+import Censor.Dashboard.CensorDashboard;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
 import Newsfeed.Editor.ExperiencePost.NewsFeedExperience;
 import Newsfeed.Flight.Feed.NewsFeedFlight;
@@ -21,7 +21,7 @@ import Newsfeed.PersonalWall.Reviews.PersonalReview;
 import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import Newsfeed.PersonalWall.Video.PersonalVideo;
 import Newsfeed.Shop.NewsFeedShopping;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.*;
 import StartingApp.Register.VerifyAccountPageObject;
 import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
@@ -53,8 +53,8 @@ public class PageGenerator {
     public static NewsFeedShopping getShoppingFeed(WebDriver driver){
         return new NewsFeedShopping(driver);
     }
-    public static NewsFeedTabPageObject getNewsFeedPage(WebDriver driver){
-        return new NewsFeedTabPageObject(driver);
+    public static NewsFeedTab getNewsFeedPage(WebDriver driver){
+        return new NewsFeedTab(driver);
     }
 
     public static BusinessDashboard getBusinessDashboardPage(WebDriver driver){
@@ -138,12 +138,12 @@ public class PageGenerator {
         return new NormalPostEditor(driver);
     }
 
-    public static CensorDashboardPageObject createCensorDashboardPage(WebDriver driver) {
-        return new CensorDashboardPageObject(driver);
+    public static CensorDashboard createCensorDashboardPage(WebDriver driver) {
+        return new CensorDashboard(driver);
     }
 
-    public static NewsFeedTabPageObject createNewsfeedTab(WebDriver driver) {
-        return new NewsFeedTabPageObject(driver);
+    public static NewsFeedTab createNewsfeedTab(WebDriver driver) {
+        return new NewsFeedTab(driver);
     }
 }
 

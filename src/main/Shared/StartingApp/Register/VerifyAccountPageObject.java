@@ -1,10 +1,7 @@
 package StartingApp.Register;
 
 import CommonHelper.Function.AbstractPage;
-import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
-import StartingApp.Register.RegisterPageUI;
 import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;

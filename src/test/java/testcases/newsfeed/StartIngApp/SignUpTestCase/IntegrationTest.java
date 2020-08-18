@@ -7,7 +7,7 @@ import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
 
 import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
 import StartingApp.Login.LoginNewsfeed;
@@ -22,7 +22,7 @@ public class IntegrationTest extends AbstractTest {
     DataHelper data = DataHelper.getData();
     // Khai báo PageObject
     LoginNewsfeed newsfeedLoginPage;
-    NewsFeedTabPageObject newsFeedPage;
+    NewsFeedTab newsFeedPage;
     VerifyAccountPageObject verifyAccountPage;
     OverviewPageObject perOverviewTab;
     BasicInfoPageObject perBasicInfoTab;
@@ -32,6 +32,7 @@ public class IntegrationTest extends AbstractTest {
     public String firstName, lastName,email, passWord, confirmPassword;
     public String birthday, country, gender, monthBirth, dayBirth, yearBirth;
     public String fullName;
+
     @Parameters("browser")
     @BeforeClass
     public void preconditionMethod(String browserName){
@@ -58,15 +59,15 @@ public class IntegrationTest extends AbstractTest {
     public void TC_01_SingUp_With_Valid_Email(){
         log.info("Register Account - Step 1");
         log.info("Step 1.1 - Enter First name");
-        newsfeedLoginPage.enterFirstNameForRegister(firstName);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104",firstName);
         log.info("Step 1.2 - Enter Last name");
-        newsfeedLoginPage.enterLastNameForRegister(lastName);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);
         log.info("Step 1.3 - Enter Email");
-        newsfeedLoginPage.enterNewAccountForRegister(email);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
         log.info("Step 1.4 - Enter Password");
-        newsfeedLoginPage.enterPasswordForRegister(passWord);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109",passWord);
         log.info("Step 1.5 - Enter Confirm Password");
-        newsfeedLoginPage.enterConfirmPasswordForRegister(confirmPassword);
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
         log.info("Step 1.6 - Click Signup Button");
         newsfeedLoginPage.clickSignUpButton();
         verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
@@ -96,7 +97,7 @@ public class IntegrationTest extends AbstractTest {
         verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Email",email));
         verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Ngày sinh",birthday));
         verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Giới tính","Nam"));
-        perBasicInfoTab.clickItemOnSettingMenu(driver,"ic-cog-c");
+        perBasicInfoTab.clickItemOnSettingMenu(driver,"Đăng xuất");
         accGeneralSetting = PageGenerator.createAccountSettingGeneralTab(driver);
         verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);
         log.info("Check Update Info - Step 3.1 - ");

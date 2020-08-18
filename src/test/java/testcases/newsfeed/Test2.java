@@ -7,7 +7,7 @@ import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
-import Newsfeed.TabFeed.NewsFeedTabPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +20,7 @@ public class Test2 extends AbstractTest {
     WebDriver driver;
 
     LoginNewsfeed loginNewsfeedPage;
-    NewsFeedTabPageObject newsfeedPage;
+    NewsFeedTab newsfeedPage;
     PersonalTimelinePageObject personalTimeline;
     OverviewPageObject perOverviewPage;
 
@@ -33,9 +33,9 @@ public class Test2 extends AbstractTest {
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginNewsfeedPage= PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Precondition - Step 02 - Enter Username");
-        loginNewsfeedPage.enterUsernameToLogin(GlobalVariables.FEED_EMAIL_ACCOUNT);
+        loginNewsfeedPage.enterDataOnDynamicTextField("identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
         log.info("Precondition - Step 03 - Enter Password");
-        loginNewsfeedPage.enterPasswordToLogin(GlobalVariables.FEED_EMAIL_PASSWORD);
+        loginNewsfeedPage.enterDataOnDynamicTextField("password", GlobalVariables.FEED_EMAIL_PASSWORD);
         log.info("Precondition - Step 04 - Click Login button");
         loginNewsfeedPage.clickLoginButton();
         newsfeedPage = PageGenerator.createNewsfeedTab(driver);
@@ -47,6 +47,5 @@ public class Test2 extends AbstractTest {
         personalTimeline.copyLinkUserProfile(driver);
         personalTimeline.openNewWindow(driver,getContentToClipBoard());
         personalTimeline.clickToTabOnPersonalMenu(driver,"userAboutPath");
-        a
     }
 }
