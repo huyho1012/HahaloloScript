@@ -1,10 +1,9 @@
-package Newsfeed.Flight.Feed;
+package Newsfeed.Flight;
 
-import HeaderMain.HeaderMenu;
-import Newsfeed.Flight.Feed.FlightTabPageUI;
+import Newsfeed.Common.FeedCommon;
 import org.openqa.selenium.WebDriver;
 
-public class NewsFeedFlight extends HeaderMenu {
+public class NewsFeedFlight extends FeedCommon {
     WebDriver driver;
     public NewsFeedFlight(WebDriver webDriver){
         driver = webDriver;

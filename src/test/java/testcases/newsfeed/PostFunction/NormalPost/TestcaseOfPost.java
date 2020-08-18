@@ -40,7 +40,7 @@ public class TestcaseOfPost extends AbstractTest {
         loginNewsfeedPage.enterDataOnDynamicTextField("password",GlobalVariables.FEED_EMAIL_PASSWORD);
         log.info("Precondition - Step 04 - Click Login button");
         loginNewsfeedPage.clickLoginButton();
-        PageGenerator.createNewsfeedTab(driver);
+        PageGenerator.createTabNewsfeed(driver);
         log.info("Precondition - Step 05 - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess());
     }

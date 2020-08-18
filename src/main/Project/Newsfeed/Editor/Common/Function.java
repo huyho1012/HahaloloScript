@@ -21,7 +21,7 @@ public class Function extends AbstractPage {
         waitElementToVisible(driver, CommonEditorUI.USER_TAGGING_LIST);
         clickToElementByJS(driver, CommonEditorUI.USER_ITEM, String.valueOf(index));
     }
-    // Hàm remove user
+    // Hàm remove tagging user
     public void removeOneUserTagging(WebDriver driver, int friendIndex){
         if(checkIsDisplayedElement(driver, CommonEditorUI.DISPLAYED_TAGGER_USER)){
             clickToElement(driver, CommonEditorUI.DISPLAYED_TAGGER_USER);
@@ -119,5 +119,10 @@ public class Function extends AbstractPage {
     public void clickToCreatePost() {
         waitElementToVisible(driver, CommonEditorUI.CREATE_BUTTON);
         clickToElement(driver, CommonEditorUI.CREATE_BUTTON);
+    }
+
+    // Kiểm tra trạng thái Enable/Disable của nút Share Post
+    public boolean checkStatusOfShareButton(WebDriver driver) {
+        return checkIsEnableElement(driver, CommonEditorUI.CREATE_BUTTON);
     }
 }

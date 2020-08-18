@@ -1,10 +1,11 @@
 package Newsfeed.UserSetting.PageObject;
 
 import CommonHelper.Function.AbstractPage;
+import HeaderMain.HeaderMenu;
 import Newsfeed.UserSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
-public class CommonAccountSetting extends AbstractPage {
+public class CommonAccountSetting extends HeaderMenu {
 
     public String getTitleTabSettingGeneral(WebDriver driver){
         waitElementToVisible(driver, AccountSettingUI.TITLE_OF_TAB,"setting_general");

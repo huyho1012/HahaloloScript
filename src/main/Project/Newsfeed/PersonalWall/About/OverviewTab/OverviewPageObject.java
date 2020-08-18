@@ -9,8 +9,16 @@ public class OverviewPageObject extends PersonalAbout {
         driver = webDriver;
     }
 
-    public String getEmailOfUserOnWidgetIntro() {
+    public String getUserEmailDisplayOnIntroduceWidget() {
         waitElementToVisible(driver, OverviewPageUI.EMAIL_USER_INFO);
         return  getTextOfElement(driver,OverviewPageUI.EMAIL_USER_INFO);
+    }
+    public String getUserBirthdayDisplayOnIntroduceWidget() {
+        waitElementToVisible(driver, OverviewPageUI.BIRTHDAY_USER_INFO);
+        return  getTextOfElement(driver,OverviewPageUI.BIRTHDAY_USER_INFO);
+    }
+    public String getUserGenderDisplayOnIntroduceWidget() {
+        waitElementToVisible(driver, OverviewPageUI.GENDER_USER_INFO);
+        return  getTextOfElement(driver,OverviewPageUI.GENDER_USER_INFO);
     }
 }

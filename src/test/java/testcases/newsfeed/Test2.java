@@ -38,7 +38,7 @@ public class Test2 extends AbstractTest {
         loginNewsfeedPage.enterDataOnDynamicTextField("password", GlobalVariables.FEED_EMAIL_PASSWORD);
         log.info("Precondition - Step 04 - Click Login button");
         loginNewsfeedPage.clickLoginButton();
-        newsfeedPage = PageGenerator.createNewsfeedTab(driver);
+        newsfeedPage = PageGenerator.createTabNewsfeed(driver);
         newsfeedPage.clickToUserHomePage();
         personalTimeline = PageGenerator.getPersonalTimeLinePage(driver);
     }

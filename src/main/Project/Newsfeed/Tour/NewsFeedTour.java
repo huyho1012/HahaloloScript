@@ -1,8 +1,10 @@
+package Newsfeed.Tour;
+
 import HeaderMain.HeaderMenu;
-import Newsfeed.Tour.TourTabPageUI;
+import Newsfeed.Common.FeedCommon;
 import org.openqa.selenium.WebDriver;
 
-public class NewsFeedTour extends HeaderMenu {
+public class NewsFeedTour extends FeedCommon {
     WebDriver driver;
     public NewsFeedTour(WebDriver webDriver){
         driver = webDriver;

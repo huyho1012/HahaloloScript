@@ -7,9 +7,10 @@ import Business.Business.Dashboard.BusinessDashboard;
 import Business.Business.Overview.BusinessOverviewPageObject;
 import Censor.AccountManager.CensorAccountList;
 import Censor.Dashboard.CensorDashboard;
+import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
-import Newsfeed.Editor.ExperiencePost.NewsFeedExperience;
-import Newsfeed.Flight.Feed.NewsFeedFlight;
+import Newsfeed.Editor.ExperiencePost.Feed.NewsFeedExperience;
+import Newsfeed.Flight.NewsFeedFlight;
 import Newsfeed.Hotel.NewsFeedHotel;
 import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
@@ -22,6 +23,7 @@ import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
 import Newsfeed.PersonalWall.Video.PersonalVideo;
 import Newsfeed.Shop.NewsFeedShopping;
 import Newsfeed.TabFeed.NewsFeedTab;
+import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.*;
 import StartingApp.Register.VerifyAccountPageObject;
 import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
@@ -40,17 +42,17 @@ public class PageGenerator {
     public static VerifyAccountPageObject createVerifyAccountPage(WebDriver driver){
         return new VerifyAccountPageObject(driver);
     }
-    public static NewsFeedExperience getExperienceFeed(WebDriver driver){
+    public static NewsFeedExperience createTabExperienceFeed(WebDriver driver){
         return new NewsFeedExperience(driver);
     }
 
-    public static NewsFeedFlight getFlightFeed(WebDriver driver){
+    public static NewsFeedFlight createTabFlightFeed(WebDriver driver){
         return new NewsFeedFlight(driver);
     }
-    public static NewsFeedHotel getHotelFeed(WebDriver driver){
+    public static NewsFeedHotel createTabHotelFeed(WebDriver driver){
         return new NewsFeedHotel(driver);
     }
-    public static NewsFeedShopping getShoppingFeed(WebDriver driver){
+    public static NewsFeedShopping createTabShopFeed(WebDriver driver){
         return new NewsFeedShopping(driver);
     }
     public static NewsFeedTab getNewsFeedPage(WebDriver driver){
@@ -142,8 +144,16 @@ public class PageGenerator {
         return new CensorDashboard(driver);
     }
 
-    public static NewsFeedTab createNewsfeedTab(WebDriver driver) {
+    public static NewsFeedTab createTabNewsfeed(WebDriver driver) {
         return new NewsFeedTab(driver);
+    }
+
+    public static NewsFeedTour createTabTourFeed(WebDriver driver) {
+        return new NewsFeedTour(driver);
+    }
+
+    public static FirstUpdateInfo createUpdateInfoPopup(WebDriver driver) {
+        return new FirstUpdateInfo(driver);
     }
 }
 

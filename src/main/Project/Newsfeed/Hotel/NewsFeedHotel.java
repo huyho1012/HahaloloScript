@@ -1,9 +1,10 @@
 package Newsfeed.Hotel;
 
 import HeaderMain.HeaderMenu;
+import Newsfeed.Common.FeedCommon;
 import org.openqa.selenium.WebDriver;
 
-public class NewsFeedHotel extends HeaderMenu {
+public class NewsFeedHotel extends FeedCommon {
     WebDriver driver;
     public NewsFeedHotel(WebDriver webDriver){
         driver = webDriver;

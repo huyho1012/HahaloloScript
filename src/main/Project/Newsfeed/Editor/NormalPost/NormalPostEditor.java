@@ -38,10 +38,7 @@ public class NormalPostEditor extends Function {
         return false;
     }
 
-    // Kiểm tra trạng thái Enable/Disable của nút Share Post
-    public boolean checkStatusOfShareButton(WebDriver driver) {
-        return checkIsEnableElement(driver, CommonEditorUI.CREATE_BUTTON);
-    }
+
 
     public void inputNormalPostContent(String contentPost) {
         waitElementToVisible(driver, NormalPostUI.POST_CONTENT);

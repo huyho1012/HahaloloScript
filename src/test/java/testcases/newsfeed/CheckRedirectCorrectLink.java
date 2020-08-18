@@ -6,9 +6,14 @@ import CommonHelper.DriverBrowser.DriverManager;
 import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
+import Newsfeed.Editor.ExperiencePost.Feed.NewsFeedExperience;
+import Newsfeed.Flight.NewsFeedFlight;
+import Newsfeed.Hotel.NewsFeedHotel;
 import Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
+import Newsfeed.Shop.NewsFeedShopping;
 import Newsfeed.TabFeed.NewsFeedTab;
 
+import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.LoginNewsfeed;
 import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
 
@@ -28,6 +33,11 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     UserHandNotePageObject handNotePage;
     GeneralSettingAccount accountSettingGeneral;
     BusinessDashboard businessDashboard;
+    NewsFeedExperience experienceTab;
+    NewsFeedHotel hotelTab;
+    NewsFeedFlight flightTab;
+    NewsFeedTour tourTab;
+    NewsFeedShopping shoppingTab;
 
 
     @Parameters("browser")
@@ -48,37 +58,57 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     }
     @Test
     public void TC01_switchToTabFeedOnMenu() {
-        newsfeedPage.changeLanguageDisplay();
-        newsfeedPage.clickToNavTabOnNewsfeed(driver, "Trải nghiệm");
-        experiencePage = PageGenerator.getExperienceFeed(driver);
-        verifyTrue(experiencePage.checkExperienceTabSelected());
-        experiencePage.clickToElementOnMenu(driver, "Khách sạn");
-        hotelPage = PageGenerator.getHotelFeed(driver);
-        verifyTrue(hotelPage.checkHotelTabSelected());
-        hotelPage.clickToElementOnMenu(driver, "Tour");
-        tourPage = PageGenerator.getTourFeed(driver);
-        verifyTrue(tourPage.checkTourTabSelected());
-        tourPage.clickToElementOnMenu(driver, "Mua sắm");
-        shopPage = PageGenerator.getShoppingFeed(driver);
-        verifyEquals(shopPage.getTitle("Mua sắm"),"Mua sắm | Hahalolo");
-        shopPage.clickToElementOnMenu(driver, "Vé máy bay");
-        flightPage = PageGenerator.getFlightFeed(driver);
-        verifyEquals(flightPage.checkFlightTabSelected(),"Tìm kiếm chuyến bay cho hành trình của bạn!");
-        flightPage.clickToElementOnMenu(driver,"Bảng tin");
-        newsfeedPage = PageGenerator.getNewsFeed(driver);
-        verifyTrue(newsfeedPage.checkNewsFeedTabSelected());
+
+        log.info("Step 1 - Verify user stay on Newsfeed tab");
+        verifyEquals(newsfeedPage.getTitlePage(driver),"Bảng tin | Hahalolo");
+
+        log.info("Step 2.1 - Redirect to Experience tab");
+        newsfeedPage.clickToNavTabOnNewsfeed("Trải nghiệm");
+        experienceTab = PageGenerator.createTabExperienceFeed(driver);
+        log.info("Step 2.2 - Verify user stay on Experience tab");
+        verifyEquals(experienceTab.getTitlePage(driver),"Trải nghiệm | Hahalolo");
+
+        log.info("Step 3.1 - Redirect to Hotel tab");
+        experienceTab.clickToNavTabOnNewsfeed("Khách sạn");
+        hotelTab = PageGenerator.createTabHotelFeed(driver);
+        log.info("Step 3.2 - Verify user stay on Hotel tab");
+        verifyEquals(hotelTab.getTitlePage(driver),"Khách sạn | Hahalolo");
+
+        log.info("Step 4.1 - Redirect to Shopping tab");
+        hotelTab.clickToNavTabOnNewsfeed("Mua sắm");
+        shoppingTab = PageGenerator.createTabShopFeed(driver);
+        log.info("Step 4.2 - Verify user stay on Shopping tab");
+        verifyEquals(shoppingTab.getTitlePage(driver),"Mua sắm | Hahalolo");
+
+        log.info("Step 5.1  - Redirect to Tour tab");
+        newsfeedPage.clickToNavTabOnNewsfeed("Tour");
+        tourTab = PageGenerator.createTabTourFeed(driver);
+        log.info("Step 5.2 - Verify user stay on Tour tab");
+        verifyEquals(tourTab.getTitlePage(driver),"Tour | Hahalolo");
+
+        log.info("Step 6.1  - Redirect to Flight tab");
+        tourTab.clickToNavTabOnNewsfeed("Vé máy bay");
+        flightTab = PageGenerator.createTabFlightFeed(driver);
+        log.info("Step 6.2 - Verify user stay on Flight tab");
+        verifyEquals(flightTab.getTitlePage(driver),"Vé máy bay | Hahalolo");
+
+        log.info("Step 7.1  - Redirect to Newsfeed tab");
+        flightTab.clickToNavTabOnNewsfeed("Bảng tin");
+        newsfeedPage = PageGenerator.createTabNewsfeed(driver);
+        log.info("Step 7.2 - Verify user stay on Newsfeed tab");
+        verifyEquals(newsfeedPage.getTitlePage(driver),"Bảng tin | Hahalolo");
     }
     @Test
     public void TC02_switchToSettingFunctionOnHeader() {
         newsfeedPage.clickItemOnSettingMenu(driver, "Sổ tay");
-        handNotePage = PageGenerator.createUserHandnotePage(driver);
+        handNotePage = PageGenerator.createUserHandNotePage(driver);
         handNotePage.clickItemOnSettingMenu(driver,"Thiết lập tài khoản");
         accountSettingGeneral = PageGenerator.createAccountSettingGeneralTab(driver);
         accountSettingGeneral.clickItemOnSettingMenu(driver,"Tài khoản kinh doanh");
         businessDashboard = PageGenerator.getBusinessDashboardPage(driver);
         businessDashboard.switchToAnotherWindowByID(driver,currentTab);
         businessDashboard.clickItemOnSettingMenu(driver,"Đăng xuất");
-        loginPage = PageGenerator.getLoginPage(driver);
+        loginNewsfeedPage = PageGenerator.createLoginNewsfeedPage(driver);
 
     }
     @Test

@@ -5,6 +5,7 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
+import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.TabFeed.NewsFeedTab;
@@ -27,6 +28,7 @@ public class IntegrationTest extends AbstractTest {
     OverviewPageObject perOverviewTab;
     BasicInfoPageObject perBasicInfoTab;
     GeneralSettingAccount accGeneralSetting;
+    FirstUpdateInfo  updateInfoPopup;
 
     // Khai báo giá trị
     public String firstName, lastName,email, passWord, confirmPassword;
@@ -58,49 +60,51 @@ public class IntegrationTest extends AbstractTest {
     @Test
     public void TC_01_SingUp_With_Valid_Email(){
         log.info("Register Account - Step 1");
-        log.info("Step 1.1 - Enter First name");
+
+        log.info("Step 1 - Enter First name");
         newsfeedLoginPage.enterDataOnDynamicTextField("nv104",firstName);
-        log.info("Step 1.2 - Enter Last name");
+
+        log.info("Step 2 - Enter Last name");
         newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);
-        log.info("Step 1.3 - Enter Email");
+
+        log.info("Step 3 - Enter Email");
         newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
-        log.info("Step 1.4 - Enter Password");
+
+        log.info("Step 4 - Enter Password");
         newsfeedLoginPage.enterDataOnDynamicTextField("nv109",passWord);
-        log.info("Step 1.5 - Enter Confirm Password");
+
+        log.info("Step 5 - Enter Confirm Password");
         newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
-        log.info("Step 1.6 - Click Signup Button");
+
+        log.info("Step 6 - Click Signup Button and check verified account display correct");
         newsfeedLoginPage.clickSignUpButton();
         verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
-        log.info("RCheck Account verification page display");
         verifyTrue(verifyAccountPage.checkTitlePageVerifyEmail());
-//        verifyTrue(verifyAccountPage.getAccountDisplayOnRegisterPage(email));
-        log.info("Enter verification code");
-        String verifyCode = verifyAccountPage.copyVerifyCodeOnMail(email);
-        verifyAccountPage.inputVerifyDataOnField(verifyCode);
-        log.info("Click verify button");
+        verifyEquals(verifyAccountPage.getAccountDisplayOnRegisterPage(), email);
+
+        log.info("Step 7 - Input verify code and verify account");
+        verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.copyVerifyCodeOnMail(email));
         verifyAccountPage.clickVerifyButton();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 3 - Update Personal Information");
-        log.info("Step 3.1 - Update birthday");
-        newsFeedPage.updateBirthday(driver,"12","10","1992");
-        log.info("Step 3.2 - Update gender");
-        newsFeedPage.updateGender(driver,"male");
-        log.info("Step 3.3 - Update country");
-        newsFeedPage.updateCountry(driver,"United States");
-        log.info("Step 3.4 - Click Update Button");
-        newsFeedPage.clickUpdateButton();
-        log.info("Register Account - Step 4.1 - Check AccountInfo");
+
+        log.info("Step 8 - Update Personal Information");
+        updateInfoPopup = newsFeedPage.targetToFirstUpdateInfoPopup();
+        updateInfoPopup.updateBirthday(driver,"12","10","1992");
+        updateInfoPopup.updateGender(driver,"male");
+        updateInfoPopup.updateCountry(driver,"United States");
+        updateInfoPopup.clickUpdateButton();
+
+        log.info("Step 9 - Go to Personal - and verify data display with data user input");
         newsFeedPage.clickEditProfile();
         perOverviewTab = PageGenerator.getPersonalOverviewTab(driver);
-        perOverviewTab.clickToBasicInfoTab();
-        perBasicInfoTab = PageGenerator.getPersonalAboutBasicInfo(driver);
-        verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Email",email));
-        verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Ngày sinh",birthday));
-        verifyTrue(perBasicInfoTab.checkDataValueAccount(driver,"Giới tính","Nam"));
-        perBasicInfoTab.clickItemOnSettingMenu(driver,"Đăng xuất");
+        verifyEquals(perOverviewTab.getUserEmailDisplayOnIntroduceWidget(),email);
+        verifyEquals(perOverviewTab.getUserBirthdayDisplayOnIntroduceWidget(),birthday);
+        verifyEquals(perOverviewTab.getUserGenderDisplayOnIntroduceWidget(),"Nam");
+
+        log.info("Step 10 - Logout account");
+        perOverviewTab.clickItemOnSettingMenu(driver,"Đăng xuất");
         accGeneralSetting = PageGenerator.createAccountSettingGeneralTab(driver);
-        verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);
-        log.info("Check Update Info - Step 3.1 - ");
+        verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);;
     }
 //    @AfterTest
 //    public void closeBrowserAndDriver(){

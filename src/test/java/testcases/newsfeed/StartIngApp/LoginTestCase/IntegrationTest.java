@@ -8,7 +8,7 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
-import HeaderMain.HeaderMenu;
+import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginCensor;
 import StartingApp.Login.LoginNewsfeed;
@@ -29,8 +29,9 @@ public class IntegrationTest extends AbstractTest {
     CensorDashboard censorHomePage;
     CensorAccountList censorAccountListPage;
     VerifyAccountPageObject verifyAccountPage;
-    HeaderMenu headerMenu;
     LoginNewsfeed loginNewsFeedPage;
+    FirstUpdateInfo updateInfo;
+
 
     // Generate Data
     String verifyCode;
@@ -45,91 +46,100 @@ public class IntegrationTest extends AbstractTest {
     public void openBrowser(String browserName){
         log.info("Precondition - Step 1 - Create driver browser");
         driverManager = BrowserDriver.getBrowser(browserName);
+
         log.info("Precondition - Step 2 - Open Newsfeed Login");
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
     public void Login_TC01_Login_With_Blocked_Account_Email(){
-        log.info("Step 1 - Register Account");
-        log.info("Step 1.1 - Enter First Name");
+        log.info("Step 1.1 - Newsfeed - Register Account - Enter First Name");
         loginNewsFeedPage.enterDataOnDynamicTextField("nv104",firstName);
-        log.info("Step 1.2 -  Enter Last Name");
+
+        log.info("Step 1.2 - Newsfeed - Register Account - Enter Last Name");
         loginNewsFeedPage.enterDataOnDynamicTextField("nv103",lastName);
-        log.info("Step 1.3 - Enter Email");
+
+        log.info("Step 1.3 - Newsfeed - Register Account - Enter Email");
         loginNewsFeedPage.enterDataOnDynamicTextField("nv108",email);
-        log.info("Step 1.4 - Enter Password");
+
+        log.info("Step 1.4 - Newsfeed - Register Account - Enter Password");
         loginNewsFeedPage.enterDataOnDynamicTextField("nv109",passWord);
-        log.info("Step 1.5 - Enter Confirm password");
+
+        log.info("Step 1.5 - Newsfeed - Register Account - Enter Confirm password");
         loginNewsFeedPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
-        log.info("Step 1.6 - Click Register button");
+
+        log.info("Step 1.6 - Newsfeed - Register Account - Click Register button and check verify account display");
         loginNewsFeedPage.clickSignUpButton();
         verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
-        log.info("Step 1.7 - Check verification page is displayed");
         verifyTrue(verifyAccountPage.checkTitlePageVerifyEmail());
-        log.info("Step 1.8 - Enter a verify code");
+        verifyEquals(verifyAccountPage.getAccountDisplayOnRegisterPage(),email);
+
+        log.info("Step 1.7 - Newsfeed - Register Account - Enter a code and click verify");
         verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.copyVerifyCodeOnMail(email));
-        log.info("Step 1.9 - Click verify account");
         verifyAccountPage.clickVerifyButton();
-        newsFeedPage = PageGenerator.createNewsfeedTab(driver);
-        log.info("Step 2 - Logout account");
-        log.info("Step 2.1 - Wait page loading success");
+        newsFeedPage = PageGenerator.createTabNewsfeed(driver);
+
+        log.info("Step 2.1 - Newsfeed - Finish verify account -  Cancel Update information");
         newsFeedPage.setTimeDelay(1);
-        log.info("Step 2.1 - Cancel Update Info");
-        newsFeedPage.clickCancelUpdateNewInfo();
+        updateInfo = newsFeedPage.targetToFirstUpdateInfoPopup();
+        updateInfo.clickCancelUpdateNewInfo();
         newsFeedPage.changeLanguageDisplay();
-        newsFeedPage.setTimeDelay(2);
-        log.info("Step 2.2 - Click logout button");
+        newsFeedPage.setTimeDelay(1);
+
+        log.info("Step 2.2 - Newsfeed - Finish verify account -  Click logout button");
         newsFeedPage.clickItemOnSettingMenu(driver,"Đăng xuất");
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
-        log.info("Step 2.3 - Check Logout success");
-        verifyTrue(loginNewsFeedPage.checkLoginNewsfeedPageIsDisplay());
-        log.info("Step 2 - Block account");
-        log.info("Step 3.1 - Go to Censor Login page");
+
+        log.info("Step 3.1 - Censor - Login Admin - Go to Login page");
         loginNewsFeedPage.openNewWindow(driver,GlobalVariables.URL_CENSOR_LINK);
         censorLoginPage = PageGenerator.getCensorLoginPage(driver);
-        log.info("Step 3.2 - Enter Admin Username");
+
+        log.info("Step 3.2 - Censor - Login Admin - Enter Admin Username");
         censorLoginPage.enterUsername(GlobalVariables.BACKEND_USER_NAME);
-        log.info("Step 3.3 - Enter Password");
+
+        log.info("Step 3.3 - Censor - Login Admin - Enter Password");
         censorLoginPage.enterPassword(GlobalVariables.BACKEND_PASSWORD);
-        log.info("Step 3.4 - Enter Captcha code - Delay");
+
+        log.info("Step 3.4 - Enter - Censor - Login Admin - Captcha code - Delay");
         censorLoginPage.setTimeDelay(10);
-        log.info("Step 3.5 - Click Login Button");
+
+        log.info("Step 3.5 - Censor - Login Admin - Click Login Button");
         censorLoginPage.clickLoginButton();
         censorHomePage = PageGenerator.createCensorDashboardPage(driver);
-        log.info("Step 3.5 - Check Login Censor success");
+
+        log.info("Step 4.1 - Censor - Block Account - Go To Account Morderator");
         verifyTrue(censorHomePage.checkLoginCensorSuccess());
-        log.info("Step 3.6 - Check default language and Change language to VI");
         censorHomePage.checkAndChangeLanguageToVI(driver);
-        log.info("Step 3.7 - Go to Account moderation");
         censorHomePage.clickToItemOnMenu(driver,"Người dùng");
         censorAccountListPage= PageGenerator.getAccountManagerList(driver);
-        log.info("Step 3.8 -Check Account moderation page is displayed successfully");
+
+        log.info("Step 4.2 - Censor - Block Account - Search Account");
         verifyTrue(censorAccountListPage.checkAccountManagerPageIsDisplay());
-        log.info("Step 3.9 - Search Account to block");
         censorAccountListPage.searchAccount(driver,email);
-        log.info("Step 3.10 - Block Account");
+
+        log.info("Step 4.3 - Censor - Block Account - Do action block Account");
         censorAccountListPage.clickToBlockAccount(driver,email,"Khóa tài khoản",GlobalVariables.BACKEND_PASSWORD);
-        log.info("Step 3.11 - Verify Account blocked");
         verifyTrue(censorAccountListPage.checkAccountIsBlockedSuccessfully(driver,email,"Đã bị khóa"));
-        log.info("Step 4 - Login with blocked account");
-        log.info("Step 4.1 - Open Newsfeed Login");
+
+        log.info("Step 5.1 - Newsfeed - Check Login Blocked Account - Go to Newsfeed Login");
         censorAccountListPage.openNewWindow(driver,GlobalVariables.URL_NEWS_FEED_LOGIN);
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
-        log.info("Step 4.2 - Enter Username");
+
+        log.info("Step 5.2 - Newsfeed - Check Login Blocked Account - Enter Username");
         loginNewsFeedPage.enterDataOnDynamicTextField("identity",email);
-        log.info("Step 4.3 - Enter password");
+
+        log.info("Step 5.3 - Newsfeed - Check Login Blocked Account - Enter password");
         loginNewsFeedPage.enterDataOnDynamicTextField("password",passWord);
-        log.info("Step 4.4 - Click Login button");
+
+        log.info("Step 5.4 - Newsfeed - Check Login Blocked Account -Click Login button");
         loginNewsFeedPage.clickLoginButton();
-        log.info("Step 4.5 - Login - Login with blocked account - Check message verification");
         verifyEquals(loginNewsFeedPage.getErrorValidationOfTextField("password"),"Tên tài khoản hoặc mật khẩu sai");
     }
 
-//    @AfterTest
-//    public void closeBrowserAndDriver(){
-//        closeBrowserAndDriver(driver);
-//    }
+    @AfterTest
+    public void closeBrowserAndDriver(){
+        closeBrowserAndDriver(driver);
+    }
 }
 
 
