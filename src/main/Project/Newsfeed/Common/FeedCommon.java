@@ -7,33 +7,23 @@ import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.Common.UpdateInfo.FirstUpdatePopUpUI;
 import Newsfeed.Editor.ExperiencePost.ExperiencePostUI;
 import Newsfeed.Editor.NormalPost.NormalPostUI;
+import Newsfeed.Widget.SidebarRight.HotExperience.HotExperience;
 import Newsfeed.TabFeed.NewsFeedPageIU;
 import org.openqa.selenium.WebDriver;
 
 public class FeedCommon extends HeaderMenu {
+    public FeedCommon(){
+        HotExperience hotExp = new HotExperience();
+    }
     WebDriver driver;
     // Hàm thay đổi ngôn ngữ hiển thị
-    public void changeLanguageDisplay() {
-        waitForPageLoading(driver);
-        if(getTextOfElement(driver, NewsFeedPageIU.LANGUAGE_BUTTON)== "English"){
-            clickToElement(driver,NewsFeedPageIU.LANGUAGE_BUTTON);
-        }
-    }
+
     // Điều hướng các tab có trên thanh Nav menu
     public void clickToNavTabOnNewsfeed(String nameTab) {
         waitElementToClickAble(driver,NewsFeedPageIU.NAV_FEED_TAB, nameTab);
         clickToElement(driver,NewsFeedPageIU.NAV_FEED_TAB, nameTab);
     }
-    // Điều hướng các tab trong Widget My Account
-    public void clickToTabOnMyAccount(WebDriver driver, String nameTab) {
-        waitElementToClickAble(driver,NewsFeedPageIU.TAB_ITEM_MY_ACCOUNT, nameTab);
-        clickToElement(driver,NewsFeedPageIU.TAB_ITEM_MY_ACCOUNT, nameTab);
-    }
-    // Thực hiện chức năng chỉnh sửa thông tin cá nhân
-    public void clickEditProfile() {
-        waitElementToClickAble(driver, NewsFeedPageIU.EDIT_PROFILE_BUTTON);
-        clickToElement(driver, NewsFeedPageIU.EDIT_PROFILE_BUTTON);
-    }
+
     // Mở model Post Normal
     public void clickToNormalPostFunction() {
         waitElementToClickAble(driver, NormalPostUI.TITLE_POPUP);
@@ -56,16 +46,9 @@ public class FeedCommon extends HeaderMenu {
         return PageGenerator.createUpdateInfoPopup(driver);
     }
 
-
-
-
-
-
-
-
-
-
-
+    public boolean checkViewModelExperiencePostIsDisplay(){
+        return checkIsEnableElement(driver, NewsFeedPageIU.MODEL_VIEW_EXPERIENCE);
+    }
 
     // Hàm kiểm tra đã login thành công hay chưa
     public boolean checkLoginSuccess() {
