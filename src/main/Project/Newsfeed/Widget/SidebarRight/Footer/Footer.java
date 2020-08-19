@@ -1,10 +1,9 @@
 package Newsfeed.Widget.SidebarRight.Footer;
 
-import CommonHelper.Function.AbstractPage;
-import Newsfeed.TabFeed.NewsFeedPageIU;
+import Newsfeed.Common.FeedCommon;
 import org.openqa.selenium.WebDriver;
 
-public class Footer extends AbstractPage {
+public class Footer extends FeedCommon {
     WebDriver driver;
 
     public void changeLanguageDisplayToVietnamese() {

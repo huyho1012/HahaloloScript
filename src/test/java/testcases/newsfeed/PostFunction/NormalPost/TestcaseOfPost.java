@@ -30,30 +30,52 @@ public class TestcaseOfPost extends AbstractTest {
     @Parameters("browser")
     @BeforeClass
     public void preconditionTest(String browserName){
+
+        log.info("Precondition - Step 1 - Open Browser");
         driverManager = BrowserDriver.getBrowser(browserName);
-        log.info("Precondition - Step 01 - Open Browser");
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
+
+        log.info("Precondition - Step 2 - Open Login Newsfeed Page");
         loginNewsfeedPage= PageGenerator.createLoginNewsfeedPage(driver);
-        log.info("Precondition - Step 02 - Enter Username");
+
+        log.info("Precondition - Step 3.1 - Login Newsfeed - Enter Username");
         loginNewsfeedPage.enterDataOnDynamicTextField("identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
-        log.info("Precondition - Step 03 - Enter Password");
+
+        log.info("Precondition - Step 3.2 - Login Newsfeed - Enter Password");
         loginNewsfeedPage.enterDataOnDynamicTextField("password",GlobalVariables.FEED_EMAIL_PASSWORD);
-        log.info("Precondition - Step 04 - Click Login button");
+
+        log.info("Precondition - Step 3.3 - Login Newsfeed - Click Login button");
+
         loginNewsfeedPage.clickLoginButton();
         PageGenerator.createTabNewsfeed(driver);
-        log.info("Precondition - Step 05 - Verify Login successfully");
+
+        log.info("Precondition - Step 3.4 - Login Newsfeed - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess());
+
+        log.info("Precondition - Step 3.5 - Change Language Newsfeed");
+
+        log.info("Precondition - Step 4  - Open Normal Post Editor");
+        newsFeedPage.clickToNormalPostFunction();
+        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+
+        log.info("Precondition - Step 4  - Verify display Normal Post Editor");
+        verifyTrue(normalPostEditor.checkEditNormalPostEditorIsDisplay(driver));
     }
     @Test
     public void TC01_Check_Display_of_Editor_Case_New_Post() {
-        log.info("Check Title of post normal");
+
+        log.info("Check content of post normal");
         verifyEquals(normalPostEditor.getTitleOfNormalPost(),"Tạo bài viết");
+
         log.info("Check placeholder of post normal");
         verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
+
         log.info("Check status of button Share post");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+
         log.info("Check default Scope dropdown");
         verifyEquals(normalPostEditor.getScopeDisplayOnDropdown(driver),"Công khai");
+
         log.info("Check function display on post normal");
         verifyTrue(normalPostEditor.checkFunctionInsertEmojiIsDisplay());
         verifyTrue(normalPostEditor.checkFunctionTaggingUserIsDisplay());
@@ -62,21 +84,11 @@ public class TestcaseOfPost extends AbstractTest {
         verifyTrue(normalPostEditor.checkFunctionAddFeelingIsDisplay());
     }
 
-//    @Test
-//    public void TC02_Check_Action_Close_Normal() {
-//
-//        normalPostEditor.clickOVerPopup(driver);
-//        verifyTrue(newsFeedPage.checkSharePostButtonIsDisplay(driver));
-//        log.info("Click close icon when no input");
-//        newsFeedPage = normalPostEditor.clickClosePostEditor();
-//        verifyFalse(newsFeedPage.checkSharePostButtonIsDisplay());
-//
-//        log.info("Reload Page To create new TC");
-//        newsFeedPage.refreshPage(driver);
-//
-//    }
     @Test
-    public void TC03_Button_Share_Check_Status_Button(){
+    public void TC03_Check_Button_Shared_Post(){
+        log.info("Step 1 - Check content of button");
+        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"")
+
         log.info("Step 1 - Default (No content input)");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
         log.info("Step 2 - User only add feeling");

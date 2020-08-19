@@ -7,16 +7,13 @@ import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.Common.UpdateInfo.FirstUpdatePopUpUI;
 import Newsfeed.Editor.ExperiencePost.ExperiencePostUI;
 import Newsfeed.Editor.NormalPost.NormalPostUI;
-import Newsfeed.Widget.SidebarRight.HotExperience.HotExperience;
 import Newsfeed.TabFeed.NewsFeedPageIU;
 import org.openqa.selenium.WebDriver;
 
 public class FeedCommon extends HeaderMenu {
-    public FeedCommon(){
-        HotExperience hotExp = new HotExperience();
-    }
     WebDriver driver;
-    // Hàm thay đổi ngôn ngữ hiển thị
+    public FeedCommon(){
+    }
 
     // Điều hướng các tab có trên thanh Nav menu
     public void clickToNavTabOnNewsfeed(String nameTab) {
