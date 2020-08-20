@@ -1,4 +1,4 @@
-package HeaderMain;
+package Newsfeed.HeaderMenu;
 
 public class HeaderPageUI {
     public static final String LOGO_HALO = "//a[@class= 'logo-top']";

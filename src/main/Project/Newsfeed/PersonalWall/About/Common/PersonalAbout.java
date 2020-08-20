@@ -1,7 +1,6 @@
 package Newsfeed.PersonalWall.About.Common;
 
-import CommonHelper.Function.AbstractPage;
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import PersonalWall.About.Common.PersonalAboutUI;
 import org.openqa.selenium.WebDriver;
 

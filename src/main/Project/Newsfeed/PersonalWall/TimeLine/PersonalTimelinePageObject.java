@@ -1,6 +1,5 @@
 package Newsfeed.PersonalWall.TimeLine;
 
-import HeaderMain.HeaderMenu;
 import org.openqa.selenium.WebDriver;
 
 public class PersonalTimelinePageObject extends PersonalCommon {

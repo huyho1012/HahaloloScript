@@ -2,7 +2,7 @@ package Business.Business.Dashboard;
 
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import org.openqa.selenium.WebDriver;
 
 public class BusinessDashboard extends HeaderMenu {

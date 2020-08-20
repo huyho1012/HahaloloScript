@@ -15,7 +15,7 @@ import Newsfeed.TabFeed.NewsFeedTab;
 
 import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.LoginNewsfeed;
-import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
+import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -31,7 +31,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTab newsfeedPage;
     UserHandNotePageObject handNotePage;
-    GeneralSettingAccount accountSettingGeneral;
+    GeneralSetting accountSettingGeneral;
     BusinessDashboard businessDashboard;
     NewsFeedExperience experienceTab;
     NewsFeedHotel hotelTab;

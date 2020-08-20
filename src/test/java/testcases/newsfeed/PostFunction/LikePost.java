@@ -5,7 +5,7 @@ import CommonHelper.DriverBrowser.DriverManager;
 import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.DataHelper;
 import CommonHelper.Function.PageGenerator;
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import StartingApp.Register.VerifyAccountPageObject;

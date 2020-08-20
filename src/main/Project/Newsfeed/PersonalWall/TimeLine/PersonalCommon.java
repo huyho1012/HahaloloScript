@@ -1,7 +1,6 @@
 package Newsfeed.PersonalWall.TimeLine;
 
-import CommonHelper.Function.AbstractTest;
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import MediaManager.MediaManagerUI;
 import Newsfeed.PersonalWall.PersonalCommonUI;
 import org.openqa.selenium.WebDriver;

@@ -1,6 +1,5 @@
 package Newsfeed.Tour;
 
-import HeaderMain.HeaderMenu;
 import Newsfeed.Common.FeedCommon;
 import org.openqa.selenium.WebDriver;
 

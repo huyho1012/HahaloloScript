@@ -26,7 +26,7 @@ import Newsfeed.TabFeed.NewsFeedTab;
 import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.*;
 import StartingApp.Register.VerifyAccountPageObject;
-import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
+import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
 import Newsfeed.Editor.ExperiencePost.ExperienceEditor;
 import ForgotPassword.ForgotPassWordPageObject;
 import org.openqa.selenium.WebDriver;
@@ -128,8 +128,8 @@ public class PageGenerator {
         return new BusinessOverviewPageObject(driver);
     }
 
-    public static GeneralSettingAccount createAccountSettingGeneralTab(WebDriver driver) {
-        return new GeneralSettingAccount(driver);
+    public static GeneralSetting createAccountSettingGeneralTab(WebDriver driver) {
+        return new GeneralSetting(driver);
     }
 
     // Hàm khởi tạo Model Editor

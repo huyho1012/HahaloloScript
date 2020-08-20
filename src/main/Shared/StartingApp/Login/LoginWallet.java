@@ -1,6 +1,6 @@
 package StartingApp.Login;
 
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import org.openqa.selenium.WebDriver;
 
 public class LoginWallet extends HeaderMenu {

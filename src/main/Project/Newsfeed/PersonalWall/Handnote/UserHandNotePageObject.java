@@ -1,6 +1,6 @@
 package Newsfeed.PersonalWall.Handnote;
 
-import HeaderMain.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderMenu;
 import org.openqa.selenium.WebDriver;
 
 public class UserHandNotePageObject extends HeaderMenu{

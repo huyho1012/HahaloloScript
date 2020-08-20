@@ -10,7 +10,7 @@ import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.TabFeed.NewsFeedTab;
 
-import Newsfeed.UserSetting.PageObject.GeneralSettingAccount;
+import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
 import StartingApp.Login.LoginNewsfeed;
 import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +27,7 @@ public class IntegrationTest extends AbstractTest {
     VerifyAccountPageObject verifyAccountPage;
     OverviewPageObject perOverviewTab;
     BasicInfoPageObject perBasicInfoTab;
-    GeneralSettingAccount accGeneralSetting;
+    GeneralSetting accGeneralSetting;
     FirstUpdateInfo  updateInfoPopup;
 
     // Khai báo giá trị

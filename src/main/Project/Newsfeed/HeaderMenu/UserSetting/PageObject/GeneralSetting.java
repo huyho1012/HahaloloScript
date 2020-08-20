@@ -1,12 +1,12 @@
-package Newsfeed.UserSetting.PageObject;
+package Newsfeed.HeaderMenu.UserSetting.PageObject;
 
-import Newsfeed.UserSetting.AccountSettingUI;
+import Newsfeed.HeaderMenu.UserSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
-public class GeneralSettingAccount extends CommonAccountSetting {
+public class GeneralSetting extends CommonAccountSetting {
 
     WebDriver driver;
-    public GeneralSettingAccount(WebDriver webDriver){
+    public GeneralSetting(WebDriver webDriver){
         driver = webDriver;
     }
 

@@ -1,8 +1,7 @@
-package Newsfeed.UserSetting.PageObject;
+package Newsfeed.HeaderMenu.UserSetting.PageObject;
 
-import CommonHelper.Function.AbstractPage;
-import HeaderMain.HeaderMenu;
-import Newsfeed.UserSetting.AccountSettingUI;
+import Newsfeed.HeaderMenu.HeaderMenu;
+import Newsfeed.HeaderMenu.UserSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
 public class CommonAccountSetting extends HeaderMenu {

@@ -1,8 +1,8 @@
 package Newsfeed.Common;
 
 import CommonHelper.Function.PageGenerator;
-import HeaderMain.HeaderMenu;
-import HeaderMain.HeaderPageUI;
+import Newsfeed.HeaderMenu.HeaderMenu;
+import Newsfeed.HeaderMenu.HeaderPageUI;
 import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
 import Newsfeed.Common.UpdateInfo.FirstUpdatePopUpUI;
 import Newsfeed.Editor.ExperiencePost.ExperiencePostUI;

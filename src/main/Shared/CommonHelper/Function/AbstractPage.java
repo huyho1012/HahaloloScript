@@ -27,7 +27,6 @@ public abstract class AbstractPage {
     public String castToObject(String locator, String... values){
         return  String.format(locator, values);
     }
-    // Timeout
     public void waitForPageLoading(WebDriver driver){
         driver.manage().timeouts().pageLoadTimeout(GlobalVariables.LONG_TIME_OUT,TimeUnit.SECONDS);
     }
@@ -41,7 +40,6 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
     }
-    // WebBrowser
     public void openURL(WebDriver driver,String urlPage){
         driver.get(urlPage);
     }
@@ -63,7 +61,6 @@ public abstract class AbstractPage {
     public void refreshPage(WebDriver driver){
         driver.navigate().refresh();
     }
-    // Alert
     public void waitPresenceAlert(WebDriver driver){
         explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.alertIsPresent());

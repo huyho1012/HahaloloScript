@@ -1,4 +1,4 @@
-package Newsfeed.UserSetting;
+package Newsfeed.HeaderMenu.UserSetting;
 
 public class AccountSettingUI {
 
