@@ -10,11 +10,8 @@ public class AccountSettingUI {
     public static final String FULL_NAME_DATA = "//label[contains(text(),'Họ và tên')]/following-sibling::div//div[contains(@data-bind, 'userProfileVM.fullName')]";
 
     public static final String EDIT_FULL_NAME_BUTTON ="//label[contains(text(),'Họ và tên')]/following-sibling::div//i[@class = 'far fa-edit']";
-    public static final String FIRSTNAME = "//input[@name = 'firstName']";
-    public static final String LASTNAME = "//input[@name = 'lastName']";
-    public static final String MIDDLENAME = "//input[@name = 'middleName']";
-    public static final String ERROR_MESSAGE_OF_FIRSTNAME = "//input[@name = 'firstName']/following-sibling::div";
-    public static final String ERROR_MESSAGE_OF_LASTNAME = "//input[@name = 'lastName']/following-sibling::div";
+    public static final String DYNAMIC_FIELD_ON_FULL_NAME = "//input[@name = '%s']";
+    public static final String ERROR_MESSAGE_OF_DYNAMIC_FIELD_ON_FULL_NAME = "//input[@name = '%s']/following-sibling::div";
     public static final String MESSAGE_CHANGE_FULL_NAME = "//p[@id = 'js-result']";
 
     public static final String SAVE_CHANGE_FULL_NAME = "//button[contains(@data-bind,'onConfirmSaveName')]";

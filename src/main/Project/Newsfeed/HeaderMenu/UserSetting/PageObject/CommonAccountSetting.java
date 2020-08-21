@@ -5,7 +5,6 @@ import Newsfeed.HeaderMenu.UserSetting.AccountSettingUI;
 import org.openqa.selenium.WebDriver;
 
 public class CommonAccountSetting extends HeaderMenu {
-
     public String getTitleTabSettingGeneral(WebDriver driver){
         waitElementToVisible(driver, AccountSettingUI.TITLE_OF_TAB,"setting_general");
         return getTextOfElement(driver,AccountSettingUI.TITLE_OF_TAB,"setting_general");

@@ -10,6 +10,7 @@ import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import com.google.inject.internal.cglib.proxy.$Dispatcher;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
 
 public class TestcaseFunctionUpdateFullName extends AbstractTest {
 
@@ -36,7 +37,7 @@ public class TestcaseFunctionUpdateFullName extends AbstractTest {
        loginNewsfeedPage.clickLoginButton();
        newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
 
-       fullName = newsFeedHomePage.getFullNameDisplayOnMyAccount();
+//       fullName = newsFeedHomePage.getFullNameDisplayOnMyAccount();
 
         log.info("Precondition step 2.1 - AccountSetting page - Click Account Setting on menu");
 
@@ -46,367 +47,314 @@ public class TestcaseFunctionUpdateFullName extends AbstractTest {
         log.info("Precondition step 2.2 - AccountSetting page - Verify full name display correct");
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(),fullName);
 
-        accountGeneralSetting.clickEditButton();
+        log.info("Precondition step 2.3- AccountSetting page - Open Edit Full Name Function");
+        accountGeneralSetting.editFullNameFunction(driver);
     }
 
-    public void TC01_Negative_Validation_FirstName(){
-        log.info("Step 1 - Validation - Blank");
-        log.info("Step 1.1 - Clear first name");
-        accountGeneralSetting.clearDataOnFullNameFunction("");
-        log.info("Step 1.2 - Click button Save Changes");
-        accountGeneralSetting.clickButtonSave();
-        log.info("Step 1.2 - Check error message");
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+    @Test
+    public void TC01_FirstName_Check_Validation_Negative(){
+        log.info("Step 1 - First name is blank");
+        accountGeneralSetting.clearDataOfFieldOnFullNameFunction(driver,"firstName");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"");
 
-        log.info("Step 2 - Validation - All whitespace");
-        log.info("Step 2.1 - Input first name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        log.info("Step 2.2 - Click button Save Changes");
-        accountGeneralSetting.clickButtonSave();
-        log.info("Step 2.3 - Check error message");
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 2 -  First name contains all whitespace");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","    ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"");
 
-        log.info("Step 1 - Validation - Number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 3 - First name contains Number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","123456");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không chứa số.");
 
-        log.info("Step 1 - Validation - Alpha number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 4 - First name contains Alpha number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Huy12");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không chứa số.");
 
-        log.info("Step 1 - Validation - 2 whitespace on middle");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 5 - First name contains 2 whitespace on middle");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Quốc  Huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không được nhập quá 2 kí tự trắng.");
 
-        log.info("Step 1 - Validation -Script Code");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 6 - First name contains Script Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName",GlobalVariables.SCRIPT_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không chứa ký tự đặc biệt.");
 
-        log.info("Step 1 - Validation - Character");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 7 - First name contains HTML Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName",GlobalVariables.SCRIPT_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không chứa ký tự đặc biệt.");
 
-        log.info("Step 1 - Validation - More than 5 word");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 8 - First name contains special character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Q@uang Huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"Tên không chứa ký tự đặc biệt.");
 
-        log.info("Step 1 - Validation - More than 126 character");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
+        log.info("Step 9 -  First name have more than 5 word");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Doãn Huỳnh Quốc");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"");
+
+        log.info("Step 10 -  First name have more than 128 character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName",randomSentence(129));
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"firstName"),"");
+
+        accountGeneralSetting.refreshPage(driver);
+        accountGeneralSetting.editFullNameFunction(driver);
     }
-    public void TC02_Positive_Validation_FirstName() {
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+
+    @Test
+    public void TC02_LastName_Check_Validation_Negative(){
+        log.info("Step 1 - Last name is blank");
+        accountGeneralSetting.clearDataOfFieldOnFullNameFunction(driver,"lastName");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ là bắt buộc.");
+
+        log.info("Step 2 -  Last name contains all whitespace");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","    ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ là bắt buộc.");
+
+        log.info("Step 3 - Last name contains Number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","123456");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không chứa số.");
+
+        log.info("Step 4 - Last name contains Alpha number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Huy12");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không chứa số.");
+
+        log.info("Step 5 - Last name contains 2 whitespace on middle");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Hồ  Doãn");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không được nhập quá 2 kí tự trắng.");
+
+        log.info("Step 6 - Last name contains Script Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName",GlobalVariables.SCRIPT_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không chứa ký tự đặc biệt.");
+
+        log.info("Step 7 - Last name contains HTML Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName",GlobalVariables.HTML_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không chứa ký tự đặc biệt.");
+
+        log.info("Step 8 - Last name contains special character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Hồ D@ãn");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Họ không chứa ký tự đặc biệt.");
+
+        log.info("Step 9 - Last name have more than 5 word");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Doãn Quốc Huỳnh Huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"");
+
+        log.info("Step 10 - Last name have more than 128 character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName",randomSentence(129));
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"");
+
+        accountGeneralSetting.refreshPage(driver);
+        accountGeneralSetting.editFullNameFunction(driver)
+    }
+    @Test
+    public void TC03_Middle_Check_Validation_Negative(){
+        log.info("Step 1 - Middle name contains Number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","123456");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"middleName"),"Chữ lót không chứa số.");
+
+        log.info("Step 2 - Middle name contains Alpha number");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","Huy12");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"middleName"),"Chữ lót không chứa số.");
+
+        log.info("Step 3 - Middle name contains Script Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName",GlobalVariables.SCRIPT_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Chữ lót không chứa ký tự đặc biệt.");
+
+        log.info("Step 4 - Last name contains HTML Code");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName",GlobalVariables.HTML_CODE);
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Chữ lót không chứa ký tự đặc biệt.");
+
+        log.info("Step 5 - Last name contains special character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","D@ãn");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"Chữ lót không chứa ký tự đặc biệt.");
+
+        log.info("Step 6 - Middle name have more than 5 word");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","Doãn Quốc Huỳnh Hoàng");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"middleName"),"");
+
+        log.info("Step 7 - Middle name have more than 128 character");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName",randomSentence(129));
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"middleName"),"");
+        accountGeneralSetting.refreshPage(driver);
+        accountGeneralSetting.editFullNameFunction(driver);
+    }
+    @Test
+    public void TC04_FirstName_Check_Validation_Positive() {
+        log.info("Step 1 - First Name - Uppercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","QUÔC HUY");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
+        accountGeneralSetting.clickConfirmButton();
+        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
+        accountGeneralSetting.editFullNameFunction(driver);
+
+        log.info("Step 2 - First Name - Lowercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","quoc huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
+        accountGeneralSetting.clickConfirmButton();
+        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
+        accountGeneralSetting.editFullNameFunction(driver);
+
+        log.info("Step 3 - First Name - Whitespace on first");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","  Huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
+        accountGeneralSetting.clickConfirmButton();
+        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
+        accountGeneralSetting.editFullNameFunction(driver);
+
+        log.info("Step 4 - First Name - Whitespace on last");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Huy  ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
+        accountGeneralSetting.clickConfirmButton();
+        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
+        accountGeneralSetting.editFullNameFunction(driver);
+
+        log.info("Step 5 - First Name -  Valid");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"firstName","Huy");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
+        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
     }
-
-    public void TC02_Positive_Validation_FirstName() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+    @Test
+    public void TC05_LastName_Check_Validation_Positive() {
+        log.info("Step 1 - Last Name - Uppercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","HỒ DOÃN");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC02_Positive_Validation_FirstName() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 2 - Last Name - Lowercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","hồ doãn");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC03_Positive_Validation_FirstName_Uppercase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 3 - Last Name - Whitespace on first");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","  Hồ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC04_Positive_Validation_FirstName_LowerCase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 4 - Last Name - Whitespace on last");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Hồ  ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC05_Positive_Validation_FirstName_Whitespace_On_First() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 5 - Last Name - Valid");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"lastName","Hồ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
 
-    public void TC06_Positive_Validation_FirstName_Whitespace_On_Last() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+    }
+    @Test
+    public void TC06_Middle_Name_Check_Validation_Positive() {
+        log.info("Step 1 - Middle Name - Blank");
+        accountGeneralSetting.clearDataOfFieldOnFullNameFunction(driver,"middleName");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC07_Negative_Validation_Middle() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Validation - Number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - Alpha number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - 2 whitespace on middle");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation -Script Code");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - Character");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - More than 5 word");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - More than 126 character");
-        accountGeneralSetting.clearDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-    }
-    public void TC06_Positive_Validation_MiddleName() {
-        log.info("Step 1 - Enter a Middle Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 1 - Middle Name - Whitespace");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName" ,"      ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC06_Positive_Validation_MiddleName_Blank() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a Middle Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 1 - Middle Name - Uppercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","DOÃN QUỐC");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-    public void TC06_Positive_Validation_MiddleName_Contains_Whitespace() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a Middle Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        accountGeneralSetting.editFullNameFunction(driver);
+
+        log.info("Step 2 - Middle Name - Lowercase");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","doãn quốc");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC03_Positive_Validation_MiddleName_Uppercase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 3 - Middle Name - Whitespace on first");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","  doãn quốc");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC04_Positive_Validation_MiddleName_LowerCase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 4 - Middle Name - Whitespace on last");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","Doãn quốc  ");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
+        accountGeneralSetting.editFullNameFunction(driver);
 
-    public void TC05_Positive_Validation_MiddleName_Whitespace_On_First() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
+        log.info("Step 5 - Middle Name - Valid");
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"middleName","Doãn Quốc");
+        accountGeneralSetting.clickSaveChangeFullName(driver);
         verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC06_Positive_Validation_MiddleName_Whitespace_On_Last() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC01_Negative_Validation_FirstName(){
-        log.info("Step 1 - Validation - Blank");
-        accountGeneralSetting.clearDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - All whitespace");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - Number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - Alpha number");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - 2 whitespace on middle");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation -Script Code");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - Character");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - More than 5 word");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-
-        log.info("Step 1 - Validation - More than 126 character");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyEquals(accountGeneralSetting.getErrorValidationMessage(),"");
-    }
-    public void TC02_Positive_Validation_FirstName() {
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC02_Positive_Validation_FirstName() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC02_Positive_Validation_FirstName() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC03_Positive_Validation_FirstName_Uppercase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC04_Positive_Validation_FirstName_LowerCase() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC05_Positive_Validation_FirstName_Whitespace_On_First() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
-        accountGeneralSetting.clickConfirmButton();
-        verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
-    }
-
-    public void TC06_Positive_Validation_FirstName_Whitespace_On_Last() {
-        accountGeneralSetting.clickEditButton();
-        log.info("Step 1 - Enter a First Name");
-        accountGeneralSetting.enterDataOnFullNameFunction("");
-        accountGeneralSetting.clickButtonSave();
-        verifyTrue(accountGeneralSetting.checkFormConfirmPasswordIsDisplay());
-        accountGeneralSetting.enterConfirmPassword();
+        accountGeneralSetting.inputDataOfFieldOnFullNameFunction(driver,"confirmPwd","123456");
         accountGeneralSetting.clickConfirmButton();
         verifyEquals(accountGeneralSetting.getFullNameIsDisplay(), "");
     }
