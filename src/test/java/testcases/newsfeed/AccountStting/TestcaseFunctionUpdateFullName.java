@@ -160,7 +160,7 @@ public class TestcaseFunctionUpdateFullName extends AbstractTest {
         verifyEquals(accountGeneralSetting.getErrorValidateMesOfFieldOnFullName(driver,"lastName"),"");
 
         accountGeneralSetting.refreshPage(driver);
-        accountGeneralSetting.editFullNameFunction(driver)
+        accountGeneralSetting.editFullNameFunction(driver);
     }
     @Test
     public void TC03_Middle_Check_Validation_Negative(){
@@ -295,7 +295,7 @@ public class TestcaseFunctionUpdateFullName extends AbstractTest {
 
     }
     @Test
-    public void TC06_Middle_Name_Check_Validation_Positive() {
+    public void TC05_Middle_Name_Check_Validation_Positive() {
         log.info("Step 1 - Middle Name - Blank");
         accountGeneralSetting.clearDataOfFieldOnFullNameFunction(driver,"middleName");
         accountGeneralSetting.clickSaveChangeFullName(driver);

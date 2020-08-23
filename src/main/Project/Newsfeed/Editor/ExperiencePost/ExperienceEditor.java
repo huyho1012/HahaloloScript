@@ -54,7 +54,7 @@ public class ExperienceEditor extends Function {
 
     public String getTiTleExperienceEditor(){
         waitElementToVisible(driver,ExperiencePostUI.EXPERIENCE_MODE);
-        return getTextOfElement(driver,ExperiencePostUI.EXPERIENCE_MODE)
+        return getTextOfElement(driver,ExperiencePostUI.EXPERIENCE_MODE);
     }
 }
 

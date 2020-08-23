@@ -25,9 +25,13 @@ public class AccountSettingUI {
     public static final String CANCEL_CONFIRM_PASS_BUTTON= "//div[@id= 'modalConfirmPw']//button[text() = 'Hủy bỏ']";
 
 
-    public static final String EDIT_USERNAME_BUTTON = "//label[contains(text(),'Tên người dùng')]/following-sibling::div//i[@class = 'far fa-edit']";
-    public static final String USERNAME = "//input[contains(@data-bind,'valUsername')]";
+    public static final String EDIT_USERNAME_ICON = "//label[contains(text(),'Tên người dùng')]/following-sibling::div//i[@class = 'far fa-edit']";
+    public static final String USERNAME_FIELD = "//input[contains(@data-bind,'valUsername')]";
     public static final String MESSAGE_VALIDATE_USERNAME = "//div[@id ='jsLoadMsg']//span";
     public static final String BUTTON_SAVE_USERNAME = "//button[@id = 'js_btn_save_username']";
     public static final String BUTTON_CANCEL_CHANGE_USERNAME = "//div[@id = 'js_body_username']/following-sibling::form//button[text()='Hủy bỏ']";
+
+    public static final String ICON_SUCCESS_MESSAGE_OF_USERNAME = "//div[@id='jsLoadMsg']/i[@class ='fa fa-check text-success']";
+    public static final String ICON_ERROR_MESSAGE_OF_USERNAME = "//div[@id='jsLoadMsg']/i[@class ='ffa fa-times text-danger']";
+    public static final String USER_NAME = "//a[contains(@data-bind,'baseUrlUsername')]";
 }

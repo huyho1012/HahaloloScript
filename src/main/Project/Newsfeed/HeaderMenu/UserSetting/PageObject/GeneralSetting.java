@@ -80,9 +80,43 @@ public class GeneralSetting extends CommonAccountSetting {
         return getTextOfElement(driver,AccountSettingUI.ERROR_MESSAGE_OF_CONFIRM_PASS);
     }
 
-    public void clickEditButton() {
+
+
+    public void clickButtonEditUserName() {
+        waitElementToClickAble(driver,AccountSettingUI.EDIT_USERNAME_ICON);
+        clickToElement(driver,AccountSettingUI.EDIT_USERNAME_ICON);
     }
 
+    public void clearDataOfFieldOnUserNameFunction() {
+        removeTextOnElement(driver, AccountSettingUI.USERNAME_FIELD);
+    }
 
+    public boolean checkStatusOfButtonSaveChangeUserName() {
+        return checkIsDisplayedElement(driver,AccountSettingUI.BUTTON_SAVE_USERNAME);
+    }
 
+    public void inputDataOfFieldOnUserNameFunction(String userName) {
+        waitElementToVisible(driver, AccountSettingUI.USERNAME_FIELD);
+        sendKeyToElement(driver, AccountSettingUI.USERNAME_FIELD, userName);
+    }
+
+    public String getMessageOfUsername() {
+        waitElementToVisible(driver, AccountSettingUI.MESSAGE_VALIDATE_USERNAME);
+        return getTextOfElement(driver, AccountSettingUI.MESSAGE_VALIDATE_USERNAME);
+    }
+
+    public void clickButtonSaveChangeUsername() {
+        waitElementToClickAble(driver,AccountSettingUI.BUTTON_SAVE_USERNAME);
+        clickToElement(driver,AccountSettingUI.BUTTON_SAVE_USERNAME);
+    }
+    public boolean checkIconSuccessIsDisplay() {
+       return checkIsDisplayedElement(driver,AccountSettingUI.ICON_SUCCESS_MESSAGE_OF_USERNAME);
+    }
+    public boolean checkIconErrorIsDisplay() {
+        return checkIsDisplayedElement(driver,AccountSettingUI.ICON_ERROR_MESSAGE_OF_USERNAME);
+    }
+
+    public Object checkUserNameIsDisplay() {
+        return getTextOfElement(driver,AccountSettingUI.USER_NAME);
+    }
 }
