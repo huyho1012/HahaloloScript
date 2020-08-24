@@ -1,12 +1,11 @@
-package Newsfeed.HeaderMenu.UserSetting;
+package Newsfeed.HeaderMenu.GeneralSettting;
 
-public class AccountSettingUI {
+public class GeneralSettingUI {
 
     public static final String TITLE_PAGE = "//div[@class = 'pageUI-header__title']";
     public static final String ACCOUNT_FUNCTION_TAB = "//a[contains(@class, '%s')]";
 
-    public static final String TITLE_OF_TAB = "//div[@id= '%s']//div[@class = 'pageUI-about-heading']";
-
+    public static final String TITLE_OF_TAB = "//div[@id='%s']//div[@class = 'pageUI-about-heading']";
     public static final String FULL_NAME_DATA = "//label[contains(text(),'Họ và tên')]/following-sibling::div//div[contains(@data-bind, 'userProfileVM.fullName')]";
 
     public static final String EDIT_FULL_NAME_BUTTON ="//label[contains(text(),'Họ và tên')]/following-sibling::div//i[@class = 'far fa-edit']";

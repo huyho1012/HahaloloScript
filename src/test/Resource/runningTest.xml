@@ -12,7 +12,7 @@
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.Validation"></class>-->
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>-->
 <!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation"></class>-->
-            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>
+            <class name="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink"></class>
 <!--            <class name="LikePost"></class>-->
 <!--               <class name= "testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>&ndash;&gt;-->
         </classes>

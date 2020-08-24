@@ -1,4 +1,4 @@
-package testcases.newsfeed;
+package testcases.newsfeed.PostFunction;
 
 import Business.Business.Dashboard.BusinessDashboard;
 import CommonHelper.DriverBrowser.BrowserDriver;
@@ -15,7 +15,7 @@ import Newsfeed.TabFeed.NewsFeedTab;
 
 import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.LoginNewsfeed;
-import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
+import Newsfeed.HeaderMenu.GeneralSettting.GeneralSetting;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;

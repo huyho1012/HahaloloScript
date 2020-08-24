@@ -45,6 +45,10 @@ public class AbstractTest {
         }
         return text;
     }
+    protected int randomNumber(int number){
+        Random rd = new Random();
+        return rd.nextInt(number);
+    }
     protected int randomEmail() {
         Random rd = new Random();
         return rd.nextInt(10000000);

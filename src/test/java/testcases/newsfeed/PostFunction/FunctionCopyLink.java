@@ -1,4 +1,4 @@
-package testcases.newsfeed;
+package testcases.newsfeed.PostFunction;
 
 import CommonHelper.DriverBrowser.BrowserDriver;
 import CommonHelper.DriverBrowser.DriverManager;
@@ -15,7 +15,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
-public class Test2 extends AbstractTest {
+public class FunctionCopyLink extends AbstractTest {
     DriverManager driverManager;
     WebDriver driver;
 

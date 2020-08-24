@@ -26,7 +26,7 @@ import Newsfeed.TabFeed.NewsFeedTab;
 import Newsfeed.Tour.NewsFeedTour;
 import StartingApp.Login.*;
 import StartingApp.Register.VerifyAccountPageObject;
-import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
+import Newsfeed.HeaderMenu.GeneralSettting.GeneralSetting;
 import Newsfeed.Editor.ExperiencePost.ExperienceEditor;
 import ForgotPassword.ForgotPassWordPageObject;
 import org.openqa.selenium.WebDriver;

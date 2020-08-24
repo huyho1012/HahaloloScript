@@ -10,7 +10,7 @@ import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
 import Newsfeed.TabFeed.NewsFeedTab;
 
-import Newsfeed.HeaderMenu.UserSetting.PageObject.GeneralSetting;
+import Newsfeed.HeaderMenu.GeneralSettting.GeneralSetting;
 import StartingApp.Login.LoginNewsfeed;
 import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;

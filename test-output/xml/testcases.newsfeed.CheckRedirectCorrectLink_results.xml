@@ -8,6 +8,6 @@
   <properties />
   
   
-            <testcase name="TC02_switchToSettingFunctionOnHeader" time="13.576" classname="testcases.newsfeed.CheckRedirectCorrectLink" />
+            <testcase name="TC02_switchToSettingFunctionOnHeader" time="13.576" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
       
 </testsuite>

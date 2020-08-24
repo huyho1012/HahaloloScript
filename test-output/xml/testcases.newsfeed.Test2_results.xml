@@ -8,6 +8,6 @@
   <properties />
   
   
-            <testcase name="Hello" time="3.845" classname="testcases.newsfeed.Test2" />
+            <testcase name="Hello" time="3.845" classname="testcases.newsfeed.PostFunction.FunctionCopyLink" />
       
 </testsuite>
