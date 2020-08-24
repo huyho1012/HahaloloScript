@@ -83,7 +83,7 @@ public class IntegrationTest extends AbstractTest {
         newsFeedPage.setTimeDelay(1);
         updateInfo = newsFeedPage.targetToFirstUpdateInfoPopup();
         updateInfo.clickCancelUpdateNewInfo();
-        newsFeedPage.changeLanguageDisplay();
+//        newsFeedPage.changeLanguageDisplay();
         newsFeedPage.setTimeDelay(1);
 
         log.info("Step 2.2 - Newsfeed - Finish verify account -  Click logout button");

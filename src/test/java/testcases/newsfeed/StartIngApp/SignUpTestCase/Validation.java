@@ -41,6 +41,40 @@ public class Validation extends AbstractTest {
         newsfeedLoginPage.changeLanguageSystemToVI();
     }
     @Test
+
+    public void TC01_Check_UserInterface_SignUpForm_With_VI_Language(){
+        newsfeedLoginPage.changeLanguageSystemToVI();
+        log.info("Check Title Of SignUp form when");
+
+        verifyEquals(newsfeedLoginPage.getTitleOfsignUpForm(),"Tham gia Hahalolo ngay!");
+        log.info("Check placeholder of fields");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Tên");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Họ");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Điện thoại hoặc Email");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Mật khẩu");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Mật khẩu xác nhận");
+        verifyEquals(newsfeedLoginPage.getContentOfSignUpButton(),"Đăng ký");
+
+        newsfeedLoginPage.getColorOfTitleOfSignUpForm();
+        newsfeedLoginPage.getColorOfSignUpButton();
+    }
+
+    @Test
+    public void TC02_Check_UserInterface_SignUpForm_With_EN_Language(){
+        newsfeedLoginPage.changeLanguageSystemToEng();
+        log.info("Check Title Of SignUp form when");
+
+        verifyEquals(newsfeedLoginPage.getTitleOfsignUpForm(),"Join Hahalolo Now!");
+        log.info("Check placeholder of fields");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"First name");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Last name");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Phone number or Email");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Password");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Confirm Password");
+        verifyEquals(newsfeedLoginPage.getContentOfSignUpButton(),"Sign Up");
+    }
+
+    @Test
     public void TC01_CheckValidationFirstName(){
         log.info("Step 1 - Prepaid and input data on other field except FirstName");
         newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);

@@ -57,4 +57,8 @@ public class LoginNewsfeed extends AbstractPage {
         waitElementToVisible(driver, RegisterPageUI.PHONE_CODE);
         removeTextOnElement(driver, RegisterPageUI.PHONE_CODE);
     }
+
+    public String getTitleOfsignUpForm() {
+        return null;
+    }
 }

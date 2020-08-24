@@ -21,7 +21,6 @@ public class Validation extends AbstractTest {
     // Khai báo pageObject
     LoginNewsfeed newFeedLoginPage;
     NewsFeedTab newsFeedPage;
-    HeaderMenu headerMenu;
     @Parameters("browser")
     @BeforeClass
     public void preconditionMethod(String browserName){
@@ -29,8 +28,10 @@ public class Validation extends AbstractTest {
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
+
+
     @Test
-    public void TC01_Login_With_Blank_Info(){
+    public void TC03_Login_With_Blank_Info(){
         log.info("Enter a Username");
         newFeedLoginPage.enterDataOnDynamicTextField("identity","");
         log.info("Enter a password");
@@ -42,7 +43,7 @@ public class Validation extends AbstractTest {
         verifyEquals(newFeedLoginPage.getErrorValidationOfTextField("password"),"Mật khẩu là bắt buộc.");
     }
     @Test
-    public void TC02_ValidateOfUsername(){
+    public void TC03_ValidateOfUsername(){
         log.info("Step 1 - Enter password");
         newFeedLoginPage.enterDataOnDynamicTextField("password","123456");
 
@@ -151,7 +152,7 @@ public class Validation extends AbstractTest {
         log.info("Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        newsFeedPage.changeLanguageDisplay();
+//        newsFeedPage.changeLanguageDisplay();
         newsFeedPage.setTimeDelay(1);
         log.info("Logout account");
         newsFeedPage.clickItemOnSettingMenu(driver,"Đăng xuất");
@@ -168,7 +169,7 @@ public class Validation extends AbstractTest {
         log.info("Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        newsFeedPage.changeLanguageDisplay();
+//        newsFeedPage.changeLanguageDisplay();
         log.info("Logout account");
         newsFeedPage.setTimeDelay(1);
         newsFeedPage.clickItemOnSettingMenu(driver,"Đăng xuất");
