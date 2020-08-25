@@ -19,7 +19,7 @@ public class HeaderPageUI {
     public static final String CART_FUNCTION = "//i[@class = 'ic ic-cart-primary']";
 
     // Helper menu
-    public static final String MENU_HELPER = "//i[@class = ' ic ic-question-circle-primary']";
+    public static final String MENU_HELPER = "//i[@class = 'ic ic-question-circle-primary']";
     public static final String MENU_HELPER_ITEM = "//i[@class = 'ic ic-question-circle-primary']/parent::span/following-sibling::div//a[contains(@data-bind,'%s')]";
 
     // Setting menu

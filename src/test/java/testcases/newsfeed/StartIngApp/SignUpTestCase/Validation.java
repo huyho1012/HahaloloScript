@@ -40,8 +40,8 @@ public class Validation extends AbstractTest {
         log.info("Precondition - Change language system to Vietnamese");
         newsfeedLoginPage.changeLanguageSystemToVI();
     }
-    @Test
 
+    @Test (enabled = false)
     public void TC01_Check_UserInterface_SignUpForm_With_VI_Language(){
         newsfeedLoginPage.changeLanguageSystemToVI();
         log.info("Check Title Of SignUp form when");
@@ -59,7 +59,7 @@ public class Validation extends AbstractTest {
         newsfeedLoginPage.getColorOfSignUpButton();
     }
 
-    @Test
+    @Test(enabled = false)
     public void TC02_Check_UserInterface_SignUpForm_With_EN_Language(){
         newsfeedLoginPage.changeLanguageSystemToEng();
         log.info("Check Title Of SignUp form when");
@@ -457,7 +457,8 @@ public class Validation extends AbstractTest {
         log.info("Step 8 - Go to Newsfeed and cancel update info");
         newsfeedPage = PageGenerator.createTabNewsfeed(driver);
         newsfeedPage.setTimeDelay(1);
-        updateInfo= newsfeedPage.targetToFirstUpdateInfoPopup();
+        newsfeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfo = PageGenerator.createUpdateInfoPopup(driver);
         updateInfo.clickCancelUpdateNewInfo();
 
         log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
@@ -466,7 +467,7 @@ public class Validation extends AbstractTest {
         verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
 
         log.info("Step 10 - Logout account");
-        personalOVerViewTab.clickItemOnSettingMenu(driver,"Đăng xuất");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
         newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
@@ -500,7 +501,7 @@ public class Validation extends AbstractTest {
         log.info("Step 8 - Go to Newsfeed and cancel update info");
         newsfeedPage = PageGenerator.createTabNewsfeed(driver);
         newsfeedPage.setTimeDelay(1);
-        updateInfo= newsfeedPage.targetToFirstUpdateInfoPopup();
+        updateInfo= newsfeedPage.targetToFirstUpdateInfoPopup(driver);
         updateInfo.clickCancelUpdateNewInfo();
 
         log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
@@ -509,7 +510,7 @@ public class Validation extends AbstractTest {
         verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
 
         log.info("Step 5.1 - Click Logout");
-        personalOVerViewTab.clickItemOnSettingMenu(driver,"Đăng xuất");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
         newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test (enabled = false)
@@ -541,7 +542,8 @@ public class Validation extends AbstractTest {
 
         log.info("Step 8 - Go to Newsfeed and cancel update info");
         newsfeedPage = PageGenerator.createTabNewsfeed(driver);
-        updateInfo= newsfeedPage.targetToFirstUpdateInfoPopup();
+        newsfeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfo = PageGenerator.createUpdateInfoPopup(driver);
         updateInfo.clickCancelUpdateNewInfo();
 
         log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
@@ -550,7 +552,7 @@ public class Validation extends AbstractTest {
         verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
 
         log.info("Step 10 - Click Logout");
-        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic ic-logout-c");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
         newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @AfterTest

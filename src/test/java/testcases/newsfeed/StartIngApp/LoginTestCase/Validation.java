@@ -168,10 +168,7 @@ public class Validation extends AbstractTest {
         log.info("Step 3 - Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Change system language to VI");
-        newsFeedHomePage.changeLanguageDisplayToVietnamese();
-        newsFeedHomePage.setTimeDelay(1);
+        newsFeedHomePage.setTimeDelay(2);
 
         log.info("Step 5 - Logout account");
         newsFeedHomePage.clickItemOnSettingMenu(driver,"ic-logout-c");
@@ -192,14 +189,12 @@ public class Validation extends AbstractTest {
         log.info("Step 3 - Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Change system language to VI");
-        newsFeedHomePage.changeLanguageDisplayToVietnamese();
-        newsFeedHomePage.setTimeDelay(1);
+        newsFeedHomePage.setTimeDelay(2);
 
         log.info("Step 5 - Logout account");
-        newsFeedHomePage.clickItemOnSettingMenu(driver,"Đăng xuất");
+        newsFeedHomePage.clickItemOnSettingMenu(driver,"ic-logout-c");
         newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+
 
         log.info("Step 6 - Check Logout account success");
         verifyTrue(newFeedLoginPage.checkLoginNewsfeedPageIsDisplay());
@@ -215,22 +210,19 @@ public class Validation extends AbstractTest {
         log.info("Step 3 - Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Change system language to VI");
-        newsFeedHomePage.changeLanguageDisplayToVietnamese();
-        newsFeedHomePage.setTimeDelay(1);
+        newsFeedHomePage.setTimeDelay(2);
 
         log.info("Step 5 - Logout account");
-        newsFeedHomePage.clickItemOnSettingMenu(driver,"Đăng xuất");
+        newsFeedHomePage.clickItemOnSettingMenu(driver,"ic-logout-c");
         newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
 
         log.info("Step 6 - Check Logout account success");
         verifyTrue(newFeedLoginPage.checkLoginNewsfeedPageIsDisplay());
     }
-    @Test
+    @Test (enabled = false)
     public void TC06_Login_With_Valid_Phone_CONTAIN_PHONECODE(){
         log.info("Step 1 - Enter username");
-        newFeedLoginPage.enterUserNameToLogin(driver,"84936709449");
+        newFeedLoginPage.enterUserNameToLogin(driver,"840936709449");
 
         log.info("Step 2 - Enter password");
         newFeedLoginPage.enterPasswordToLogin(driver,"20b87bis");
@@ -238,13 +230,10 @@ public class Validation extends AbstractTest {
         log.info("Step 3 - Click Login button");
         newFeedLoginPage.clickLoginButton();
         newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Change system language to VI");
-        newsFeedHomePage.changeLanguageDisplayToVietnamese();
-        newsFeedHomePage.setTimeDelay(1);
+        newsFeedHomePage.setTimeDelay(2);
 
         log.info("Step 5 - Logout account");
-        newsFeedHomePage.clickItemOnSettingMenu(driver,"Đăng xuất");
+        newsFeedHomePage.clickItemOnSettingMenu(driver,"ic-logout-c");
         newFeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
 
         log.info("Step 6 - Check Logout account success");

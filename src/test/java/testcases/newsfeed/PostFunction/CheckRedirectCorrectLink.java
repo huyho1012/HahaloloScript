@@ -23,7 +23,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import sun.jvm.hotspot.debugger.Page;
 
 public class CheckRedirectCorrectLink extends AbstractTest {
 
@@ -62,7 +61,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
         newsfeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Precondition - Step 04 - Verify Login successfully");
-        verifyTrue(newsfeedPage.checkLoginSuccess());
+        verifyTrue(newsfeedPage.checkLoginSuccess(driver));
 
         log.info("Precondition - Step 05 - Check language default display and change language to VI");
         newsfeedPage.changeLanguageDisplayToVietnamese();
@@ -75,52 +74,51 @@ public class CheckRedirectCorrectLink extends AbstractTest {
         verifyEquals(newsfeedPage.getTitlePage(driver),"Bảng tin | Hahalolo");
 
         log.info("Step 2 - Redirect to Experience tab");
-        newsfeedPage.clickToNavTabOnNewsfeed("Trải nghiệm");
+        newsfeedPage.clickToNavTabOnNewsfeed(driver,"Trải nghiệm");
         experienceTab = PageGenerator.createTabExperienceFeed(driver);
         verifyEquals(experienceTab.getTitlePage(driver),"Trải nghiệm | Hahalolo");
 
         log.info("Step 3.1 - Redirect to Hotel tab");
-        experienceTab.clickToNavTabOnNewsfeed("Khách sạn");
+        experienceTab.clickToNavTabOnNewsfeed(driver,"Khách sạn");
         hotelTab = PageGenerator.createTabHotelFeed(driver);
         verifyEquals(hotelTab.getTitlePage(driver),"Khách sạn | Hahalolo");
 
         log.info("Step 4.1 - Redirect to Shopping tab");
-        hotelTab.clickToNavTabOnNewsfeed("Mua sắm");
+        hotelTab.clickToNavTabOnNewsfeed(driver,"Mua sắm");
         shoppingTab = PageGenerator.createTabShopFeed(driver);
         verifyEquals(shoppingTab.getTitlePage(driver),"Mua sắm | Hahalolo");
 
         log.info("Step 5.1  - Redirect to Tour tab");
-        newsfeedPage.clickToNavTabOnNewsfeed("Tour");
+        newsfeedPage.clickToNavTabOnNewsfeed(driver,"Tour");
         tourTab = PageGenerator.createTabTourFeed(driver);
         verifyEquals(tourTab.getTitlePage(driver),"Tour | Hahalolo");
 
         log.info("Step 6.1  - Redirect to Flight tab");
-        tourTab.clickToNavTabOnNewsfeed("Vé máy bay");
+        tourTab.clickToNavTabOnNewsfeed(driver,"Vé máy bay");
         flightTab = PageGenerator.createTabFlightFeed(driver);
         verifyEquals(flightTab.getTitlePage(driver),"Vé máy bay | Hahalolo");
 
         log.info("Step 7.1  - Redirect to Newsfeed tab");
-        flightTab.clickToNavTabOnNewsfeed("Bảng tin");
+        flightTab.clickToNavTabOnNewsfeed(driver,"Bảng tin");
         newsfeedPage = PageGenerator.createTabNewsfeed(driver);
         verifyEquals(newsfeedPage.getTitlePage(driver),"Bảng tin | Hahalolo");
     }
 
     @Test
     public void TC02_Check_Go_To_Direct_Link_When_User_Click_To_Item_On_Helper_Menu(){
-        log.info("Step 1 - Verify user stay on Newsfeed tab");
-        newsfeedPage.checkLoginSuccess();
-
         log.info("Step 2 - Click to Halo's Official");
         newsfeedPage.clickFunctionOnHelping(driver,"about");
 
         log.info("Step 3 - Click to Halo's Terms");
         newsfeedPage.clickFunctionOnHelping(driver,"terms");
-        verifyEquals(newsfeedPage.getCurrentUrl(driver), "Điều khoản dịch vụ của HAHALOLO – Trung tâm hỗ trợ");
+        newsfeedPage.switchToAnotherWindowByID(driver,currentTab);
+        verifyEquals(newsfeedPage.getTitlePage(driver), "Điều khoản dịch vụ của HAHALOLO – Trung tâm hỗ trợ");
         newsfeedPage.closeAllWindowExceptParentWindow(driver,currentTab);
 
         log.info("Step 4 - Click to Halo's Terms");
         newsfeedPage.clickFunctionOnHelping(driver,"help");
-        verifyEquals(newsfeedPage.getCurrentUrl(driver), "Trung tâm hỗ trợ");
+        newsfeedPage.switchToAnotherWindowByID(driver,currentTab);
+        verifyEquals(newsfeedPage.getTitlePage(driver), "Trung tâm hỗ trợ");
         newsfeedPage.closeAllWindowExceptParentWindow(driver,currentTab);
     }
 
@@ -140,7 +138,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
         newsfeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 2 - Verify Go to Homepage success");
-        verifyTrue(newsfeedPage.checkLoginSuccess());
+        verifyTrue(newsfeedPage.checkLoginSuccess(driver));
     }
 
     @Test
@@ -148,7 +146,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
         log.info("Step 1  - Redirect to Handnote Tour");
         newsfeedPage.clickItemOnSettingMenu(driver, "ic-handnotes-c");
         handNotePage = PageGenerator.createUserHandNotePage(driver);
-        verifyTrue(handNotePage.checkHandnoteTourTabIsDisplay(driver));
+        verifyTrue(handNotePage.checkHandnoteTourTabIsDisplay(""));
 
         log.info("Step 2  - Redirect to Account Setting");
         handNotePage.clickItemOnSettingMenu(driver,"ic-cog-c");
@@ -158,7 +156,7 @@ public class CheckRedirectCorrectLink extends AbstractTest {
         log.info("Step 3  - Redirect to Account Setting");
         accountSettingGeneral.clickItemOnSettingMenu(driver,"ic-business-c");
         businessDashboard = PageGenerator.getBusinessDashboardPage(driver);
-        verifyTrue(businessDashboard.checkBussinessDashboardPageIsDisplay(driver));
+        verifyTrue(businessDashboard.checkBusinessDashboardPageIsDisplay(driver));
 
         log.info("Step 3  - Logout account");
         businessDashboard.clickItemOnSettingMenu(driver,"ic-logout-c");

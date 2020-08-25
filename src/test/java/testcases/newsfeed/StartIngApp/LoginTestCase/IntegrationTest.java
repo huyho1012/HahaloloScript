@@ -24,6 +24,7 @@ public class IntegrationTest extends AbstractTest {
     DriverManager driverManager;
     DataHelper dataHelper = DataHelper.getData();
 
+    // PageObject Model
     NewsFeedTab newsFeedPage;
     LoginCensor censorLoginPage;
     CensorDashboard censorHomePage;
@@ -32,13 +33,19 @@ public class IntegrationTest extends AbstractTest {
     LoginNewsfeed loginNewsFeedPage;
     FirstUpdateInfo updateInfo;
 
-    // Generate Data
+    // Data Driven
     String verifyCode;
+    String adminUser = GlobalVariables.BACKEND_USER_NAME;
+    String adminPass = GlobalVariables.BACKEND_PASSWORD;
+    String urlNewFeed = GlobalVariables.URL_NEWS_FEED_LOGIN;
     String passWord ="123456";
     String confirmPassword = "123456";
+    // Random data
     String firstName = dataHelper.getFirstName();
     String lastName = dataHelper.getLastName();
-    String email = "tester.hahalolo" + randomEmail() + "@mailinator.com";
+    String email = createVirtualMail();
+
+
 
     @Parameters("browser")
     @BeforeTest
@@ -46,9 +53,12 @@ public class IntegrationTest extends AbstractTest {
         log.info("Precondition - Step 1 - Create driver browser");
         driverManager = BrowserDriver.getBrowser(browserName);
 
-        log.info("Precondition - Step 2 - Open Newsfeed Login");
-        driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
+        log.info("Precondition - Step 2 - Open Browser and Go to Login Newsfeed");
+        driver = driverManager.getDriver(urlNewFeed);
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
+
+        log.info("Precondition - Step 3 - Verify Login Newsfeed display success");
+        loginNewsFeedPage.checkLoginNewsfeedPageIsDisplay();
     }
     @Test
     public void TC01_Login_With_Blocked_Account_Email(){
@@ -80,9 +90,9 @@ public class IntegrationTest extends AbstractTest {
 
         log.info("Step 2.1 - Newsfeed - Finish verify account -  Cancel Update information");
         newsFeedPage.setTimeDelay(1);
-        updateInfo = newsFeedPage.targetToFirstUpdateInfoPopup();
+        updateInfo = newsFeedPage.targetToFirstUpdateInfoPopup(driver);
         updateInfo.clickCancelUpdateNewInfo();
-//        newsFeedPage.changeLanguageDisplay();
+        newsFeedPage.changeLanguageDisplayToVietnamese();
         newsFeedPage.setTimeDelay(1);
 
         log.info("Step 2.2 - Newsfeed - Finish verify account -  Click logout button");

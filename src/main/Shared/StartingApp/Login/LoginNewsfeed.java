@@ -20,7 +20,7 @@ public class LoginNewsfeed extends AbstractPage {
 
     public void enterUserNameToLogin(WebDriver driver, String userName){
         waitElementToVisible(driver, CommonLoginUI.USER_NAME, userName);
-        sendKeyToElement(driver, CommonLoginUI.USER_NAME, userName;
+        sendKeyToElement(driver, CommonLoginUI.USER_NAME, userName);
     }
 
     public void enterPasswordToLogin(WebDriver driver, String passWord){
@@ -76,5 +76,22 @@ public class LoginNewsfeed extends AbstractPage {
         sendKeyToElement(driver,CommonLoginUI.USER_NAME,userName);
         sendKeyToElement(driver, CommonLoginUI.PASSWORD ,passWord);
         clickToElement(driver, CommonLoginUI.LOGIN_BUTTON);
+    }
+
+    public Object getPlaceholderOfDynamicField() {
+        return null;
+    }
+
+    public Object getContentOfSignUpButton() {
+        return null;
+    }
+
+    public void getColorOfTitleOfSignUpForm() {
+    }
+
+    public void getColorOfSignUpButton() {
+    }
+
+    public void changeLanguageSystemToEng() {
     }
 }

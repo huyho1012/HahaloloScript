@@ -16,7 +16,7 @@ public class FeedCommon extends HeaderMenu {
     }
 
     // Điều hướng các tab có trên thanh Nav menu
-    public void clickToNavTabOnNewsfeed(String nameTab) {
+    public void clickToNavTabOnNewsfeed(WebDriver driver, String nameTab) {
         waitElementToClickAble(driver,NewsFeedPageIU.NAV_FEED_TAB, nameTab);
         clickToElement(driver,NewsFeedPageIU.NAV_FEED_TAB, nameTab);
     }
@@ -37,7 +37,7 @@ public class FeedCommon extends HeaderMenu {
         clickToElement(driver,HeaderPageUI.PERSONAL_URL_LINK);
     }
 
-    public FirstUpdateInfo targetToFirstUpdateInfoPopup(){
+    public FirstUpdateInfo targetToFirstUpdateInfoPopup(WebDriver driver){
         waitElementToVisible(driver, FirstUpdatePopUpUI.FORM_UPDATE_INFO);
         clickToElement(driver,FirstUpdatePopUpUI.FORM_UPDATE_INFO);
         return PageGenerator.createUpdateInfoPopup(driver);
@@ -48,7 +48,7 @@ public class FeedCommon extends HeaderMenu {
     }
 
     // Hàm kiểm tra đã login thành công hay chưa
-    public boolean checkLoginSuccess() {
+    public boolean checkLoginSuccess(WebDriver driver) {
         waitElementToVisible(driver, HeaderPageUI.CART_FUNCTION);
         return checkIsDisplayedElement(driver, HeaderPageUI.CART_FUNCTION);
     }

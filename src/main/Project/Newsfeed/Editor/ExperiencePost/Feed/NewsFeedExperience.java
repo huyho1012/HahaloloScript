@@ -20,7 +20,7 @@ public class NewsFeedExperience extends FeedCommon {
         waitElementToClickAble(driver,ExperienceTabPageUI.SEARCH_FORM_EXPERIENCE);
         clickToElement(driver,ExperienceTabPageUI.SEARCH_FORM_EXPERIENCE);
    }
-    public void inputDataToSearchExperience(String keyWord, String){
+    public void inputDataToSearchExperience(String keyWord){
         waitElementToVisible(driver,ExperienceTabPageUI.EXPERIENCE_SEARCH_FIELD);
         sendKeyToElement(driver,ExperienceTabPageUI.EXPERIENCE_SEARCH_FIELD,keyWord);
     }

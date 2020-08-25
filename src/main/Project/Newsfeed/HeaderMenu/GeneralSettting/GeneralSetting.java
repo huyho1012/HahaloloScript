@@ -97,4 +97,11 @@ public class GeneralSetting extends CommonAccountSetting {
     }
 
 
+    public Object checkUserNameIsDisplay() {
+        return null;
+    }
+
+    public boolean checkGeneralAccountSettingTabIsDisplay(WebDriver driver) {
+        return true;
+    }
 }

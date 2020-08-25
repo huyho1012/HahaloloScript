@@ -15,4 +15,8 @@ public class BusinessDashboard extends HeaderMenu {
         openURL(driver, GlobalVariables.URL_BUSINESS_PAGE);
         return PageGenerator.getBusinessDashboardPage(driver);
     }
+
+    public boolean checkBusinessDashboardPageIsDisplay(WebDriver driver) {
+        return true;
+    }
 }

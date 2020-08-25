@@ -88,7 +88,8 @@ public class IntegrationTest extends AbstractTest {
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
         log.info("Step 8 - Update Personal Information");
-        updateInfoPopup = newsFeedPage.targetToFirstUpdateInfoPopup();
+        newsFeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfoPopup = PageGenerator.createUpdateInfoPopup(driver);
         updateInfoPopup.updateBirthday(driver,"12","10","1992");
         updateInfoPopup.updateGender(driver,"male");
         updateInfoPopup.updateCountry(driver,"United States");

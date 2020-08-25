@@ -24,4 +24,9 @@ public class NewsFeedTab extends FeedCommon {
             clickToElement(driver, FooterUI.LANGUAGE_BUTTON);
         }
     }
+
+    public void clickEditProfile() {
+        waitElementToClickAble(driver,MyAccountUI.EDIT_PROFILE_BUTTON);
+        clickToElement(driver,MyAccountUI.EDIT_PROFILE_BUTTON);
+    }
 }

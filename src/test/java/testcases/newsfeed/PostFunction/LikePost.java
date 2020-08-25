@@ -76,7 +76,7 @@ public class LikePost extends AbstractTest {
             newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
             log.info("Step 1.9 - Register Account - Check account verify successfully");
-            verifyTrue(newsFeedPage.checkLoginSuccess());
+            verifyTrue(newsFeedPage.checkLoginSuccess(driver));
             newsFeedPage.setTimeDelay(4);
         }
     }

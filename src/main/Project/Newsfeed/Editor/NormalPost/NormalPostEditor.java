@@ -103,4 +103,8 @@ public class NormalPostEditor extends Function {
         waitElementToVisible(driver, NormalPostUI.POST_CONTENT);
         removeTextOnElement(driver, NormalPostUI.POST_CONTENT);
     }
+
+    public Object getTextOfSharePostButton() {
+        return  null;
+    }
 }

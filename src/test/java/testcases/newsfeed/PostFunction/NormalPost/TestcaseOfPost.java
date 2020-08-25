@@ -50,7 +50,7 @@ public class TestcaseOfPost extends AbstractTest {
         PageGenerator.createTabNewsfeed(driver);
 
         log.info("Precondition - Step 3.4 - Login Newsfeed - Verify Login successfully");
-        verifyTrue(newsFeedPage.checkLoginSuccess());
+        verifyTrue(newsFeedPage.checkLoginSuccess(driver));
 
         log.info("Precondition - Step 3.5 - Change Language Newsfeed");
 
@@ -87,7 +87,7 @@ public class TestcaseOfPost extends AbstractTest {
     @Test
     public void TC03_Check_Button_Shared_Post(){
         log.info("Step 1 - Check content of button");
-        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"")
+        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"");
 
         log.info("Step 1 - Default (No content input)");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));

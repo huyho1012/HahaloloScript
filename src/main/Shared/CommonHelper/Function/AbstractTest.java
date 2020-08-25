@@ -53,6 +53,14 @@ public class AbstractTest {
         Random rd = new Random();
         return rd.nextInt(10000000);
     }
+
+    public String createVirtualMail(){
+        String domainEmail = "@mailinator.com";
+        String sutrix = String.valueOf(randomNumber(300000));
+        String refix = "huyho";
+        return  refix+sutrix+domainEmail;
+
+    }
     protected boolean verifyTrue(boolean condition) {
         boolean status = true;
         try {
