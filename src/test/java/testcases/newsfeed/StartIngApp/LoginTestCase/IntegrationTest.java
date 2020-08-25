@@ -32,7 +32,6 @@ public class IntegrationTest extends AbstractTest {
     LoginNewsfeed loginNewsFeedPage;
     FirstUpdateInfo updateInfo;
 
-
     // Generate Data
     String verifyCode;
     String passWord ="123456";
@@ -52,7 +51,7 @@ public class IntegrationTest extends AbstractTest {
         loginNewsFeedPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
-    public void Login_TC01_Login_With_Blocked_Account_Email(){
+    public void TC01_Login_With_Blocked_Account_Email(){
         log.info("Step 1.1 - Newsfeed - Register Account - Enter First Name");
         loginNewsFeedPage.enterDataOnDynamicTextField("nv104",firstName);
 

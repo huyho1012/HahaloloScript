@@ -17,7 +17,17 @@ public class LoginNewsfeed extends AbstractPage {
             clickToElement(driver, RegisterPageUI.VIETNAMESE_BUTTON);
         }
     }
-    // Login và đều hướng sang trang NF
+
+    public void enterUserNameToLogin(WebDriver driver, String userName){
+        waitElementToVisible(driver, CommonLoginUI.USER_NAME, userName);
+        sendKeyToElement(driver, CommonLoginUI.USER_NAME, userName;
+    }
+
+    public void enterPasswordToLogin(WebDriver driver, String passWord){
+        waitElementToVisible(driver, CommonLoginUI.PASSWORD, passWord);
+        sendKeyToElement(driver, CommonLoginUI.PASSWORD, passWord);
+    }
+
     public void clickLoginButton(){
         waitElementToClickAble(driver, CommonLoginUI.LOGIN_BUTTON);
         clickToElement(driver, CommonLoginUI.LOGIN_BUTTON);
@@ -60,5 +70,11 @@ public class LoginNewsfeed extends AbstractPage {
 
     public String getTitleOfsignUpForm() {
         return null;
+    }
+
+    public void doActionLogin(WebDriver driver, String userName, String passWord) {
+        sendKeyToElement(driver,CommonLoginUI.USER_NAME,userName);
+        sendKeyToElement(driver, CommonLoginUI.PASSWORD ,passWord);
+        clickToElement(driver, CommonLoginUI.LOGIN_BUTTON);
     }
 }

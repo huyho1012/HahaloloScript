@@ -32,7 +32,7 @@ public class FeedCommon extends HeaderMenu {
         clickToElement(driver, ExperiencePostUI.EXPERIENCE_MODE);
     }
     // Điều hướng tới trang personal-Timeline
-    public void clickToUserHomePage() {
+    public void clickToUserHomePage(WebDriver driver) {
         waitElementToVisible(driver, HeaderPageUI.PERSONAL_URL_LINK);
         clickToElement(driver,HeaderPageUI.PERSONAL_URL_LINK);
     }

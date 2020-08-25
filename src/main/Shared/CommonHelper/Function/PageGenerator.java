@@ -19,7 +19,7 @@ import Newsfeed.PersonalWall.Haha.PersonalHaha;
 import Newsfeed.PersonalWall.Handnote.UserHandNotePageObject;
 import Newsfeed.PersonalWall.Photo.PersonalPhoto;
 import Newsfeed.PersonalWall.Reviews.PersonalReview;
-import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
+import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePage;
 import Newsfeed.PersonalWall.Video.PersonalVideo;
 import Newsfeed.Shop.NewsFeedShopping;
 import Newsfeed.TabFeed.NewsFeedTab;
@@ -81,8 +81,8 @@ public class PageGenerator {
     public static UserHandNotePageObject createUserHandNotePage(WebDriver driver){
         return new UserHandNotePageObject(driver);
     }
-    public static PersonalTimelinePageObject getPersonalTimeLinePage(WebDriver driver){
-        return new PersonalTimelinePageObject(driver);
+    public static PersonalTimelinePage getPersonalTimeLinePage(WebDriver driver){
+        return new PersonalTimelinePage(driver);
     }
     public static PersonalFriend getPersonalFriendTab(WebDriver driver){
         return new PersonalFriend(driver);

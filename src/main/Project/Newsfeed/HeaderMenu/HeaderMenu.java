@@ -4,14 +4,20 @@ import CommonHelper.Function.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public class HeaderMenu extends AbstractPage {
-    public void clickFunctionOnHelping(WebDriver driver,String helperItem){
-        selectItemInCustomDropdown(driver,HeaderPageUI.MENU_HELPER,HeaderPageUI.MENU_HELPER_ITEM,helperItem);
+    public void clickFunctionOnHelping(WebDriver driver,String pageLink){
+        waitElementToClickAble(driver, HeaderPageUI.MENU_HELPER);
+        clickToElement(driver, HeaderPageUI.MENU_HELPER);
+        setTimeDelay(1);
+        clickToElement(driver, HeaderPageUI.MENU_HELPER_ITEM, pageLink);
     }
-    public void clickItemOnSettingMenu(WebDriver driver,String settingITem){
-        selectItemInCustomDropdown(driver,HeaderPageUI.MENU_SETTING,HeaderPageUI.MENU_SETTING_ITEM,settingITem);
+    public void clickItemOnSettingMenu(WebDriver driver,String setFunction){
+        waitElementToClickAble(driver, HeaderPageUI.MENU_SETTING);
+        clickToElement(driver, HeaderPageUI.MENU_SETTING);
+        setTimeDelay(1);
+        clickToElement(driver, HeaderPageUI.MENU_SETTING_ITEM, setFunction);
     }
 
-    public void GoToNewsfeedHomePage(WebDriver driver){
+    public void goToNewsfeedHomePage(WebDriver driver){
         waitElementToVisible(driver,HeaderPageUI.HOMEPAGE_LINK);
         clickToElement(driver,HeaderPageUI.HOMEPAGE_LINK);
     }

@@ -6,7 +6,7 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
-import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
+import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePage;
 import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class FunctionCopyLink extends AbstractTest {
 
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTab newsfeedPage;
-    PersonalTimelinePageObject personalTimeline;
+    PersonalTimelinePage personalTimeline;
     OverviewPageObject perOverviewPage;
 
 
@@ -39,7 +39,7 @@ public class FunctionCopyLink extends AbstractTest {
         log.info("Precondition - Step 04 - Click Login button");
         loginNewsfeedPage.clickLoginButton();
         newsfeedPage = PageGenerator.createTabNewsfeed(driver);
-        newsfeedPage.clickToUserHomePage();
+        newsfeedPage.clickToUserHomePage(driver);
         personalTimeline = PageGenerator.getPersonalTimeLinePage(driver);
     }
     @Test

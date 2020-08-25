@@ -6,7 +6,7 @@ import CommonHelper.Function.AbstractTest;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
-import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePageObject;
+import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePage;
 import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class TestcaseOfPost extends AbstractTest {
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTab newsFeedPage;
     NormalPostEditor normalPostEditor;
-    PersonalTimelinePageObject perTimelinePage;
+    PersonalTimelinePage perTimelinePage;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
     String authorName = "Chúa Tể Khô";
@@ -146,7 +146,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.inputNormalPostContent(contentPost);
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
         perTimelinePage.backPreviousPage(driver);
@@ -163,7 +163,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 4.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
@@ -181,7 +181,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -199,7 +199,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -217,7 +217,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -235,7 +235,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -253,7 +253,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -273,7 +273,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -291,7 +291,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
@@ -309,7 +309,7 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.clickToCreatePost();
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage();
+        newsFeedPage.clickToUserHomePage(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         log.info("Step 4.5 - Check post has been created successfully");
         verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));

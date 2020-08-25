@@ -20,10 +20,11 @@ public class HeaderPageUI {
 
     // Helper menu
     public static final String MENU_HELPER = "//i[@class = ' ic ic-question-circle-primary']";
-    public static final String MENU_HELPER_ITEM = "//i[@class = 'ic ic-question-circle-primary']/parent::span/following-sibling::div/a";
+    public static final String MENU_HELPER_ITEM = "//i[@class = 'ic ic-question-circle-primary']/parent::span/following-sibling::div//a[contains(@data-bind,'%s')]";
+
     // Setting menu
     public static final String MENU_SETTING = "//i[@class = 'ic ic-caret-down primary']";
-    public static final String MENU_SETTING_ITEM = "//i[@class = 'ic ic-caret-down primary']/parent::span/following-sibling::div/a/span/following-sibling::span";
+    public static final String MENU_SETTING_ITEM = "//i[@class = 'ic ic-caret-down primary']/parent::span/following-sibling::div//i[contains(@class,'%s')]";
 
 
 }
