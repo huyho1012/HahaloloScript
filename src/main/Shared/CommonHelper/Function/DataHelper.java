@@ -5,8 +5,8 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 public class DataHelper {
-    private Locale locale = new Locale("en");
-    private Faker faker = new Faker(locale);
+    private final Locale locale = new Locale("en");
+    private final Faker faker = new Faker(locale);
 
     public static DataHelper getData(){
         return new DataHelper();

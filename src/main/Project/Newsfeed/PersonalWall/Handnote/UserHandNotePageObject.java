@@ -11,7 +11,9 @@ public class UserHandNotePageObject extends HeaderMenu{
     }
 
     public boolean checkHandnoteTourTabIsDisplay(String username) {
-        return getTextOfElement(driver, PersonalCommonUI.PERSONAL_NAME).equals(username) && checkIsSelectedElement(driver, UserHandnoteUI.TITTLE_HANDNOTE) && checkIsSelectedElement(driver,UserHandnoteUI.TITLE_TAB_TOUR_HANDNOTE);
+        return getTextOfElement(driver, PersonalCommonUI.PERSONAL_NAME).contains(username)
+                && getTextOfElement(driver, UserHandnoteUI.TITTLE_HAND_NOTES).contains("Sổ tay")
+                && checkIsDisplayedElement(driver,UserHandnoteUI.TAB_TOUR_HAND_NOTES);
 
     }
 }

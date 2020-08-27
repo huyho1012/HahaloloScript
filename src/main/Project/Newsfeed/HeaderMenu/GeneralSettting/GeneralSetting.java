@@ -101,7 +101,8 @@ public class GeneralSetting extends CommonAccountSetting {
         return null;
     }
 
-    public boolean checkGeneralAccountSettingTabIsDisplay(WebDriver driver) {
-        return true;
+    public boolean checkGeneralAccountSettingTabIsDisplay(WebDriver driver, String fullName) {
+        waitElementToVisible(driver,GeneralSettingUI.FULL_NAME_DATA);
+        return getTitlePage(driver).contains("Cài đặt tài khoản | Hahalolo") && getTextOfElement(driver,GeneralSettingUI.FULL_NAME_DATA).contains(fullName) && checkIsDisplayedElement(driver, GeneralSettingUI.TITLE_OF_TAB,"setting_general");
     }
 }

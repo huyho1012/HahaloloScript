@@ -10,32 +10,25 @@ public class NormalPostEditor extends Function {
         driver= webDriver;
     }
 
-    // Hàm get title của Normal Editor
     public String getTitleOfNormalPost(){
         waitElementToVisible(driver, NormalPostUI.TITLE_POPUP);
         return getTextOfElement(driver, NormalPostUI.TITLE_POPUP);
     }
 
-    // Hàm kiểm tra Khởi tạo hiển thị Normal Editor
     public boolean checkNewNormalPostEditorIsDisplay(WebDriver driver) {
-        if(checkIsDisplayedElement(driver, CommonEditorUI.CREATE_BUTTON) && !checkStatusOfShareButton(driver)
+        return checkIsDisplayedElement(driver, CommonEditorUI.CREATE_BUTTON) && !checkStatusOfShareButton(driver)
                 && checkIsDisplayedElement(driver, CommonEditorUI.SCOPE_POST_DROPDOWN) && checkIsDisplayedElement(driver, CommonEditorUI.TAGGING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_LOCATION_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.ADD_FELLING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_IMAGE_FUNCTION) && getTitleOfNormalPost().contains("Tạo bài viết")
-                && checkIsDisplayedElement(driver, CommonEditorUI.EMOJI_INSERT_FUNCTION))
-            return true;
-        return false;
+                && checkIsDisplayedElement(driver, CommonEditorUI.EMOJI_INSERT_FUNCTION);
     }
 
-    // Hàm kiểm tra Khởi tạo hiển thị Normal Editor
     public boolean checkEditNormalPostEditorIsDisplay(WebDriver driver) {
-        if(checkIsDisplayedElement(driver, CommonEditorUI.CREATE_BUTTON) && checkStatusOfShareButton(driver)
+        return checkIsDisplayedElement(driver, CommonEditorUI.CREATE_BUTTON) && checkStatusOfShareButton(driver)
                 && checkIsDisplayedElement(driver, CommonEditorUI.SCOPE_POST_DROPDOWN) && checkIsDisplayedElement(driver, CommonEditorUI.TAGGING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_LOCATION_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.ADD_FELLING_FUNCTION)
                 && checkIsDisplayedElement(driver, CommonEditorUI.ADD_IMAGE_FUNCTION) && checkIsDisplayedElement(driver, CommonEditorUI.EMOJI_INSERT_FUNCTION)
-                && getTitleOfNormalPost().contains("Chỉnh sửa bài viết"))
-            return true;
-        return false;
+                && getTitleOfNormalPost().contains("Chỉnh sửa bài viết");
     }
 
 

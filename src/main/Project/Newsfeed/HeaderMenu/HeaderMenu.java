@@ -22,6 +22,11 @@ public class HeaderMenu extends AbstractPage {
         clickToElement(driver,HeaderPageUI.HOMEPAGE_LINK);
     }
 
+    public void clickToUserHomePage(WebDriver driver) {
+        waitElementToVisible(driver, HeaderPageUI.PERSONAL_URL_LINK);
+        clickToElement(driver,HeaderPageUI.PERSONAL_URL_LINK);
+    }
+
     public void goToWalletLoginPage(WebDriver driver){
         waitElementToVisible(driver,HeaderPageUI.WALLET_FUNCTION);
         clickToElement(driver,HeaderPageUI.WALLET_FUNCTION);

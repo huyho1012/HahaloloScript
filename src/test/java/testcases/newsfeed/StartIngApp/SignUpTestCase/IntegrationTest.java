@@ -105,7 +105,7 @@ public class IntegrationTest extends AbstractTest {
         log.info("Step 10 - Logout account");
         perOverviewTab.clickItemOnSettingMenu(driver,"Đăng xuất");
         accGeneralSetting = PageGenerator.createAccountSettingGeneralTab(driver);
-        verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);;
+        verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);
     }
 //    @AfterTest
 //    public void closeBrowserAndDriver(){

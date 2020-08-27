@@ -36,7 +36,7 @@ public class TestcaseFunctionUpdateFullName extends AbstractTest {
        loginNewsfeedPage.clickLoginButton();
        newsFeedHomePage = PageGenerator.getNewsFeedPage(driver);
 
-         fullName = newsFeedHomePage.getFullNameDisplayOnMyAccount();
+         fullName = newsFeedHomePage.getFullNameDisplayOnMyAccount(driver);
 
         log.info("Precondition step 2.1 - AccountSetting page - Click Account Setting on menu");
 

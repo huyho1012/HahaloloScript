@@ -1,4 +1,4 @@
-package PersonalWall.About.Common;
+package Newsfeed.PersonalWall.About.Common;
 
 public class PersonalAboutUI {
     public static final String VALUE_OF_PERSONAL = "//li[@class ='list-user__item']//label[contains(text(),'%s')]/following-sibling::div[@class='col']";

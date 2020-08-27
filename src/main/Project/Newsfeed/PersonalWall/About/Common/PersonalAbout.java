@@ -1,17 +1,14 @@
 package Newsfeed.PersonalWall.About.Common;
 
 import Newsfeed.HeaderMenu.HeaderMenu;
-import PersonalWall.About.Common.PersonalAboutUI;
+import Newsfeed.PersonalWall.PersonalCommonUI;
 import org.openqa.selenium.WebDriver;
 
 public class PersonalAbout extends HeaderMenu {
     WebDriver driver;
     public boolean checkDataValueAccount(WebDriver driver, String valuePer, String valueData){
         waitElementToVisible(driver, PersonalAboutUI.VALUE_OF_PERSONAL,valuePer);
-        if(getTextOfElement(driver,PersonalAboutUI.VALUE_OF_PERSONAL,valuePer).equals(valueData)){
-            return true;
-        }else
-            return false;
+        return getTextOfElement(driver, PersonalAboutUI.VALUE_OF_PERSONAL, valuePer).equals(valueData);
     }
 
     public void clickToOverViewTab(){
@@ -36,5 +33,9 @@ public class PersonalAbout extends HeaderMenu {
     public void clickToDetailAboutYouTab(){
         waitElementToVisible(driver,PersonalAboutUI.DETAILS_ABOUT_TAB);
         clickToElement(driver,PersonalAboutUI.DETAILS_ABOUT_TAB);
+    }
+
+    public boolean checkPageAboutIsDisplay(WebDriver driver, String fullName) {
+        return getTextOfElement(driver, PersonalCommonUI.PERSONAL_NAME).contains(fullName) && checkIsDisplayedElement(driver, PersonalAboutUI.OVERVIEW_TAB);
     }
 }

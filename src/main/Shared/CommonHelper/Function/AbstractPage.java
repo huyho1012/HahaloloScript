@@ -61,6 +61,9 @@ public abstract class AbstractPage {
     public void refreshPage(WebDriver driver){
         driver.navigate().refresh();
     }
+    public void closePage(WebDriver driver){
+        driver.close();
+    }
     public void waitPresenceAlert(WebDriver driver){
         explicitWait = new WebDriverWait(driver, GlobalVariables.LONG_TIME_OUT);
         explicitWait.until(ExpectedConditions.alertIsPresent());
@@ -100,10 +103,22 @@ public abstract class AbstractPage {
         for(String currentWindow:allWindow){
             driver.switchTo().window(currentWindow);
             String textCurrentWindow = driver.getTitle();
-            if(!currentWindow.equals(titleWindow)){
+            if(textCurrentWindow.equals(titleWindow)){
                 break;
             }
         }
+    }
+
+    public String getTitleAnotherWindow(WebDriver driver , String titleWindow){
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String currentWindow:allWindow){
+            driver.switchTo().window(currentWindow);
+            String textCurrentWindow = driver.getTitle();
+            if(textCurrentWindow.equals(titleWindow)){
+                break;
+            }
+        }
+        return driver.getTitle();
     }
     public void closeAllWindowExceptParentWindow(WebDriver driver , String parentID){
         Set<String> allWindow = driver.getWindowHandles();
@@ -459,4 +474,22 @@ public abstract class AbstractPage {
         jsExecutor.executeScript("arguments[0].click();",element);
     }
 
+    public void closeParentWindow(WebDriver driver){
+        String titleID = driver.getWindowHandle();
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String currentWindow :allWindow){
+            driver.switchTo().window(currentWindow);
+            driver.close();
+        }
+        driver.switchTo().window(titleID);
+    }
+
+
+    public String getTitleOfTabByChoose(WebDriver driver, String titleTab) {
+        String tabID = driver.getWindowHandle();
+        String text = getTitleAnotherWindow(driver,titleTab);
+        driver.close();
+        driver.switchTo().window(tabID);
+        return text;
+    }
 }

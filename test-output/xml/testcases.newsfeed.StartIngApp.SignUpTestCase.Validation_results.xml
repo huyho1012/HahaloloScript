@@ -4,17 +4,17 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="85.343">
+           time="57.554">
   <properties />
   
   
-            <testcase name="TC06_ValidationOFConfirmPasswordField" time="0.960" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC03_ValidationOfEmail" time="2.576" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC08_RegisterAccountWithEmailIsUppercase" time="42.815" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC04_ValidateOfUsernameWithPhone" time="4.486" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC05_ValidationOFPasswordField" time="0.866" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC01_CheckValidationFirstName" time="1.611" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC09_RegisterAccountWithEmailContainsMoreThan2Idots" time="30.808" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
-                <testcase name="TC02_CheckValidationLastName" time="1.221" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+            <testcase name="TC08_RegisterAccountWithEmailIsUppercase" time="24.714" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC05_ValidationOFPasswordField" time="1.163" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC09_RegisterAccountWithEmailContainsMoreThan2Idots" time="22.075" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC02_CheckValidationLastName" time="1.554" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC03_ValidationOfEmail" time="2.256" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC01_CheckValidationFirstName" time="2.138" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC06_ValidationOFConfirmPasswordField" time="1.302" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC04_ValidateOfUsernameWithPhone" time="2.352" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
       
 </testsuite>

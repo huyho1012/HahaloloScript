@@ -22,7 +22,7 @@ public class FeedCommon extends HeaderMenu {
     }
 
     // Mở model Post Normal
-    public void clickToNormalPostFunction() {
+    public void clickToNormalPostFunction(WebDriver driver) {
         waitElementToClickAble(driver, NormalPostUI.TITLE_POPUP);
         clickToElement(driver, NormalPostUI.TITLE_POPUP);
     }
@@ -31,11 +31,7 @@ public class FeedCommon extends HeaderMenu {
         waitElementToClickAble(driver, ExperiencePostUI.EXPERIENCE_MODE);
         clickToElement(driver, ExperiencePostUI.EXPERIENCE_MODE);
     }
-    // Điều hướng tới trang personal-Timeline
-    public void clickToUserHomePage(WebDriver driver) {
-        waitElementToVisible(driver, HeaderPageUI.PERSONAL_URL_LINK);
-        clickToElement(driver,HeaderPageUI.PERSONAL_URL_LINK);
-    }
+
 
     public FirstUpdateInfo targetToFirstUpdateInfoPopup(WebDriver driver){
         waitElementToVisible(driver, FirstUpdatePopUpUI.FORM_UPDATE_INFO);

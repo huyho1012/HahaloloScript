@@ -16,7 +16,14 @@ public class BusinessDashboard extends HeaderMenu {
         return PageGenerator.getBusinessDashboardPage(driver);
     }
 
-    public boolean checkBusinessDashboardPageIsDisplay(WebDriver driver) {
-        return true;
+    public boolean  checkDashboardPageIsDisplayCaseHaveBusiness(WebDriver driver, String parentID) {
+        setTimeDelay(1);
+        switchToAnotherWindowByTitle(driver, parentID);
+        return getTextOfElement(driver, BusinessDashboardUI.TITLE_CONTENT).contains("Quản lý tài khoản")
+                && checkIsDisplayedElement(driver, BusinessDashboardUI.BUTTON_CONTENT,"Quản lý tài khoản");
+    }
+
+    public void clickToBusiness() {
+        clickToElement(driver,BusinessDashboardUI.BUTTON_CONTENT);
     }
 }

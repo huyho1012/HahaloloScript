@@ -47,15 +47,17 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Precondition - Step 3.3 - Login Newsfeed - Click Login button");
 
         loginNewsfeedPage.clickLoginButton();
-        PageGenerator.createTabNewsfeed(driver);
+        newsFeedPage =  PageGenerator.createTabNewsfeed(driver);
 
         log.info("Precondition - Step 3.4 - Login Newsfeed - Verify Login successfully");
         verifyTrue(newsFeedPage.checkLoginSuccess(driver));
 
         log.info("Precondition - Step 3.5 - Change Language Newsfeed");
+        newsFeedPage.changeLanguageDisplayToVietnamese();
+        newsFeedPage.setTimeDelay(1);
 
         log.info("Precondition - Step 4  - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
 
         log.info("Precondition - Step 4  - Verify display Normal Post Editor");
@@ -86,12 +88,12 @@ public class TestcaseOfPost extends AbstractTest {
 
     @Test
     public void TC03_Check_Button_Shared_Post(){
-        log.info("Step 1 - Check content of button");
-        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"");
-
+//        log.info("Step 1 - Check content of button");
+//        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"");
+;
         log.info("Step 1 - Default (No content input)");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 2 - User only add feeling");
+        log.info("Step 2 - User only add feeling")
         normalPostEditor.chooseFeeling(driver,"thú vị");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
         normalPostEditor.removeFeeling(driver,"thú vị");
@@ -155,7 +157,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content -  100000 characters");
         log.info("Step 4.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 4.2 - Input content");
         normalPostEditor.inputNormalPostContent(randomSentence(10000));
@@ -173,7 +175,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 5 - Check post content - one paragraph");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent(randomParagraphs(1));
@@ -191,7 +193,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 3 - Check post content -  >= 2 paragraphs");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent(randomParagraphs(2));
@@ -209,7 +211,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content - HTML code");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent(GlobalVariables.HTML_CODE);
@@ -227,7 +229,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content - Script code");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent(GlobalVariables.SCRIPT_CODE);
@@ -245,7 +247,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content with only Emoji");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input Emoji");
         normalPostEditor.insertEmoji(driver,2);
@@ -263,7 +265,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content with Content + Emoji");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent(contentPost);
@@ -283,7 +285,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content - special Character");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent("@@@ $$@ASdas $@# $@34q");
@@ -301,7 +303,7 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Step 4 - Check post content - Whitespace before and after");
         log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction();
+        newsFeedPage.clickToNormalPostFunction(driver);
         normalPostEditor = PageGenerator.openNormalPostEditor(driver);
         log.info("Step 5.2 - Input content");
         normalPostEditor.inputNormalPostContent("  Hahaha Bạn tôi ơi  ");
