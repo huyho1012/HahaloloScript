@@ -88,24 +88,29 @@ public class TestcaseOfPost extends AbstractTest {
 
     @Test
     public void TC03_Check_Button_Shared_Post(){
-//        log.info("Step 1 - Check content of button");
-//        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"");
-;
-        log.info("Step 1 - Default (No content input)");
+        log.info("Step 1 - Check content of button");
+        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"Chia sẻ");
+
+        log.info("Step 2 - Check status button when open new editor");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 2 - User only add feeling")
+
+        log.info("Step 3 - Check status button when user only add feeling");
         normalPostEditor.chooseFeeling(driver,"thú vị");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+
+        log.info("Step 4 - Check status button when user only add location");
         normalPostEditor.removeFeeling(driver,"thú vị");
-        log.info("Step 3 - User only add location");
         normalPostEditor.chooseLocationAddress(driver,"Ho Chi Minh City");
-        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+
+
         log.info("Step 4 - User only tag friend");
+        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
         normalPostEditor.chooseUserTagging(driver,"Huy Hồ",1);
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        normalPostEditor.removeOneUserTagging(driver,1);
+
         log.info("Step 6 - User add image");
+        normalPostEditor.removeOneUserTagging(driver,1);
         normalPostEditor.uploadImageToNormalPost(driver, file1,file2);
         normalPostEditor.setTimeDelay(3);
         verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
@@ -119,206 +124,207 @@ public class TestcaseOfPost extends AbstractTest {
         normalPostEditor.inputNormalPostContent("");
         log.info("Step 9 - User input whitespace content");
         normalPostEditor.inputNormalPostContent("     ");
+        normalPostEditor.clickToTargetTextArea();
         verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
         log.info("Step 10 - User insert emoji");
         normalPostEditor.insertEmoji(driver,4);
         verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
         normalPostEditor.clearNormalPostContent();
     }
-    @Test
-    public void TC04_VALIDATE_POST_CONTENT(){
-        log.info("Step 1 - Do not input ");
-        normalPostEditor.inputNormalPostContent("");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        System.out.println("Finish Step 1");
-
-        log.info("Step 2 - All Whitespace");
-        normalPostEditor.inputNormalPostContent("          ");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        System.out.println("Finish Step 2");
-
-        log.info("Step 3 - > 100000 character");
-        normalPostEditor.inputNormalPostContent(randomSentence(10001));
-        normalPostEditor.clickToCreatePost();
-        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000");
-        normalPostEditor.clickButtonOk(driver);
-        System.out.println("Finish Step 3");
-
-        log.info("Step 4 - Valid content");
-        normalPostEditor.inputNormalPostContent(contentPost);
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
-        perTimelinePage.backPreviousPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        System.out.println("Complete 4");
-
-        log.info("Step 4 - Check post content -  100000 characters");
-        log.info("Step 4.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 4.2 - Input content");
-        normalPostEditor.inputNormalPostContent(randomSentence(10000));
-        log.info("Step 4.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 4.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.backPreviousPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 5 - Check post content - one paragraph");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(randomParagraphs(1));
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 3 - Check post content -  >= 2 paragraphs");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(randomParagraphs(2));
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content - HTML code");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(GlobalVariables.HTML_CODE);
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content - Script code");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(GlobalVariables.SCRIPT_CODE);
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content with only Emoji");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input Emoji");
-        normalPostEditor.insertEmoji(driver,2);
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content with Content + Emoji");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent(contentPost);
-        log.info("Step 5.2 - Input Emoji");
-        normalPostEditor.insertEmoji(driver,2);
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content - special Character");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent("@@@ $$@ASdas $@# $@34q");
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-
-        log.info("Step 4 - Check post content - Whitespace before and after");
-        log.info("Step 5.1 - Open Normal Post Editor");
-        newsFeedPage.clickToNormalPostFunction(driver);
-        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
-        log.info("Step 5.2 - Input content");
-        normalPostEditor.inputNormalPostContent("  Hahaha Bạn tôi ơi  ");
-        log.info("Step 5.3 - Click Share post button");
-        normalPostEditor.clickToCreatePost();
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-        log.info("Step 5.4 - Go to Personal Timeline");
-        newsFeedPage.clickToUserHomePage(driver);
-        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
-        log.info("Step 4.5 - Check post has been created successfully");
-        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
-        log.info("Step 4.6 - Back to newsfeed");
-        perTimelinePage.clickToLogoPage(driver);
-        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-    }
+//    @Test
+//    public void TC04_VALIDATE_POST_CONTENT(){
+//        log.info("Step 1 - Do not input ");
+//        normalPostEditor.inputNormalPostContent("");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        System.out.println("Finish Step 1: " + normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 2 - All Whitespace");
+//        normalPostEditor.inputNormalPostContent("          ");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        System.out.println("Finish Step 2: " + normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 3 - > 100000 character");
+//        normalPostEditor.inputNormalPostContent(randomSentence(10001));
+//        normalPostEditor.clickToCreatePost(driver);
+//        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000 ký tự");
+//        normalPostEditor.clickButtonOk(driver);
+//        System.out.println("Finish Step 3: "+ normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 4 - Valid content");
+//        normalPostEditor.inputNormalPostContent(contentPost);
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
+//        perTimelinePage.backPreviousPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        System.out.println("Finish 4" + normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 4 - Check post content -  100000 characters");
+//        log.info("Step 4.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 4.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(randomSentence(10000));
+//        log.info("Step 4.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 4.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        perTimelinePage.checkCreatedPostSuccessfully(driver,"",contentPost);
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.backPreviousPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 5 - Check post content - one paragraph");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(randomParagraphs(1));
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 3 - Check post content -  >= 2 paragraphs");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(randomParagraphs(2));
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content - HTML code");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(GlobalVariables.HTML_CODE);
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content - Script code");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(GlobalVariables.SCRIPT_CODE);
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content with only Emoji");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input Emoji");
+//        normalPostEditor.insertEmoji(driver,2);
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content with Content + Emoji");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent(contentPost);
+//        log.info("Step 5.2 - Input Emoji");
+//        normalPostEditor.insertEmoji(driver,2);
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content - special Character");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent("@@@ $$@ASdas $@# $@34q");
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//
+//        log.info("Step 4 - Check post content - Whitespace before and after");
+//        log.info("Step 5.1 - Open Normal Post Editor");
+//        newsFeedPage.clickToNormalPostFunction(driver);
+//        normalPostEditor = PageGenerator.openNormalPostEditor(driver);
+//        log.info("Step 5.2 - Input content");
+//        normalPostEditor.inputNormalPostContent("  Hahaha Bạn tôi ơi  ");
+//        log.info("Step 5.3 - Click Share post button");
+//        normalPostEditor.clickToCreatePost(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//        log.info("Step 5.4 - Go to Personal Timeline");
+//        newsFeedPage.clickToUserHomePage(driver);
+//        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+//        log.info("Step 4.5 - Check post has been created successfully");
+//        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,"",""));
+//        log.info("Step 4.6 - Back to newsfeed");
+//        perTimelinePage.clickToLogoPage(driver);
+//        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+//    }
 //    @Test
 //    public void TC_01_CreateNewNormalPost(){
 //        log.info("Create Post - Step 01 - Open Editor function");

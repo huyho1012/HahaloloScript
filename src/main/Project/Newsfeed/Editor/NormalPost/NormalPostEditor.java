@@ -97,7 +97,12 @@ public class NormalPostEditor extends Function {
         removeTextOnElement(driver, NormalPostUI.POST_CONTENT);
     }
 
-    public Object getTextOfSharePostButton() {
-        return  null;
+    public String getTextOfSharePostButton() {
+        return getTextOfElement(driver,CommonEditorUI.CREATE_BUTTON);
+    }
+
+    public void clickToTargetTextArea() {
+        clickToElement(driver,NormalPostUI.POST_CONTENT);
+        setTimeDelay(1);
     }
 }

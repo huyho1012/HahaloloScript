@@ -116,7 +116,7 @@ public class Function extends AbstractPage {
         clickToElement(driver, CommonEditorUI.BUTTON_OK);
     }
 
-    public void clickToCreatePost() {
+    public void clickToCreatePost(WebDriver driver) {
         waitElementToVisible(driver, CommonEditorUI.CREATE_BUTTON);
         clickToElement(driver, CommonEditorUI.CREATE_BUTTON);
     }
