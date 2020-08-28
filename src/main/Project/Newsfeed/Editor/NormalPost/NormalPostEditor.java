@@ -32,8 +32,7 @@ public class NormalPostEditor extends Function {
     }
 
     public void inputNormalPostContent(WebDriver driver,String content) {
-        hoverMouseAndClickToElement(driver, NormalPostUI.POST_CONTENT);
-        pasteDataOnClipBoard(content);
+        sendKeyToElement(driver, NormalPostUI.POST_CONTENT,content);
     }
 
     // Hàm upload image

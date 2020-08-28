@@ -148,7 +148,7 @@ public abstract class AbstractPage {
     public List<WebElement> findElements(WebDriver driver, String locator){
         return driver.findElements(byXpath(locator));
     }
-    public void sendKeyToElement(WebDriver driver, String locator, String data){
+    public void  vsendKeyToElement(WebDriver driver, String locator, String data){
         element = findElement(driver,locator);
         element.clear();
         element.sendKeys(data);

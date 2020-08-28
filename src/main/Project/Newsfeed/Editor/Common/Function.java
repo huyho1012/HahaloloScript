@@ -112,7 +112,7 @@ public class Function extends AbstractPage {
     }
 
     public void clickButtonOk(WebDriver driver) {
-        waitElementToVisible(driver, CommonEditorUI.BUTTON_OK);
+        waitElementToClickAble(driver, CommonEditorUI.BUTTON_OK);
         clickToElement(driver, CommonEditorUI.BUTTON_OK);
     }
 

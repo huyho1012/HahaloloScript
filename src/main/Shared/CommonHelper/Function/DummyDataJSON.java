@@ -27,6 +27,13 @@ public class DummyDataJSON {
 
     @JsonProperty("content20001Chars")
     String content20001Chars;
+
+    @JsonProperty("updateContent")
+    String updateContent;
+
+    @JsonProperty("newContent")
+    String newContent;
+
     public String getContent10000Chars() {
         return content10000Chars;
     }
@@ -60,6 +67,12 @@ public class DummyDataJSON {
         this.content20000Chars = content20000Chars;
     }
 
+    public String getNewContent() {
+        return newContent;
+    }
 
+    public void setNewContent(String newContent) {
+        this.newContent = newContent;
+    }
 
 }

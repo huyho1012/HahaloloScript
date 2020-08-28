@@ -10,6 +10,10 @@ import Newsfeed.Editor.NormalPost.NormalPostEditor;
 import Newsfeed.PersonalWall.TimeLine.PersonalTimelinePage;
 import Newsfeed.TabFeed.NewsFeedTab;
 import StartingApp.Login.LoginNewsfeed;
+
+import com.google.inject.internal.cglib.core.$MethodWrapper;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -18,23 +22,27 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 
+
 public class TestcaseOfPost extends AbstractTest {
+    DummyDataJSON dummyData;
+    Lorem lorem;
     WebDriver driver;
     DriverManager driverManager;
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTab newsFeedPage;
     NormalPostEditor normalPostEditor;
-    DummyDataJSON dummyData;
     PersonalTimelinePage perTimelinePage;
-    String contentPost = "Hahalolo này còn ai đẹp hơn ta";
-    String updateContent = "Xiến chi 19 tủi";
-    String authorName = "Chúa Tể Khô";
+
+    String postContent;
+    String authorName;
     String file1 =  "image1.jpg";
     String file2 = "image2.jpg";
+
     @Parameters({"browser"})
     @BeforeClass
     public void preconditionTest(String browserName) throws IOException {
-        dummyData = DummyDataJSON.getDummyData(GlobalVariables.ROOT_FOLDER + ".\\SupportHelper\\DummyData\\DataJSON\\Paragraph.json");
+        lorem = LoremIpsum.getInstance();
+        dummyData = DummyDataJSON.getDummyData(GlobalVariables.DATAJSON);
         log.info("Precondition - Step 1 - Open Browser");
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
@@ -59,6 +67,8 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Precondition - Step 3.5 - Change Language Newsfeed");
         newsFeedPage.changeLanguageDisplayToVietnamese();
         newsFeedPage.setTimeDelay(1);
+
+        authorName = newsFeedPage.getFullNameDisplayOnMyAccount(driver);
 
         log.info("Precondition - Step 4  - Open Normal Post Editor");
         newsFeedPage.clickToNormalPostFunction(driver);
@@ -136,32 +146,38 @@ public class TestcaseOfPost extends AbstractTest {
 //        normalPostEditor.clearNormalPostContent();
 //    }
     @Test
-    public void TC04_VALIDATE_POST_CONTENT(){
-//        log.info("Step 1 - Do not input ");
-//        normalPostEditor.inputNormalPostContent("");
-//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-//        System.out.println("Finish Step 1: " + normalPostEditor.checkStatusOfShareButton(driver));
-//
-//        log.info("Step 2 - All Whitespace");
-//        normalPostEditor.inputNormalPostContent("          ");
-//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-//        System.out.println("Finish Step 2: " + normalPostEditor.checkStatusOfShareButton(driver));
+    public void TC04_VALIDATE_POST_CONTENT_NEGATIVE() {
+        log.info("Step 1 - Do not input ");
+        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
 
-//        log.info("Step 3 - > 100000 character");
-//        normalPostEditor.inputNormalPostContent(driver,dummyData.getContent10001Chars());
-//        normalPostEditor.clickToCreatePost(driver);
-//        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000 ký tự");
-//        normalPostEditor.clickButtonOk(driver);
-//        System.out.println("Finish Step 3: "+ normalPostEditor.checkStatusOfShareButton(driver));
+        log.info("Step 2 - All Whitespace");
+        normalPostEditor.inputNormalPostContent(driver, "   ");
+        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
 
         log.info("Step 3 - > 100000 character");
-        System.out.println("Start generate: "  + getDateTimeNow());
-        String c = randomSentence(10001);
-        System.out.println(c);
-        System.out.println("End generate: "  + getDateTimeNow());
-        System.out.println("Start time input generate: "  + getDateTimeNow());
-        normalPostEditor.inputNormalPostContent(driver,c);
-        System.out.println("End time input generate: "  + getDateTimeNow());
+        postContent = randomSentence(10001);
+        normalPostEditor.pasteDataOnClipBoard(postContent);
+        normalPostEditor.clickToCreatePost(driver);
+        normalPostEditor.setTimeDelay(1);
+        verifyEquals(normalPostEditor.getMessageErrLimitChar(), "Giới hạn tối đa của bài viết là 10000 ký tự");
+        normalPostEditor.setTimeDelay(1);
+        normalPostEditor.clickButtonOk(driver);
+    }
+
+    @Test
+    public void TC05_Create_Post_Normal_With_2_Paragraphs() {
+        postContent = lorem.getParagraphs(2,2);
+        postContent = "Test";
+        normalPostEditor.inputNormalPostContent(driver,postContent);
+//        normalPostEditor.pasteDataOnClipBoard(postContent);
+        normalPostEditor.clickToCreatePost(driver);
+        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
+        newsFeedPage.clickToAvatarUser(driver);
+        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
+        perTimelinePage.setTimeDelay(2);
+        perTimelinePage.clickEditPostHasBeenCreatedBefore(driver,postContent,authorName);
+
+    }
 
 //
 //        normalPostEditor.clickToCreatePost(driver);
@@ -392,21 +408,7 @@ public class TestcaseOfPost extends AbstractTest {
 //        perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
 //        verifyTrue(perTimelinePage.checkCreatedPostSuccessfully(driver,authorName,contentPost));
 //   }
-//    @Test
-//    public void NormalPost_03_Check_Button_Share_Post_When_User_Do_Not_Input_Content(){
-//        log.info("Check Share Post button - Step 01 - Open Editor function");
-//        newsFeedPage.clickToNormalPostFunction();
-//        postPage = PageGenerator.openNormalPostEditor(driver);
-//
-//        log.info("Check Button Share Post - Step 02 - Verify Normal Post Display");
-//        verifyTrue(postPage.checkNormalPostEditorDisplay());
-//
-//        log.info("Check Button Share Post - Step 03 - Check button Share Post disable");
-//        verifyTrue(postPage.checkSharedButtonIsDisable());
-//
-//        log.info("Check Button Share Post - Step 04 - Close Post Normal Editor");
-//        postPage.closeNormalPostEditor();
-//    }
+
 //   @Test
 //    public void TC02_Edit_Normal_Post(){
 //       log.info("Edit Normal Post - Step 01 - Click edit Personal Wall");
@@ -487,5 +489,3 @@ public class TestcaseOfPost extends AbstractTest {
 //        perTimelinePage.saveChangePost();
 //    }
 
-
-}

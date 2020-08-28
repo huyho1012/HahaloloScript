@@ -26,4 +26,9 @@ public class PersonalTimelinePage extends PersonalCommon {
         waitForPageLoading(driver);
         return getTextOfElement(driver, PersonalCommonUI.PERSONAL_NAME).equals(username) && checkIsDisplayedElement(driver,NormalPostUI.TITLE_POPUP);
     }
+
+    public void clickEditPostHasBeenCreatedBefore(WebDriver driver, String postContent, String authorName) {
+        waitForPageLoading(driver);
+        clickToElementByJS(driver,PersonalTimelinePageUI.BUTTON_EDIT,postContent,authorName);
+    }
 }

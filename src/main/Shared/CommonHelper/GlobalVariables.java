@@ -31,6 +31,8 @@ public class GlobalVariables {
     public static final String UPLOAD_ONE_FILE_FIREFOX = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\chromeUploadOneTime.exe";
     public static final String UPLOAD_ONE_FILE_CHROME = ROOT_FOLDER + "\\SupportHelper\\AutoIT\\firefoxUploadOneTime.exe";
 
+    public static final String DATAJSON = ROOT_FOLDER + ".\\SupportHelper\\DummyData\\DataJSON\\Paragraph.json";
+
     // Mailinator
     public static final String URL_MAILINATOR = "https://www.mailinator.com/";
     public static final String MAIl_SEARCH_BOX = "//input[@id = 'addOverlay']";
