@@ -10,11 +10,14 @@ import org.testng.Reporter;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Random;
 
-public class AbstractTest {
+public class AbstractTest  extends AbstractPage{
     protected final Log log;
     protected final LoremIpsum lorem;
 
@@ -36,14 +39,20 @@ public class AbstractTest {
         return text;
     }
     protected String randomSentence(int numChar) {
-        String text = null;
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz"+ " ";
+        char[] chars  = AlphaNumericString.toCharArray();
+        String text = null;
         StringBuilder bd = new StringBuilder(numChar);
-        for (int i = 0; i < numChar; i++) {
-            int index = (int) (AlphaNumericString.length() * Math.random());
-            text = bd.append(AlphaNumericString.charAt(index)).toString();
+        Random rd = new Random();
+            for (int i = 0; i < numChar; i++) {
+               char c = chars[rd.nextInt(chars.length)];
+               text = bd.append(c).toString();
         }
         return text;
+    }
+    protected Date getDateTimeNow(){
+        Date date = new Date();
+        return date;
     }
     protected int randomNumber(int number){
         Random rd = new Random();

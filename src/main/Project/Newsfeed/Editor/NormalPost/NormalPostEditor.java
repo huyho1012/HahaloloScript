@@ -31,11 +31,9 @@ public class NormalPostEditor extends Function {
                 && getTitleOfNormalPost().contains("Chỉnh sửa bài viết");
     }
 
-
-
-    public void inputNormalPostContent(String contentPost) {
-        waitElementToVisible(driver, NormalPostUI.POST_CONTENT);
-        sendKeyToElement(driver, NormalPostUI.POST_CONTENT, contentPost);
+    public void inputNormalPostContent(WebDriver driver,String content) {
+        hoverMouseAndClickToElement(driver, NormalPostUI.POST_CONTENT);
+        pasteDataOnClipBoard(content);
     }
 
     // Hàm upload image
@@ -45,8 +43,7 @@ public class NormalPostEditor extends Function {
     }
 
     public void removeImage(WebDriver driver) {
-        int numImage = countElements(driver, NormalPostUI
-                .LIST_IMAGE_ATTACHMENT);
+        int numImage = countElements(driver, NormalPostUI.LIST_IMAGE_ATTACHMENT);
         for(int i = numImage ; i > 0; i--){
             hoverMouseToElement(driver, NormalPostUI.ITEM_IMAGE,String.valueOf(i));
             clickToElement(driver, NormalPostUI.BUTTON_REMOVE_ITEM_IMAGE,String.valueOf(i));
@@ -55,7 +52,6 @@ public class NormalPostEditor extends Function {
 
     // Hàm get placeholder
     public String getPlaceHolderPostNormal() {
-        waitElementToVisible(driver,NormalPostUI.POST_CONTENT);
         return getAttributeOfElement(driver, NormalPostUI.POST_CONTENT,"data-placeholder");
     }
 

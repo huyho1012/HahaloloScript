@@ -31,7 +31,7 @@ public abstract class AbstractPage {
         driver.manage().timeouts().pageLoadTimeout(GlobalVariables.LONG_TIME_OUT,TimeUnit.SECONDS);
     }
     public void setImplicitWait(WebDriver driver){
-        driver.manage().timeouts().implicitlyWait(GlobalVariables.LONG_TIME_OUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
     public void setTimeDelay(long time){
         try {
@@ -224,6 +224,11 @@ public abstract class AbstractPage {
         action = new Actions(driver);
         action.moveToElement(element).perform();
     }
+    public void hoverMouseAndClickToElement(WebDriver driver, String locator){
+        element = findElement(driver, locator);
+        action = new Actions(driver);
+        action.moveToElement(element).click().perform();
+    }
     public void moveByOffset(WebDriver driver){
         action.moveByOffset(30,40).click().perform();
     }
@@ -331,6 +336,7 @@ public abstract class AbstractPage {
         element = findElement(driver,locator);
         jsExecutor.executeScript("arguments[0].setAttribute('value', '" + valueName +"')", element);
     }
+
     public void scrollToElement(WebDriver driver , String locator){
         jsExecutor = (JavascriptExecutor) driver;
         element = findElement(driver,locator);
@@ -491,5 +497,27 @@ public abstract class AbstractPage {
         driver.close();
         driver.switchTo().window(tabID);
         return text;
+    }
+
+    public void pasteDataOnClipBoard(String data){
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        robot.setAutoDelay(2000);
+        StringSelection ss = new StringSelection(data);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+        robot.setAutoDelay(1000);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.setAutoDelay(1000);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        setTimeDelay(1);
+
     }
 }

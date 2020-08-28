@@ -3,6 +3,7 @@ package testcases.newsfeed.PostFunction.NormalPost;
 import CommonHelper.DriverBrowser.BrowserDriver;
 import CommonHelper.DriverBrowser.DriverManager;
 import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.DummyDataJSON;
 import CommonHelper.Function.PageGenerator;
 import CommonHelper.GlobalVariables;
 import Newsfeed.Editor.NormalPost.NormalPostEditor;
@@ -14,6 +15,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 
 public class TestcaseOfPost extends AbstractTest {
     WebDriver driver;
@@ -21,16 +24,17 @@ public class TestcaseOfPost extends AbstractTest {
     LoginNewsfeed loginNewsfeedPage;
     NewsFeedTab newsFeedPage;
     NormalPostEditor normalPostEditor;
+    DummyDataJSON dummyData;
     PersonalTimelinePage perTimelinePage;
     String contentPost = "Hahalolo này còn ai đẹp hơn ta";
     String updateContent = "Xiến chi 19 tủi";
     String authorName = "Chúa Tể Khô";
     String file1 =  "image1.jpg";
     String file2 = "image2.jpg";
-    @Parameters("browser")
+    @Parameters({"browser"})
     @BeforeClass
-    public void preconditionTest(String browserName){
-
+    public void preconditionTest(String browserName) throws IOException {
+        dummyData = DummyDataJSON.getDummyData(GlobalVariables.ROOT_FOLDER + ".\\SupportHelper\\DummyData\\DataJSON\\Paragraph.json");
         log.info("Precondition - Step 1 - Open Browser");
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
@@ -63,76 +67,76 @@ public class TestcaseOfPost extends AbstractTest {
         log.info("Precondition - Step 4  - Verify display Normal Post Editor");
         verifyTrue(normalPostEditor.checkEditNormalPostEditorIsDisplay(driver));
     }
-    @Test
-    public void TC01_Check_Display_of_Editor_Case_New_Post() {
-
-        log.info("Check content of post normal");
-        verifyEquals(normalPostEditor.getTitleOfNormalPost(),"Tạo bài viết");
-
-        log.info("Check placeholder of post normal");
-        verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
-
-        log.info("Check status of button Share post");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Check default Scope dropdown");
-        verifyEquals(normalPostEditor.getScopeDisplayOnDropdown(driver),"Công khai");
-
-        log.info("Check function display on post normal");
-        verifyTrue(normalPostEditor.checkFunctionInsertEmojiIsDisplay());
-        verifyTrue(normalPostEditor.checkFunctionTaggingUserIsDisplay());
-        verifyTrue(normalPostEditor.checkFunctionAddLocationIsDisplay());
-        verifyTrue(normalPostEditor.checkFunctionAddImageIsDisplay());
-        verifyTrue(normalPostEditor.checkFunctionAddFeelingIsDisplay());
-    }
-
-    @Test
-    public void TC03_Check_Button_Shared_Post(){
-        log.info("Step 1 - Check content of button");
-        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"Chia sẻ");
-
-        log.info("Step 2 - Check status button when open new editor");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 3 - Check status button when user only add feeling");
-        normalPostEditor.chooseFeeling(driver,"thú vị");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 4 - Check status button when user only add location");
-        normalPostEditor.removeFeeling(driver,"thú vị");
-        normalPostEditor.chooseLocationAddress(driver,"Ho Chi Minh City");
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-
-        log.info("Step 4 - User only tag friend");
-        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
-        normalPostEditor.chooseUserTagging(driver,"Huy Hồ",1);
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-
-        log.info("Step 6 - User add image");
-        normalPostEditor.removeOneUserTagging(driver,1);
-        normalPostEditor.uploadImageToNormalPost(driver, file1,file2);
-        normalPostEditor.setTimeDelay(3);
-        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 7 - User remove image");
-        normalPostEditor.removeImage(driver);
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 8 - User input content");
-        normalPostEditor.inputNormalPostContent(contentPost);
-        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 9 - User remove content");
-        normalPostEditor.inputNormalPostContent("");
-        log.info("Step 9 - User input whitespace content");
-        normalPostEditor.inputNormalPostContent("     ");
-        normalPostEditor.clickToTargetTextArea();
-        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
-        log.info("Step 10 - User insert emoji");
-        normalPostEditor.insertEmoji(driver,4);
-        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
-        normalPostEditor.clearNormalPostContent();
-    }
 //    @Test
-//    public void TC04_VALIDATE_POST_CONTENT(){
+//    public void TC01_Check_Display_of_Editor_Case_New_Post() {
+//
+//        log.info("Check content of post normal");
+//        verifyEquals(normalPostEditor.getTitleOfNormalPost(),"Tạo bài viết");
+//
+//        log.info("Check placeholder of post normal");
+//        verifyEquals(normalPostEditor.getPlaceHolderPostNormal(),"Haha, hôm nay bạn thế nào?");
+//
+//        log.info("Check status of button Share post");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Check default Scope dropdown");
+//        verifyEquals(normalPostEditor.getScopeDisplayOnDropdown(driver),"Công khai");
+//
+//        log.info("Check function display on post normal");
+//        verifyTrue(normalPostEditor.checkFunctionInsertEmojiIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionTaggingUserIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddLocationIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddImageIsDisplay());
+//        verifyTrue(normalPostEditor.checkFunctionAddFeelingIsDisplay());
+//    }
+
+//    @Test
+//    public void TC03_Check_Button_Shared_Post(){
+//        log.info("Step 1 - Check content of button");
+//        verifyEquals(normalPostEditor.getTextOfSharePostButton(),"Chia sẻ");
+//
+//        log.info("Step 2 - Check status button when open new editor");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 3 - Check status button when user only add feeling");
+//        normalPostEditor.chooseFeeling(driver,"thú vị");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 4 - Check status button when user only add location");
+//        normalPostEditor.removeFeeling(driver,"thú vị");
+//        normalPostEditor.chooseLocationAddress(driver,"Ho Chi Minh City");
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//
+//        log.info("Step 4 - User only tag friend");
+//        normalPostEditor.removeLocation(driver,"Ho Chi Minh City");
+//        normalPostEditor.chooseUserTagging(driver,"Huy Hồ",1);
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//
+//        log.info("Step 6 - User add image");
+//        normalPostEditor.removeOneUserTagging(driver,1);
+//        normalPostEditor.uploadImageToNormalPost(driver, file1,file2);
+//        normalPostEditor.setTimeDelay(3);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//        log.info("Step 7 - User remove image");
+//        normalPostEditor.removeImage(driver);
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        log.info("Step 8 - User input content");
+//        normalPostEditor.inputNormalPostContent(contentPost);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//        log.info("Step 9 - User remove content");
+//        normalPostEditor.inputNormalPostContent("");
+//        log.info("Step 9 - User input whitespace content");
+//        normalPostEditor.inputNormalPostContent("     ");
+//        normalPostEditor.clickToTargetTextArea();
+//        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
+//        log.info("Step 10 - User insert emoji");
+//        normalPostEditor.insertEmoji(driver,4);
+//        verifyTrue(normalPostEditor.checkStatusOfShareButton(driver));
+//        normalPostEditor.clearNormalPostContent();
+//    }
+    @Test
+    public void TC04_VALIDATE_POST_CONTENT(){
 //        log.info("Step 1 - Do not input ");
 //        normalPostEditor.inputNormalPostContent("");
 //        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
@@ -142,9 +146,24 @@ public class TestcaseOfPost extends AbstractTest {
 //        normalPostEditor.inputNormalPostContent("          ");
 //        verifyFalse(normalPostEditor.checkStatusOfShareButton(driver));
 //        System.out.println("Finish Step 2: " + normalPostEditor.checkStatusOfShareButton(driver));
-//
+
 //        log.info("Step 3 - > 100000 character");
-//        normalPostEditor.inputNormalPostContent(randomSentence(10001));
+//        normalPostEditor.inputNormalPostContent(driver,dummyData.getContent10001Chars());
+//        normalPostEditor.clickToCreatePost(driver);
+//        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000 ký tự");
+//        normalPostEditor.clickButtonOk(driver);
+//        System.out.println("Finish Step 3: "+ normalPostEditor.checkStatusOfShareButton(driver));
+
+        log.info("Step 3 - > 100000 character");
+        System.out.println("Start generate: "  + getDateTimeNow());
+        String c = randomSentence(10001);
+        System.out.println(c);
+        System.out.println("End generate: "  + getDateTimeNow());
+        System.out.println("Start time input generate: "  + getDateTimeNow());
+        normalPostEditor.inputNormalPostContent(driver,c);
+        System.out.println("End time input generate: "  + getDateTimeNow());
+
+//
 //        normalPostEditor.clickToCreatePost(driver);
 //        verifyEquals(normalPostEditor.getMessageErrLimitChar(),"Giới hạn tối đa của bài viết là 10000 ký tự");
 //        normalPostEditor.clickButtonOk(driver);
@@ -324,7 +343,8 @@ public class TestcaseOfPost extends AbstractTest {
 //        log.info("Step 4.6 - Back to newsfeed");
 //        perTimelinePage.clickToLogoPage(driver);
 //        newsFeedPage = PageGenerator.getNewsFeedPage(driver);
-//    }
+    }
+
 //    @Test
 //    public void TC_01_CreateNewNormalPost(){
 //        log.info("Create Post - Step 01 - Open Editor function");

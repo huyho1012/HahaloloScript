@@ -92,6 +92,7 @@ public class IntegrationTest extends AbstractTest {
         updateInfoPopup = PageGenerator.createUpdateInfoPopup(driver);
         updateInfoPopup.updateBirthday(driver,"12","10","1992");
         updateInfoPopup.updateGender(driver,"male");
+        updateInfoPopup.setTimeDelay(2);
         updateInfoPopup.updateCountry(driver,"United States");
         updateInfoPopup.clickUpdateButton();
 

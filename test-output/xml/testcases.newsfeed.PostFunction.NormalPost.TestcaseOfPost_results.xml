@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="Test with firefox"
-           tests="2"
+           tests="1"
            failures="0"
            errors="0"
            skipped="0"
-           time="13.212">
+           time="7.638">
   <properties />
   
   
-            <testcase name="TC01_Check_Display_of_Editor_Case_New_Post" time="0.821" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
-                <testcase name="TC03_Check_Button_Shared_Post" time="12.391" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
+            <testcase name="TC04_VALIDATE_POST_CONTENT" time="7.638" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
       
 </testsuite>
