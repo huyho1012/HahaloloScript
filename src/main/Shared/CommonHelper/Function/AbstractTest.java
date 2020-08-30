@@ -178,4 +178,10 @@ public class AbstractTest  extends AbstractPage{
         }
         return null;
     }
+
+    public void convertPostContent(String postContains){
+
+        char c = postContains.charAt(postContains.length());
+
+    }
 }

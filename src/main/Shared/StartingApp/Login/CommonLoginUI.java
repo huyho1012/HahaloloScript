@@ -12,6 +12,5 @@ public class CommonLoginUI {
     public static final String VALIDATE_PASS_WORD_ERROR_MESSAGE = "//input[@name = 'password']/following-sibling::div";
 
 
-
-
+    public static final String LANGUAGE_BUTTON = "//span[contains(@data-bind, 'vi')]";
 }

@@ -49,12 +49,14 @@ public class TestcaseOfPost extends AbstractTest {
 
         log.info("Precondition - Step 2 - Open Login Newsfeed Page");
         loginNewsfeedPage= PageGenerator.createLoginNewsfeedPage(driver);
+        loginNewsfeedPage.changeLanguageSystemToVI(driver);
 
         log.info("Precondition - Step 3.1 - Login Newsfeed - Enter Username");
         loginNewsfeedPage.enterDataOnDynamicTextField("identity",GlobalVariables.FEED_EMAIL_ACCOUNT);
 
         log.info("Precondition - Step 3.2 - Login Newsfeed - Enter Password");
         loginNewsfeedPage.enterDataOnDynamicTextField("password",GlobalVariables.FEED_EMAIL_PASSWORD);
+
 
         log.info("Precondition - Step 3.3 - Login Newsfeed - Click Login button");
 
@@ -166,16 +168,16 @@ public class TestcaseOfPost extends AbstractTest {
 
     @Test
     public void TC05_Create_Post_Normal_With_2_Paragraphs() {
-        postContent = lorem.getParagraphs(2,2);
-        postContent = "Test";
+        postContent = "Một ngày mua"+"\n"+"Một ngày buồn"+"\n" +"Một ngày toang.";
         normalPostEditor.inputNormalPostContent(driver,postContent);
 //        normalPostEditor.pasteDataOnClipBoard(postContent);
         normalPostEditor.clickToCreatePost(driver);
+        System.out.println(getDateTimeNow());
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
         newsFeedPage.clickToAvatarUser(driver);
         perTimelinePage = PageGenerator.getPersonalTimeLinePage(driver);
         perTimelinePage.setTimeDelay(2);
-        perTimelinePage.clickEditPostHasBeenCreatedBefore(driver,postContent,authorName);
+//        perTimelinePage.verifyPostIsCreatedSuccessfully(driver,postContent,authorName);
 
     }
 

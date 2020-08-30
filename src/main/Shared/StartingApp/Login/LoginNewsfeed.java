@@ -11,11 +11,8 @@ public class LoginNewsfeed extends AbstractPage {
     }
 
     // Kiểm tra trang có phải tiếng việt chưa (False -> Chuyển đồi ngôn ngữ hệ thống)
-    public void changeLanguageSystemToVI(){
-        waitElementToVisible(driver, RegisterPageUI.VIETNAMESE_BUTTON);
-        if(!checkIsDisplayedElement(driver, RegisterPageUI.VIETNAMESE_BUTTON)){
-            clickToElement(driver, RegisterPageUI.VIETNAMESE_BUTTON);
-        }
+    public void changeLanguageSystemToVI(WebDriver driver){
+      clickToElement(driver,CommonLoginUI.LANGUAGE_BUTTON);
     }
 
     public void enterUserNameToLogin(WebDriver driver, String userName){

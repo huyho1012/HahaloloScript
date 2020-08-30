@@ -31,4 +31,9 @@ public class PersonalTimelinePage extends PersonalCommon {
         waitForPageLoading(driver);
         clickToElementByJS(driver,PersonalTimelinePageUI.BUTTON_EDIT,postContent,authorName);
     }
+
+    public boolean verifyPostIsCreatedSuccessfully(WebDriver driver, String postContent, String authorName) {
+        return checkIsDisplayedElement(driver,PersonalTimelinePageUI.DIRECT_POST_WITH_CONTENT_AND_AUTHOR,postContent.replace("\n", "<br>"),authorName);
+    }
+
 }

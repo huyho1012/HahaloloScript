@@ -38,12 +38,12 @@ public class Validation extends AbstractTest {
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
         newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Precondition - Change language system to Vietnamese");
-        newsfeedLoginPage.changeLanguageSystemToVI();
+        newsfeedLoginPage.changeLanguageSystemToVI(driver);
     }
 
     @Test (enabled = false)
     public void TC01_Check_UserInterface_SignUpForm_With_VI_Language(){
-        newsfeedLoginPage.changeLanguageSystemToVI();
+        newsfeedLoginPage.changeLanguageSystemToVI(driver);
         log.info("Check Title Of SignUp form when");
 
         verifyEquals(newsfeedLoginPage.getTitleOfsignUpForm(),"Tham gia Hahalolo ngay!");

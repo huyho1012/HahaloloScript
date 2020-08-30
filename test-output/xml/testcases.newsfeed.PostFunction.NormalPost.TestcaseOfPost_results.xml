@@ -4,11 +4,11 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="14.078">
+           time="14.712">
   <properties />
   
   
-            <testcase name="TC04_VALIDATE_POST_CONTENT_NEGATIVE" time="9.462" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
-                <testcase name="TC05_Create_Post_Normal_With_2_Paragraphs" time="4.616" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
+            <testcase name="TC05_Create_Post_Normal_With_2_Paragraphs" time="4.816" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
+                <testcase name="TC04_VALIDATE_POST_CONTENT_NEGATIVE" time="9.896" classname="testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost" />
       
 </testsuite>
