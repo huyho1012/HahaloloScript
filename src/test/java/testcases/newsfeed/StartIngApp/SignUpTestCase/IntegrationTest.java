@@ -1,22 +1,9 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
-import CommonHelper.DriverBrowser.BrowserDriver;
-import CommonHelper.DriverBrowser.DriverManager;
-import CommonHelper.Function.AbstractTest;
-import CommonHelper.Function.DataHelper;
-import CommonHelper.Function.PageGenerator;
-import CommonHelper.GlobalVariables;
-import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
-import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
-import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
-import Newsfeed.TabFeed.NewsFeedTab;
-
-import Newsfeed.HeaderMenu.GeneralSettting.GeneralSetting;
-import StartingApp.Login.LoginNewsfeed;
-import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 public class IntegrationTest extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
