@@ -1,13 +1,16 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
 
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.DataHelper;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.DataHelper;
+import CommonHelper.Function.PageGenerator;
+import CommonHelper.GlobalVariables;
+import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
+import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
+import StartingApp.Login.LoginNewsfeed;
+import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
@@ -15,557 +18,543 @@ public class Validation extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();
-    // Khai báo PageObject
-    NewsFeedVerifyAccount verifyPage;
-    NewsFeedLogin loginPage;
+    VerifyAccountPageObject verifyPage;
+    LoginNewsfeed newsfeedLoginPage;
+    NewsFeedTab newsfeedPage;
+    OverviewPageObject personalOVerViewTab;
+    FirstUpdateInfo updateInfo;
     // Khai báo giá trị nhập vào
-    public String email, firstName, lastName, passWord, confirmPass;
+    String email ="huy.hodoan" + randomEmail() + "@mailinator.com";
+    String firstName = data.getFirstName();
+    String lastName = data.getFirstName();
+    String confirmPass,password;
 
     @Parameters("browser")
     @BeforeClass
     public void openBrowser(String urlPage){
-        email ="huy.hodoan"+randomEmail()+"@mailinantor.com";
-        firstName = data.getFirstName();
-        lastName = data.getFirstName();
-        confirmPass = "123456";
-
-        log.info("Precondition - Open browser");
+        log.info("Precondition - Create driver browser");
         driverManager = BrowserDriver.getBrowser(urlPage);
         log.info("Precondition - Go to NewsFeed Login");
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-        loginPage = PageGenerator.getLoginPage(driver);
+        newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
         log.info("Precondition - Change language system to Vietnamese");
-        loginPage.changeLanguageSystemToVI();
+        newsfeedLoginPage.changeLanguageSystemToVI(driver);
     }
-    @Test
-    public void firstNameValidate_01_Signup_With_Blank_FirstName(){
-        log.info("Step 1 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 2 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 3 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 4 - Enter Confirm password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 5 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 6 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên là bắt buộc.");
+
+    @Test (enabled = false)
+    public void TC01_Check_UserInterface_SignUpForm_With_VI_Language(){
+        newsfeedLoginPage.changeLanguageSystemToVI(driver);
+        log.info("Check Title Of SignUp form when");
+
+        verifyEquals(newsfeedLoginPage.getTitleOfsignUpForm(),"Tham gia Hahalolo ngay!");
+        log.info("Check placeholder of fields");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Tên");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Họ");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Điện thoại hoặc Email");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Mật khẩu");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Mật khẩu xác nhận");
+        verifyEquals(newsfeedLoginPage.getContentOfSignUpButton(),"Đăng ký");
+
+        newsfeedLoginPage.getColorOfTitleOfSignUpForm();
+        newsfeedLoginPage.getColorOfSignUpButton();
     }
-    @Test
-    public void firstNameValidate_01_SignUp_With_FirstName_Contains_NumberChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","12345647");
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên không chứa số.");
-    }
-    @Test
-    public void firstNameValidate_03_SignUp_With_FirstName_Contains_AlphaNumChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","Huy12");
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên không chứa số.");
-    }
-    @Test
-    public void firstNameValidate_04_SignUp_With_FirstName_Contains_SpecialChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","H@ang @anh");
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên không chứa ký tự đặc biệt.");
-    }
-    @Test
-    public void firstNameValidate_05_SignUp_With_FirstName_Contains_Only_Whitespace(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104","  ");
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên là bắt buộc.");
-    }
-    @Test
-    public void firstNameValidate_06_SignUp_With_FirstName_Contains_ScriptCode(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",GlobalVariables.SCRIPT_CODE);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên không chứa ký tự đặc biệt.");
-    }
-    @Test
-    public void firstNameValidate_07_SignUp_With_FirstName_Contains_HTMLCode(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",GlobalVariables.HTML_CODE);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv104"),"Tên không chứa ký tự đặc biệt.");
+
+    @Test(enabled = false)
+    public void TC02_Check_UserInterface_SignUpForm_With_EN_Language(){
+        newsfeedLoginPage.changeLanguageSystemToEng();
+        log.info("Check Title Of SignUp form when");
+
+        verifyEquals(newsfeedLoginPage.getTitleOfsignUpForm(),"Join Hahalolo Now!");
+        log.info("Check placeholder of fields");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"First name");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Last name");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Phone number or Email");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Password");
+        verifyEquals(newsfeedLoginPage.getPlaceholderOfDynamicField(),"Confirm Password");
+        verifyEquals(newsfeedLoginPage.getContentOfSignUpButton(),"Sign Up");
     }
 
     @Test
-    public void lastNameValidate_01_SignUp_With_Last_Name_Is_Blank(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 3 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 4 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 5 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 6 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ là bắt buộc.");
+    public void TC01_CheckValidationFirstName(){
+        log.info("Step 1 - Prepaid and input data on other field except FirstName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123456");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123456");
+
+        log.info("Step 2.1 - Do Input First name");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104","");
+
+        log.info("Step 2.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên là bắt buộc.");
+
+        log.info("Step 3.1 - Input First name with data contains whitespace");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104","    ");
+
+        log.info("Step 3.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên là bắt buộc.");
+
+        log.info("Step 4 - Input First name contains numChar");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104","12345647");
+
+        log.info("Step 4.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 4.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên không chứa số.");
+
+        log.info("Step 5 - Input First name contains AlphaNumberChar");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104","Huy12");
+
+        log.info("Step 5.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 5.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên không chứa số.");
+
+        log.info("Step 6.1 - Input First name contains SpecialChar");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104","H@ang @anh");
+
+        log.info("Step 6.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 6.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên không chứa ký tự đặc biệt.");
+
+        log.info("Step 7 - Input First name is Script");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104", GlobalVariables.SCRIPT_CODE);
+
+        log.info("Step 7.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 7.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên không chứa ký tự đặc biệt.");
+
+        log.info("Step 8 - Input First name is HTML Code");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104",GlobalVariables.HTML_CODE);
+
+        log.info("Step 8.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 8.3 - Verify error message on Firstname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv104"),"Tên không chứa ký tự đặc biệt.");
     }
     @Test
-    public void lastNameValidate_02_SignUp_With_Last_Name_Contains_NumberChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103","12");
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ không chứa số.");
-    }
-    @Test
-    public void lastNameValidate_03_SignUp_With_Last_Name_Contains_AlphaNumChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103","Hồ 123");
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ không chứa số.");
-    }
-    @Test
-    public void lastNameValidate_04_SignUp_With_Last_Name_Contains_SpecialChar(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103","H@ Do@n");
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ không chứa ký tự đặc biệt.");
-    }
-    @Test
-    public void lastNameValidate_05_SignUp_With_Last_Name_Contains_All_Whitespace(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103","  ");
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7- Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ là bắt buộc.");
-    }
-    @Test
-    public void lastNameValidate_06_SignUp_With_Last_Name_Contains_ScriptCode(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",GlobalVariables.SCRIPT_CODE);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ không chứa ký tự đặc biệt.");
-    }
-    @Test
-    public void lastNameValidate_07_SignUp_With_Last_Name_Contains_HTMLCode(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",GlobalVariables.HTML_CODE);
-        log.info("Step 3 - Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 6 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 7 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv103"),"Họ không chứa ký tự đặc biệt.");
+    public void TC02_CheckValidationLastName(){
+        log.info("Make field Firstname have valid value");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104",firstName);
+
+        log.info("Step 1.1 - Do not input Last name");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103","");
+
+        log.info("Step 1.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 1.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ là bắt buộc.");
+
+        log.info("Step 2.1 - Input Last name with data contains whitespace");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103","    ");
+
+        log.info("Step 2.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ là bắt buộc.");
+
+        log.info("Step 3.1 - Input Last name contains NumChar");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103","12345647");
+
+        log.info("Step 3.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ không chứa số.");
+
+        log.info("Step 4.1 - Input Last name contains Alpha number character");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103","Hồ 12");
+
+        log.info("Step 4.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 4.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ không chứa số.");
+
+        log.info("Step 5.1 - Input Last name contains specialChar");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103","H@ Do@an");
+
+        log.info("Step 5.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 5.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ không chứa ký tự đặc biệt.");
+
+        log.info("Step 6.1 - Input Last name contains Script Code");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103", GlobalVariables.SCRIPT_CODE);
+
+        log.info("Step 6.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 6.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ không chứa ký tự đặc biệt.");
+
+        log.info("Step 7.1 - Input Last name contains HTML Code");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103",GlobalVariables.HTML_CODE);
+
+        log.info("Step 7.2 - Click to signup button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 7.3 - Verify error message on Lastname");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv103"),"Họ không chứa ký tự đặc biệt.");
     }
 
     @Test
-    public void accountValidate_01_SignUp_With_Account_Is_Blank(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 4 - Enter Confirm password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Step 5 - Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Step 6 - Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản là bắt buộc.");
+    public void  TC03_ValidationOfEmail() {
+        log.info("Restore field lastname with valid value");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);
+
+        log.info("Step 1.1 - Do not input Email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","");
+
+        log.info("Step 1.1 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 1.2 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản là bắt buộc.");
+
+        log.info("Step 2.1 - Input email contains Whitespace");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","   ");
+
+        log.info("Step 2.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản là bắt buộc.");
+
+        log.info("Step 3.1 - Input invalid email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","huyho12@gmail.");
+
+        log.info("Step 3.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
+
+        log.info("Step 4.1 - Input existed email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","balo_04@mailinator.com");
+
+        log.info("Step 4.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 4.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản đã tồn tại trên hệ thống Hahalolo");
+
+        log.info("Step 5.1 - Input email contains special char");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","huy!@hoho@mailinator.com");
+
+        log.info("Step 5.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 5.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
+
+        log.info("Step 6.1 - Input email contains whitespace on first");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108"," huy@mailinator.com");
+
+        log.info("Step 6.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 6.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
+
+        log.info("Step 7.1 - Input email contains whitespace on middle");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","huy ho@mailinator.com");
+
+        log.info("Step 7.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 7.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
+
+        log.info("Step 8.1 - Input email contains whitespace on last");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","huyho@mailinator.com ");
+
+        log.info("Step 8.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 8.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
     }
+
     @Test
-    public void accountValidate_02_SignUp_With_Invalid_Email(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","huyho12@gmail.");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản không hợp lệ.");
+    public void TC04_ValidateOfUsernameWithPhone() {
+        log.info("Step 1.1 - Input invalid Phone");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","09022222");
+
+        log.info("Step 1.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 1.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Số điện thoại không hợp lệ.");
+
+        log.info("Step 2.1 - Input Existed Phone");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","0936709449");
+
+        log.info("Step 2.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản đã tồn tại trên hệ thống Hahalolo");
+
+        log.info("Step 3.1 - Input Phone contains phone code(+84)");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","+840936709449");
+
+        log.info("Step 3.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.3 - Check verify error message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv108"), "Tài khoản không hợp lệ.");
     }
+
     @Test
-    public void accountValidate_03_SignUp_With_Existed_Email(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","balo_04@mailinator.com");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản đã tồn tại trên hệ thống Hahalolo");
+    public void TC05_ValidationOFPasswordField(){
+        log.info("Step 1 - Input Email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
+
+        log.info("Step 2.1 - Do not Input Blank Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","");
+
+        log.info("Step 2.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv109"),"Mật khẩu là bắt buộc.");
+
+        log.info("Step 3.1 - Enter Password <6 chars");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","12345");
+
+        log.info("Step 3.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv109"),"Giới hạn tối thiểu của Mật khẩu là 6 kí tự");
+
+        log.info("Step 4.1 - Enter Password > 128 chars");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109",randomPassword(129));
+
+        log.info("Step 4.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 4.2 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv109"),"Giới hạn tối đa của Mật khẩu là 128 kí tự");
+
+        log.info("Step 5.1 Enter Password contains whitespace");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123 456");
+
+        log.info("Step 5.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 5.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("nv109"),"Mật khẩu không chứa kí tự trắng.");
     }
+
     @Test
-    public void accountValidate_04_SignUp_With_Email_Contains_UppercaseChar(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email.toUpperCase());
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        verifyPage =  loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
+    public void TC06_ValidationOFConfirmPasswordField(){
+        log.info("Change password in previous step from invalid to valid");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123456");
+
+        log.info("Step 1 - Do not input Confirm Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","");
+
+        log.info("Step 1.1 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 1.2 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("repeatPassword"),"Mật khẩu xác nhận là bắt buộc.");
+
+        log.info("Step 2.1 Enter Confirm Password <6 chars");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","12345");
+
+        log.info("Step 2.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 2.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
+
+        log.info("Step 3.1 Enter ConfirmPassword > 128 chars");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword",randomPassword(129));
+
+        log.info("Step 3.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 3.2 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
+
+        log.info("Step 4.1 Enter Confirm Password contains whitespace");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123 456");
+
+        log.info("Step 4.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 4.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("repeatPassword"),"Mật khẩu xác nhận không chứa kí tự trắng.");
+
+        log.info("Step 5.1 Enter Password not same confirm pass");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","1234567");
+
+        log.info("Step 5.2 - Click SignUp button");
+        newsfeedLoginPage.clickSignUpButton();
+
+        log.info("Step 5.3 - Verify error validation message");
+        verifyEquals(newsfeedLoginPage.getErrorValidationOfTextField("repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
+    }
+//    @Test
+//    public void TC07_ValidationOFPhoneCode() {
+//        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123456");
+//        log.info("Step 1.1 - Input Phone");
+//        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","840936709449");
+//        log.info("Step 2.1 - Phone area code");
+//        newsfeedLoginPage.removePhoneCode();
+//        log.info("Step 4.2 - Click SignUp button");
+//        newsfeedLoginPage.clickSignUpButton();
+//        verifyEquals(newsfeedLoginPage.getErrValidationOfPhoneCode(),"Mã vùng là bắt buộc.");
+//    }
+    @Test
+    public void TC08_RegisterAccountWithEmailIsUppercase() {
+        newsfeedLoginPage.refreshPage(driver);
+
+        log.info("Step 1 - Input FirstName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104", firstName);
+
+        log.info("Step 2 - Input LastName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103", lastName);
+
+        log.info("Step 3 - Input email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email.toUpperCase());
+
+        log.info("Step 4 - Input Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123456");
+
+        log.info("Step 5 - Input ConfirmPass");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123456");
+
+        log.info("Step 6 - Click SignUp button and verify email of account display");
+        newsfeedLoginPage.clickSignUpButton();
+        verifyPage = PageGenerator.createVerifyAccountPage(driver);
         verifyTrue(verifyPage.checkTitlePageVerifyEmail());
-//        Assert.assertTrue(verifyPage.checkEmailDisplayOnRegisterPage(email));
-    }
+        verifyEquals(verifyPage.getAccountDisplayOnRegisterPage(), email);
 
+        log.info("Step 7 - Input verify code and verify account");
+        verifyPage.inputVerifyDataOnField(verifyPage.copyVerifyCodeOnMail(email));
+        verifyPage.clickVerifyButton();
+
+        log.info("Step 8 - Go to Newsfeed and cancel update info");
+        newsfeedPage = PageGenerator.createTabNewsfeed(driver);
+        newsfeedPage.setTimeDelay(1);
+        newsfeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfo = PageGenerator.createUpdateInfoPopup(driver);
+        updateInfo.clickCancelUpdateNewInfo();
+
+        log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
+        newsfeedPage.clickEditProfile();
+        personalOVerViewTab = PageGenerator.getPersonalOverviewTab(driver);
+        verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
+
+        log.info("Step 10 - Logout account");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
+        newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+    }
     @Test
-    public void accountValidate_05_SignUp_With_Email_Contains_Diots_More_Than_2(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","huy.ho.ho@mailinator.com");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        verifyPage =  loginPage.clickSignUpButton();
+    public void TC09_RegisterAccountWithEmailContainsMoreThan2Idots() {
+        log.info("Step 1 - Input FirstName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104", firstName);
+
+        log.info("Step 2 - Input LastName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103", lastName);
+
+        log.info("Step 3 - Input Email");
+        email ="huy.ho.ho"+randomEmail()+"@mailinator.com";
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
+
+        log.info("Step 4 - Input Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123456");
+
+        log.info("Step 5 - Input ConfirmPass");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123456");
+
+        log.info("Step 6 - Click SignUp button and verify email of account display");
+        newsfeedLoginPage.clickSignUpButton();
+        verifyPage = PageGenerator.createVerifyAccountPage(driver);
         verifyTrue(verifyPage.checkTitlePageVerifyEmail());
-//        verifyTrue(verifyPage.checkEmailDisplayOnRegisterPage(email));
-    }
-    @Test
-    public void accountValidate_06_SignUp_With_Email_Contains_SpecialChar(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","huy!@hoho@mailinator.com");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản không hợp lệ.");
-    }
+        verifyEquals(verifyPage.getAccountDisplayOnRegisterPage(), email);
 
-    @Test(enabled = false)
-    public void accountValidate_07_SignUp_With_Phone_Is_Difference_PhoneCode(){
-        log.info("Step 1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Step 2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Step 3 - Enter Phone Number");
-        loginPage.enterDataToTextBoxField(driver,"nv108","0936709449");
-        log.info("Step 4 - Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Step 5 - Enter Confirm password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Change Phone code");
-        loginPage.changePhoneCode("(+598) Uruguay");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Số điện thoại không hợp lệ.");
-    }
-    @Test(enabled = false)
-    public void accountValidate_08_SignUp_With_Existed_Phone(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","0936709449");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản đã tồn tại trên hệ thống Hahalolo");
-    }
-    @Test(enabled = false)
-    public void accountValidate_09_SignUp_With_Invalid_Phone(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108","0123432");
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv108"),"Tài khoản không hợp lệ.");
-    }
+        log.info("Step 7 - Input verify code and verify account");
+        verifyPage.inputVerifyDataOnField(verifyPage.copyVerifyCodeOnMail(email));
+        verifyPage.clickVerifyButton();
 
-    @Test
-    public void passwordValidate_01_SignUp_With_Password_Is_Blank(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv109"),"Mật khẩu là bắt buộc.");
-    }
-    @Test
-    public void passwordValidate_02_SingUp_With_Password_Less_Than_6_Chars(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","12345");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","12345");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv109"),"Giới hạn tối thiểu của Mật khẩu là 6 kí tự");
-    }
-    @Test
-    public void passwordValidate_03_SingUp_With_Password_Greater_Than_128_Chars(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109",randomPassword(129));
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword",randomPassword(129));
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv109"),"Giới hạn tối thiểu của Mật khẩu là 128 kí tự");
-    }
-    @Test
-    public void passwordValidate_03_SingUp_With_Password_Contains_Whitespace(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","1234 56");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"nv109"),"Mật khẩu không chứa kí tự trắng.");
-    }
-    @Test
-    public void passwordValidate_04_SingUp_With_Password_Not_Same_Confirm_Pass(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","1234567");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","123456");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
-    }
+        log.info("Step 8 - Go to Newsfeed and cancel update info");
+        newsfeedPage = PageGenerator.createTabNewsfeed(driver);
+        newsfeedPage.setTimeDelay(1);
+        updateInfo= newsfeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfo.clickCancelUpdateNewInfo();
 
-    @Test
-    public void confirmPassValidate_01_SignUp_With_Confirm_Password_Is_Blank(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"repeatPassword"),"Mật khẩu xác nhận là bắt buộc.");
-    }
-    @Test
-    public void confirmPassValidate_02_SingUp_With_Confirm_Password_Less_Than_6_Chars(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword","12345");
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
-    }
-    @Test
-    public void confirmPassValidate_03_SingUp_With_ConfirmPass_Greater_Than_128_Chars(){
-        log.info("Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104",firstName);
-        log.info("Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
-        log.info("Enter Account");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
-        log.info("Enter Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109","123456");
-        log.info("Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword",randomPassword(129));
-        log.info("Click Sign up button");
-        loginPage.clickSignUpButton();
-        log.info("Verify error validation message");
-        verifyEquals(loginPage.getValidateErrMessage(driver,"repeatPassword"),"Mật khẩu xác nhận phải trùng với Mật khẩu");
-    }
+        log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
+        newsfeedPage.clickEditProfile();
+        personalOVerViewTab = PageGenerator.getPersonalOverviewTab(driver);
+        verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
 
+        log.info("Step 5.1 - Click Logout");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
+        newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+    }
+    @Test (enabled = false)
+    public void TC10_RegisterAccountWithPhoneHaveAreaCode() {
+        log.info("Step 1 - Input FirstName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104", firstName);
+
+        log.info("Step 2 - Input LastName");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103", lastName);
+
+        log.info("Step 3 - Input Phone");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108","840936709449");
+
+        log.info("Step 4 - Input Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109","123456");
+
+        log.info("Step 5 - Input ConfirmPass");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword","123456");
+
+        log.info("Step 6 - Click SignUp button and verify phone of account display");
+        newsfeedLoginPage.clickSignUpButton();
+        verifyPage = PageGenerator.createVerifyAccountPage(driver);
+        verifyTrue(verifyPage.checkTitlePageVerifyPhone());
+        verifyEquals(verifyPage.getAccountDisplayOnRegisterPage(), "840936709449");
+
+        log.info("Step 7 - Input verify code and verify account");
+        verifyPage.copyVerifyCodeOnMail(verifyPage.copyVerifyCodeOnMail(email));
+        verifyPage.clickVerifyButton();
+
+        log.info("Step 8 - Go to Newsfeed and cancel update info");
+        newsfeedPage = PageGenerator.createTabNewsfeed(driver);
+        newsfeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfo = PageGenerator.createUpdateInfoPopup(driver);
+        updateInfo.clickCancelUpdateNewInfo();
+
+        log.info("Step 9 - Go To Personal about and check email display on WidgetIntro");
+        newsfeedPage.clickEditProfile();
+        personalOVerViewTab = PageGenerator.getPersonalOverviewTab(driver);
+        verifyEquals(personalOVerViewTab.getUserEmailDisplayOnIntroduceWidget(), email);
+
+        log.info("Step 10 - Click Logout");
+        personalOVerViewTab.clickItemOnSettingMenu(driver,"ic-logout-c");
+        newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
+    }
     @AfterTest
     public void closeBrowserAndDriver(){
         closeBrowserAndDriver(driver);

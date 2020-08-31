@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test with firefox"
+           tests="8"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="62.823">
+  <properties />
+  
+  
+            <testcase name="TC06_ValidationOFConfirmPasswordField" time="1.319" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC08_RegisterAccountWithEmailIsUppercase" time="27.234" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC01_CheckValidationFirstName" time="2.211" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC03_ValidationOfEmail" time="2.459" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC05_ValidationOFPasswordField" time="1.218" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC09_RegisterAccountWithEmailContainsMoreThan2Idots" time="24.178" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC02_CheckValidationLastName" time="1.661" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+                <testcase name="TC04_ValidateOfUsernameWithPhone" time="2.543" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation" />
+      
+</testsuite>

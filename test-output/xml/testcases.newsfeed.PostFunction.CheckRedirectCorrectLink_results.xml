@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test with firefox"
+           tests="6"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="86.329">
+  <properties />
+  
+  
+            <testcase name="TC06_Check_Go_To_Direct_Link_When_User_Click_To_Item_On_Footer" time="27.076" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+                <testcase name="TC03_Check_Redirect_Link_When_User_Click_Avatar" time="3.130" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+                <testcase name="TC05_Check_Go_To_Direct_Link_When_User_Click_To_Item_On_Menu_Setting" time="19.107" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+                <testcase name="TC02_Check_Go_To_Direct_Link_When_User_Click_To_Item_On_Helper_Menu" time="14.059" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+                <testcase name="TC04_Check_Redirect_Link_When_User_Click_Homepage" time="1.987" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+                <testcase name="TC07_Click_To_Tab_On_My_Account" time="20.970" classname="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink" />
+      
+</testsuite>

@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="All Test Suite" paralle  ="false">
     <listeners>
-        <listener class-name="actions.common.LogAndReport.MethodListener"></listener>
-        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
-        <listener class-name="actions.common.LogAndReport.ExtentReportListener"/>
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="CommonHelper.LogAndReport.MethodListener"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
+        <listener class-name="CommonHelper.LogAndReport.ExtentReportListener"> </listener>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
     </listeners>
     <test name="Test with firefox">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.Validation"></class>-->
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>-->
+<<<<<<< HEAD
             <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest"></class>
 <!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
+=======
+<!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation"></class>-->
+<!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest"></class>-->
+<!--            <class name="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink"></class>-->
+<!--            <class name="LikePost"></class>-->
+<!--            <class name= "testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>&ndash;&gt;-->
+            <class name= "testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost"></class>
+>>>>>>> 821c893291585763ba1beaff80851e7d8b548c95
         </classes>
     </test>
 

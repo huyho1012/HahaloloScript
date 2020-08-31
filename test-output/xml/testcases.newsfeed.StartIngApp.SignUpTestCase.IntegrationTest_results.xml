@@ -4,6 +4,7 @@
            failures="1"
            errors="0"
            skipped="0"
+<<<<<<< HEAD
            time="30.600">
   <properties />
             <testcase name="TC_01_SingUp_With_Valid_Email" time="30.600" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest">
@@ -16,6 +17,21 @@
   actions.common.Function.AbstractPage.waitElementToVisible(AbstractPage.java:436)
   actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount.checkTitlePageVerifyEmail(NewsFeedVerifyAccount.java:24)
   testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:76)
+=======
+           time="62.812">
+  <properties />
+            <testcase name="TC_01_SingUp_With_Valid_Email" time="62.812" classname="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest">
+                <failure type="org.openqa.selenium.TimeoutException"
+                  message="Expected condition failed: waiting for element to be clickable: By.xpath: //select[@id =&apos;select-country&apos;] (tried for 30 second(s) with 500 milliseconds interval)"
+              >
+<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //select[@id ='select-country'] (tried for 30 second(s) with 500 milliseconds interval)
+  org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+  org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
+  CommonHelper.Function.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
+  Newsfeed.Common.UpdateInfo.FirstUpdateInfo.updateCountry(FirstUpdateInfo.java:35)
+  testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:95)
+>>>>>>> 821c893291585763ba1beaff80851e7d8b548c95
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
   java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -39,6 +55,7 @@
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
   com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+<<<<<<< HEAD
 Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//h3[@class ='text-center'][contains(text(),'Xác minh tài khoản bằng email')]"}
   (Session info: chrome=84.0.4147.135)
 For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
@@ -48,6 +65,17 @@ Driver info: org.openqa.selenium.chrome.ChromeDriver
 Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.135, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: C:\Users\Admin\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51883}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
 Session ID: 81b573923f6402498a82b9140ad60505
 *** Element info: {Using=xpath, value=//h3[@class ='text-center'][contains(text(),'Xác minh tài khoản bằng email')]}
+=======
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//select[@id ='select-country']"}
+  (Session info: chrome=84.0.4147.135)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-OARQHUE', ip: '10.0.1.20', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '14.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.135, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: C:\Users\admin\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56832}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 8cf0a5d7c9544500da8c521f01411c2f
+*** Element info: {Using=xpath, value=//select[@id ='select-country']}
+>>>>>>> 821c893291585763ba1beaff80851e7d8b548c95
   java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
   java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
   java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -65,10 +93,20 @@ Session ID: 81b573923f6402498a82b9140ad60505
   org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
   org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
   org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+<<<<<<< HEAD
   org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
   actions.common.Function.AbstractPage.waitElementToVisible(AbstractPage.java:436)
   actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount.checkTitlePageVerifyEmail(NewsFeedVerifyAccount.java:24)
   testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:76)
+=======
+  org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:641)
+  org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:638)
+  org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
+  CommonHelper.Function.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
+  Newsfeed.Common.UpdateInfo.FirstUpdateInfo.updateCountry(FirstUpdateInfo.java:35)
+  testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:95)
+>>>>>>> 821c893291585763ba1beaff80851e7d8b548c95
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
   java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

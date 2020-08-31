@@ -1,15 +1,18 @@
 package testcases.newsfeed.StartIngApp.SignUpTestCase;
-import actions.PageObject.newsfeed.AccountSetting.NewsFeedAccSettingGeneral;
-import actions.PageObject.newsfeed.PageFeed.NewsFeedHomepage;
-import actions.PageObject.newsfeed.PersonalWall.PersonalAbout;
-import actions.PageObject.newsfeed.Starting.NewsFeedLogin;
-import actions.PageObject.newsfeed.Starting.NewsFeedVerifyAccount;
-import actions.common.DriverBrowser.BrowserDriver;
-import actions.common.DriverBrowser.DriverManager;
-import actions.common.Function.AbstractTest;
-import actions.common.Function.DataHelper;
-import actions.common.Function.PageGenerator;
-import actions.common.GlobalVariables;
+import CommonHelper.DriverBrowser.BrowserDriver;
+import CommonHelper.DriverBrowser.DriverManager;
+import CommonHelper.Function.AbstractTest;
+import CommonHelper.Function.DataHelper;
+import CommonHelper.Function.PageGenerator;
+import CommonHelper.GlobalVariables;
+import Newsfeed.Common.UpdateInfo.FirstUpdateInfo;
+import Newsfeed.PersonalWall.About.BasicInfoTab.BasicInfoPageObject;
+import Newsfeed.PersonalWall.About.OverviewTab.OverviewPageObject;
+import Newsfeed.TabFeed.NewsFeedTab;
+
+import Newsfeed.HeaderMenu.GeneralSettting.GeneralSetting;
+import StartingApp.Login.LoginNewsfeed;
+import StartingApp.Register.VerifyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -19,16 +22,19 @@ public class IntegrationTest extends AbstractTest {
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();
     // Khai báo PageObject
-    NewsFeedLogin loginPage;
-    NewsFeedHomepage newsFeedPage;
-    NewsFeedVerifyAccount verifyAccountPage;
-    PersonalAbout perAboutPage;
-    NewsFeedAccSettingGeneral accountSettingPage;
+    LoginNewsfeed newsfeedLoginPage;
+    NewsFeedTab newsFeedPage;
+    VerifyAccountPageObject verifyAccountPage;
+    OverviewPageObject perOverviewTab;
+    BasicInfoPageObject perBasicInfoTab;
+    GeneralSetting accGeneralSetting;
+    FirstUpdateInfo  updateInfoPopup;
 
     // Khai báo giá trị
     public String firstName, lastName,email, passWord, confirmPassword;
     public String birthday, country, gender, monthBirth, dayBirth, yearBirth;
     public String fullName;
+
     @Parameters("browser")
     @BeforeClass
     public void preconditionMethod(String browserName){
@@ -49,65 +55,58 @@ public class IntegrationTest extends AbstractTest {
         birthday = getBirthday(dayBirth,monthBirth,yearBirth);
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(GlobalVariables.URL_NEWS_FEED_LOGIN);
-        loginPage = PageGenerator.getLoginPage(driver);
+        newsfeedLoginPage = PageGenerator.createLoginNewsfeedPage(driver);
     }
     @Test
     public void TC_01_SingUp_With_Valid_Email(){
         log.info("Register Account - Step 1");
-        log.info("Register Account - Step 1.1 - Enter First name");
-        loginPage.enterDataToTextBoxField(driver,"nv104", firstName);
 
-        log.info("Register Account - Step 1.2 - Enter Last name");
-        loginPage.enterDataToTextBoxField(driver,"nv103",lastName);
+        log.info("Step 1 - Enter First name");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv104",firstName);
 
-        log.info("Register Account - Step 1.3 - Enter Email");
-        loginPage.enterDataToTextBoxField(driver,"nv108",email);
+        log.info("Step 2 - Enter Last name");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv103",lastName);
 
-        log.info("Register Account - Step 1.4 - Password");
-        loginPage.enterDataToTextBoxField(driver,"nv109",passWord);
+        log.info("Step 3 - Enter Email");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv108",email);
 
-        log.info("Register Account - Step 1.5 - Enter Confirm Password");
-        loginPage.enterDataToTextBoxField(driver,"repeatPassword",confirmPassword);
+        log.info("Step 4 - Enter Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("nv109",passWord);
 
-        log.info("Register Account - Step 1.6 - Click Signup Button");
-        verifyAccountPage = loginPage.clickSignUpButton();
+        log.info("Step 5 - Enter Confirm Password");
+        newsfeedLoginPage.enterDataOnDynamicTextField("repeatPassword",confirmPassword);
 
-        log.info("Register Account - Step 2.1 - Check Account verification");
+        log.info("Step 6 - Click Signup Button and check verified account display correct");
+        newsfeedLoginPage.clickSignUpButton();
+        verifyAccountPage = PageGenerator.createVerifyAccountPage(driver);
         verifyTrue(verifyAccountPage.checkTitlePageVerifyEmail());
-        verifyTrue(verifyAccountPage.checkAccountDisplayOnRegisterPage(email));
+        verifyEquals(verifyAccountPage.getAccountDisplayOnRegisterPage(), email);
 
-        log.info("Register Account - Step 2.2 - Enter verification code");
-        verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.getVerificationAccountCode(email));
-
-        log.info("Register Account - Step 2.3 - Click verify button");
+        log.info("Step 7 - Input verify code and verify account");
+        verifyAccountPage.inputVerifyDataOnField(verifyAccountPage.copyVerifyCodeOnMail(email));
         verifyAccountPage.clickVerifyButton();
-
-        log.info("Register Account - Step 2.5 - Check verify account successfully");
         newsFeedPage = PageGenerator.getNewsFeedPage(driver);
 
-        log.info("Register Account - Step 3.1 - Update Personal Information - Update birthday");
-        newsFeedPage.updateBirthday(driver,"12","10","1992");
+        log.info("Step 8 - Update Personal Information");
+        newsFeedPage.targetToFirstUpdateInfoPopup(driver);
+        updateInfoPopup = PageGenerator.createUpdateInfoPopup(driver);
+        updateInfoPopup.updateBirthday(driver,"12","10","1992");
+        updateInfoPopup.updateGender(driver,"male");
+        updateInfoPopup.setTimeDelay(2);
+        updateInfoPopup.updateCountry(driver,"United States");
+        updateInfoPopup.clickUpdateButton();
 
+        log.info("Step 9 - Go to Personal - and verify data display with data user input");
+        newsFeedPage.clickEditProfile();
+        perOverviewTab = PageGenerator.getPersonalOverviewTab(driver);
+        verifyEquals(perOverviewTab.getUserEmailDisplayOnIntroduceWidget(),email);
+        verifyEquals(perOverviewTab.getUserBirthdayDisplayOnIntroduceWidget(),birthday);
+        verifyEquals(perOverviewTab.getUserGenderDisplayOnIntroduceWidget(),"Nam");
 
-        log.info("Register Account - Step 3.2 - Update Personal Information - Update gender");
-        newsFeedPage.updateGender(driver,"male");
-
-        log.info("Register Account - Step 3.3 - Update Personal Information - Update country");
-        newsFeedPage.updateCountry(driver,"United States");
-
-        log.info("Register Account - Step 3.4 - Update Personal Information - Click Update Button");
-        newsFeedPage.clickUpdateButton();
-
-        log.info("Register Account - Step 4.1 - Check AccountInfo");
-        perAboutPage = newsFeedPage.clickEditProfile();
-        perAboutPage.clickToBasicInfo();
-        verifyTrue(perAboutPage.checkDataValueAccount(driver,"Email",email));
-        verifyTrue(perAboutPage.checkDataValueAccount(driver,"Ngày sinh",birthday));
-        verifyTrue(perAboutPage.checkDataValueAccount(driver,"Giới tính","Nam"));
-        perAboutPage.clickToSettingItem(driver,"ic-cog-c");
-        accountSettingPage = PageGenerator.getAccountSettingPage(driver);
-        verifyTrue(accountSettingPage.checkFullNameIsDisplay(driver,fullName));
-        log.info("Check Update Info - Step 3.1 - ");
+        log.info("Step 10 - Logout account");
+        perOverviewTab.clickItemOnSettingMenu(driver,"Đăng xuất");
+        accGeneralSetting = PageGenerator.createAccountSettingGeneralTab(driver);
+        verifyEquals(accGeneralSetting.getFullNameIsDisplay(),fullName);
     }
 //    @AfterTest
 //    public void closeBrowserAndDriver(){
