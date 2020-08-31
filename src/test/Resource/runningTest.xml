@@ -11,7 +11,7 @@
         <classes>
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.Validation"></class>-->
 <!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>-->
-            <class name="testcases.newsfeed.StartIngApp."></class>
+            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest"></class>
 <!--            <class name="testcases.newsfeed.CheckRedirectCorrectLink"></class>-->
         </classes>
     </test>
