@@ -10,10 +10,10 @@
                 <failure type="org.openqa.selenium.TimeoutException"
                   message="Expected condition failed: waiting for element to be clickable: By.xpath: //i[@class = &apos;ic ic-caret-down primary&apos;] (tried for 30 second(s) with 500 milliseconds interval)"
               >
-<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //i[@class = 'ic ic-caret-down primary'] (tried for 30 second(s) with 500 milliseconds interval)
+                    <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //i[@class = 'ic ic-caret-down primary'] (tried for 30 second(s) with 500 milliseconds interval)
   org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
   org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:353)
+  common.GeneralHandler.AbstractPage.waitElementToClickAble(AbstractPage.java:353)
   Newsfeed.HeaderMenu.HeaderMenu.clickItemOnSettingMenu(HeaderMenu.java:14)
   testcases.newsfeed.StartIngApp.LoginTestCase.Validation.TC06_Login_With_Valid_Phone_CONTAIN_PHONECODE(Validation.java:236)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -38,7 +38,7 @@
   org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-  com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+  com.intellij.rt.testng.RemoteTestNGStarter.testNaub(RemoteTestNGStarter.java:109)
 Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//i[@class = 'ic ic-caret-down primary']"}
   (Session info: chrome=84.0.4147.135)
 For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
@@ -68,7 +68,7 @@ Session ID: c431e5feb33126f01eb88580ae19c4d1
   org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:641)
   org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:638)
   org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
-  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:353)
+  common.GeneralHandler.AbstractPage.waitElementToClickAble(AbstractPage.java:353)
   Newsfeed.HeaderMenu.HeaderMenu.clickItemOnSettingMenu(HeaderMenu.java:14)
   testcases.newsfeed.StartIngApp.LoginTestCase.Validation.TC06_Login_With_Valid_Phone_CONTAIN_PHONECODE(Validation.java:236)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -93,9 +93,9 @@ Session ID: c431e5feb33126f01eb88580ae19c4d1
   org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-  com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+  com.intellij.rt.testng.RemoteTestNGStarter.testNaub(RemoteTestNGStarter.java:109)
 ]]>
-      </failure>
+                </failure>
 
           </testcase>
   

@@ -19,7 +19,7 @@
   org.openqa.selenium.support.ui.FluentWait.<init>(FluentWait.java:106)
   org.openqa.selenium.support.ui.WebDriverWait.<init>(WebDriverWait.java:85)
   org.openqa.selenium.support.ui.WebDriverWait.<init>(WebDriverWait.java:45)
-  actions.common.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:387)
+  actions.common.GeneralHandler.AbstractPage.waitElementToClickAble(AbstractPage.java:387)
   Editor.Common.FunctionPageObject.clickToSharePostButton(EditorFunctionObject.java:109)
   TestcaseOfPost.TC03_VALIDATE_POST_CONTENT(TestcaseOfPost.java:106)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -44,7 +44,7 @@
   org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-  com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+  com.intellij.rt.testng.RemoteTestNGStarter.testNaub(RemoteTestNGStarter.java:109)
 ]]>
                 </failure>
 

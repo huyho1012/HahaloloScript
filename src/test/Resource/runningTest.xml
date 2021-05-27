@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="All Test Suite" paralle  ="false">
     <listeners>
-        <listener class-name="CommonHelper.LogAndReport.MethodListener"></listener>
+        <listener class-name="common.GeneralHandler.MethodListener"></listener>
         <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
-        <listener class-name="CommonHelper.LogAndReport.ExtentReportListener"> </listener>
+        <listener class-name="common.LogAndReport.ExtentReportListener"> </listener>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
     </listeners>
-    <test name="Test with firefox">
+    <test name="Test with Chrome">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.Validation"></class>-->
-<!--            <class name="testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>-->
-<!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.Validation"></class>-->
-<!--            <class name="testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest"></class>-->
-<!--            <class name="testcases.newsfeed.PostFunction.CheckRedirectCorrectLink"></class>-->
+<!--            class>-->
 <!--            <class name="LikePost"></class>-->
 <!--            <class name= "testcases.newsfeed.StartIngApp.LoginTestCase.IntegrationTest"></class>&ndash;&gt;-->
-            <class name= "testcases.newsfeed.PostFunction.NormalPost.TestcaseOfPost"></class>
+            <class name= "testcase_Login"></class>
         </classes>
     </test>
 

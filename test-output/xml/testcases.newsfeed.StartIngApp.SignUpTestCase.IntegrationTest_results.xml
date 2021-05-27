@@ -10,11 +10,11 @@
                 <failure type="org.openqa.selenium.TimeoutException"
                   message="Expected condition failed: waiting for element to be clickable: By.xpath: //select[@id =&apos;select-country&apos;] (tried for 30 second(s) with 500 milliseconds interval)"
               >
-<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //select[@id ='select-country'] (tried for 30 second(s) with 500 milliseconds interval)
+                    <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //select[@id ='select-country'] (tried for 30 second(s) with 500 milliseconds interval)
   org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
   org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
-  CommonHelper.Function.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
+  common.GeneralHandler.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
+  common.GeneralHandler.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
   Newsfeed.Common.UpdateInfo.FirstUpdateInfo.updateCountry(FirstUpdateInfo.java:35)
   testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:95)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -39,7 +39,7 @@
   org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-  com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+  com.intellij.rt.testng.RemoteTestNGStarter.testNaub(RemoteTestNGStarter.java:109)
 Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//select[@id ='select-country']"}
   (Session info: chrome=84.0.4147.135)
 For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
@@ -69,8 +69,8 @@ Session ID: 8cf0a5d7c9544500da8c521f01411c2f
   org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:641)
   org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:638)
   org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
-  CommonHelper.Function.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
-  CommonHelper.Function.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
+  common.GeneralHandler.AbstractPage.waitElementToClickAble(AbstractPage.java:374)
+  common.GeneralHandler.AbstractPage.selectItemInCustomDropdown(AbstractPage.java:178)
   Newsfeed.Common.UpdateInfo.FirstUpdateInfo.updateCountry(FirstUpdateInfo.java:35)
   testcases.newsfeed.StartIngApp.SignUpTestCase.IntegrationTest.TC_01_SingUp_With_Valid_Email(IntegrationTest.java:95)
   java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -95,9 +95,9 @@ Session ID: 8cf0a5d7c9544500da8c521f01411c2f
   org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
   org.testng.TestNG.run(TestNG.java:1057)
   com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-  com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+  com.intellij.rt.testng.RemoteTestNGStarter.testNaub(RemoteTestNGStarter.java:109)
 ]]>
-      </failure>
+                </failure>
 
           </testcase>
   
