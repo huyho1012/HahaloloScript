@@ -1,5 +1,6 @@
 import Interface.Register_PageUI;
 import PageObject.Login_PageObject;
+import PageObject.Newsfeed.Newsfeed_PageObject;
 import PageObject.Register_PageObject;
 import common.DriverBrowser.DriverFactory;
 import common.DriverBrowser.DriverManager;
@@ -19,6 +20,7 @@ public class testcase_Login extends AbstractTest {
     DriverManager driverManager;
     Login_PageObject loginPage;
     Register_PageObject registerPage;
+    Newsfeed_PageObject newsfeedPage;
     @Parameters("browser")
     @BeforeTest
     public void createDriverAndInitPage(String browserName){
@@ -52,10 +54,16 @@ public class testcase_Login extends AbstractTest {
        String verifyCode =  registerPage.getVerificationCode(email);
        registerPage.enterVerifyCodeToRegister(verifyCode);
        registerPage.clickToButtonVerify();
+       setTimeDelay(2);
+       newsfeedPage.updateNewInfo("12","10","1992");
+
+        setTimeDelay(2);
+
     }
 
     public void initPage(){
         loginPage = PageGenerator.createLoginNewsfeedPage(driver);
         registerPage = PageGenerator.createRegisterForm(driver);
+        newsfeedPage = PageGenerator.createNewsfeedPage(driver);
     }
 }
